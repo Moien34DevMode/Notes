@@ -3,5 +3,20 @@
         "name": "Network Troubleshooting Check-List",
         "description": "Whenever I have a problem with my network, I use this Check-List",
         "url": "notes/NetworkTroubleShootingChecklist.html"
+    },
+    {
+        "name": "Unreal Engine Profiling",
+        "description": "Performance profiling, Unreal Insights, CPU and GPU optimization.",
+        "url": "notes/unreal/profiling.html"
+    },
+    {
+        "name": "MetaHuman",
+        "description": "MetaHuman Creator, Identity, DNA, and animation workflow.",
+        "url": "notes/unreal/metahuman.html"
+    },
+    {
+        "name": "Networking",
+        "description": "TCP, UDP, DNS, HTTP, and networking fundamentals.",
+        "url": "notes/networking/networking.html"
     }
 ]
