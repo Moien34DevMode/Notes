@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal Path — Network Troubleshooting Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a0f12;
+    --panel: #101820;
+    --panel-2: #131e27;
+    --line: #1e2c35;
+    --trace: #1b3a34;
+    --text: #d7e2e6;
+    --text-dim: #7c939c;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+
+    --p0: #ff5c5c;   /* critical */
+    --p1: #ffb020;   /* high */
+    --p2: #4fd1ff;   /* medium */
+    --p3: #6ee7b7;   /* low */
+    --ok: #3ddc97;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(circle at 10% 0%, #0d1a1c 0%, transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    min-height:100vh;
+    padding:40px 20px 80px;
+  }
+
+  .wrap{max-width:920px;margin:0 auto;}
+
+  header{
+    margin-bottom:44px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:28px;
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:.18em;
+    color:var(--p2);
+    text-transform:uppercase;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:8px;height:8px;border-radius:50%;
+    background:var(--ok);
+    box-shadow:0 0 8px var(--ok);
+  }
+  h1{
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:clamp(26px,4vw,38px);
+    margin:14px 0 10px;
+    letter-spacing:-.01em;
+  }
+  header p{
+    color:var(--text-dim);
+    font-size:15px;
+    line-height:1.6;
+    max-width:640px;
+    margin:0;
+  }
+
+  .meta-row{
+    display:flex;
+    gap:24px;
+    margin-top:20px;
+    flex-wrap:wrap;
+  }
+  .meta-item{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+  }
+  .meta-item b{color:var(--text);font-weight:600;}
+
+  /* Legend */
+  .legend{
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+    margin:22px 0 0;
+  }
+  .legend-item{
+    display:flex;align-items:center;gap:7px;
+    font-family:var(--mono);font-size:11px;color:var(--text-dim);
+    text-transform:uppercase;letter-spacing:.06em;
+  }
+  .dot{width:9px;height:9px;border-radius:2px;display:inline-block;}
+
+  /* Progress */
+  .progress-bar{
+    height:4px;background:var(--panel);border-radius:2px;overflow:hidden;
+    margin-top:24px;
+  }
+  .progress-fill{
+    height:100%;background:linear-gradient(90deg,var(--p2),var(--ok));
+    width:0%;transition:width .35s ease;
+  }
+  .progress-label{
+    font-family:var(--mono);font-size:11px;color:var(--text-dim);
+    margin-top:8px;
+  }
+
+  /* Section */
+  .section{margin-bottom:38px;position:relative;}
+  .section-title{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .section-title::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--line);
+  }
+
+  /* Signal rail */
+  .rail{
+    position:relative;
+    padding-left:34px;
+  }
+  .rail::before{
+    content:"";
+    position:absolute;
+    left:9px;top:6px;bottom:6px;
+    width:2px;
+    background:repeating-linear-gradient(
+      to bottom, var(--trace) 0 6px, transparent 6px 11px
+    );
+  }
+
+  .item{
+    position:relative;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:16px 18px 16px 20px;
+    margin-bottom:12px;
+    transition:border-color .2s, background .2s;
+  }
+  .item:hover{border-color:#2a3d47;}
+  .item.done{
+    background:var(--panel-2);
+    opacity:.55;
+  }
+  .item.done .check-text{
+    text-decoration:line-through;
+    text-decoration-color:var(--text-dim);
+  }
+
+  .node{
+    position:absolute;
+    left:-34px;
+    top:20px;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--bg);
+    border:2px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .node.p0{border-color:var(--p0);}
+  .node.p1{border-color:var(--p1);}
+  .node.p2{border-color:var(--p2);}
+  .node.p3{border-color:var(--p3);}
+  .node.checked{background:var(--ok);border-color:var(--ok);}
+  .node.checked::after{
+    content:"✓";
+    font-size:10px;color:#06110d;font-weight:700;
+  }
+
+  .item-top{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    cursor:pointer;
+  }
+  .checkbox{
+    width:18px;height:18px;
+    border:1.5px solid var(--text-dim);
+    border-radius:4px;
+    flex-shrink:0;
+    margin-top:2px;
+    display:flex;align-items:center;justify-content:center;
+    transition:all .15s;
+  }
+  .checkbox.checked{
+    background:var(--ok);
+    border-color:var(--ok);
+  }
+  .checkbox.checked::after{
+    content:"✓";
+    color:#06110d;font-size:12px;font-weight:700;
+  }
+
+  .item-head{flex:1;}
+  .item-tags{
+    display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap;
+  }
+  .badge{
+    font-family:var(--mono);
+    font-size:10px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:3px;
+    font-weight:600;
+  }
+  .badge.p0{background:rgba(255,92,92,.14);color:var(--p0);}
+  .badge.p1{background:rgba(255,176,32,.14);color:var(--p1);}
+  .badge.p2{background:rgba(79,209,255,.14);color:var(--p2);}
+  .badge.p3{background:rgba(110,231,183,.14);color:var(--p3);}
+  .badge.cat{background:transparent;color:var(--text-dim);border:1px solid var(--line);}
+
+  .check-text{
+    font-size:15px;
+    font-weight:500;
+    line-height:1.5;
+    color:var(--text);
+  }
+
+  .details{
+    display:none;
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--line);
+    font-size:13.5px;
+    line-height:1.65;
+    color:var(--text-dim);
+  }
+  .details.open{display:block;}
+  .details .row{margin-bottom:8px;}
+  .details .row:last-child{margin-bottom:0;}
+  .details .k{
+    font-family:var(--mono);
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:.08em;
+    color:var(--text-dim);
+    display:inline-block;
+    width:82px;
+    vertical-align:top;
+  }
+  .details .v{color:var(--text);display:inline;}
+  .details .v.ok{color:var(--ok);}
+  .details .v.no{color:var(--p0);}
+
+  .expand-hint{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-dim);
+    margin-left:auto;
+    white-space:nowrap;
+    padding-top:1px;
+  }
+
+  footer{
+    margin-top:50px;
+    padding-top:20px;
+    border-top:1px solid var(--line);
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-dim);
+    line-height:1.8;
+  }
+  footer code{
+    background:var(--panel);
+    padding:2px 6px;
+    border-radius:3px;
+    color:var(--p2);
+  }
+
+  .reset-btn{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--text-dim);
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:6px 12px;
+    border-radius:4px;
+    cursor:pointer;
+    letter-spacing:.05em;
+  }
+  .reset-btn:hover{color:var(--text);border-color:#2a3d47;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Signal Path / Diagnostic Sequence</div>
+    <h1>Internet Troubleshooting Checklist</h1>
+    <p>Ordered by probability, not by network layer. Work top to bottom — each check tells you exactly where to go next depending on the result. Click a row to expand it.</p>
+    <div class="meta-row">
+      <div class="meta-item">OWNER: <b>Household / Home Network</b></div>
+      <div class="meta-item">LAST INCIDENT: <b>2026-07-30 — TCP/IP stack corruption</b></div>
+    </div>
+    <div class="legend">
+      <span class="legend-item"><span class="dot" style="background:var(--p0)"></span>P0 — Check first</span>
+      <span class="legend-item"><span class="dot" style="background:var(--p1)"></span>P1 — High</span>
+      <span class="legend-item"><span class="dot" style="background:var(--p2)"></span>P2 — Medium</span>
+      <span class="legend-item"><span class="dot" style="background:var(--p3)"></span>P3 — Low</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 0 checked</div>
+  </header>
+
+  <div id="checklist"></div>
+
+  <footer>
+    <div>NOTE: state resets on page refresh (no local storage used). Check items off during one troubleshooting session.</div>
+    <div>To add or edit checks later: open this file, find the <code>CHECKLIST</code> array near the top of the <code>&lt;script&gt;</code> block, and add/edit an object. Fields: <code>priority</code> (p0–p3), <code>category</code>, <code>check</code>, <code>why</code>, <code>ifWorks</code>, <code>ifNot</code>.</div>
+    <button class="reset-btn" onclick="resetAll()" style="margin-top:14px;">RESET ALL CHECKS</button>
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   EDIT ME — add / remove / reorder checks here.
+   Items render in the order they appear in this array.
+   priority: "p0" (critical/first) | "p1" (high) | "p2" (medium) | "p3" (low)
+   ========================================================= */
+const CHECKLIST = [
+  {
+    priority: "p0",
+    category: "Physical / Optical",
+    check: "ONT status LEDs — Power, PON/Optical, LOS",
+    why: "If the optical signal is down, nothing downstream matters.",
+    ifWorks: "Optical link healthy → move to router/WAN check.",
+    ifNot: "LOS red or PON off → fiber signal problem (bad splice, dirty connector, ISP outage). Power-cycle ONT, check ISP status."
+  },
+  {
+    priority: "p0",
+    category: "Router / WAN",
+    check: "Router WAN/Internet LED — solid vs blinking/off",
+    why: "Confirms whether the router itself has a live handoff from the ISP.",
+    ifWorks: "Router has WAN link → check device IP config next.",
+    ifNot: "No WAN link → problem is router↔ISP. Power-cycle router; if it persists, call ISP."
+  },
+  {
+    priority: "p0",
+    category: "Device / IP Config",
+    check: "ipconfig /all — valid IPv4 (not 169.254.x.x) and Default Gateway present",
+    why: "A self-assigned 169.254.x.x address or missing gateway means DHCP never completed.",
+    ifWorks: "Valid LAN IP + gateway → test raw connectivity (ping gateway, then 8.8.8.8).",
+    ifNot: "169.254.x.x / no gateway → DHCP failure. Try ipconfig /release + /renew."
+  },
+  {
+    priority: "p1",
+    category: "Device / IP Config",
+    check: "ipconfig /release then ipconfig /renew",
+    why: "Forces a fresh DHCP request — fixes transient router DHCP glitches immediately.",
+    ifWorks: "Got a proper 192.168.x.x address → router DHCP just hiccuped, connection restored.",
+    ifNot: "Still 169.254.x.x, or errors like \u201cobject already exists\u201d / \u201cparameter is incorrect\u201d → router not responding to DHCP, or local network stack is corrupted."
+  },
+  {
+    priority: "p1",
+    category: "Router / WAN",
+    check: "Power-cycle the router (unplug 10s, replug, wait ~60s)",
+    why: "Clears a hung DHCP/routing process on the router faster than remote debugging.",
+    ifWorks: "Renew succeeds with proper IP/gateway → router service hang was the cause.",
+    ifNot: "Still fails after reboot → isolate router-wide vs single-device issue next."
+  },
+  {
+    priority: "p1",
+    category: "Isolation",
+    check: "Test another device (phone/laptop) on the same network",
+    why: "Determines whether the fault is router-wide (DHCP server down for everyone) or isolated to one PC.",
+    ifWorks: "Other devices online fine → problem is local to the one PC → check its network stack/VPN/adapters.",
+    ifNot: "Nothing connects → router DHCP service is broken → factory-level router troubleshooting or ISP escalation."
+  },
+  {
+    priority: "p1",
+    category: "Connectivity vs DNS",
+    check: "ping 192.168.1.1 (gateway), then ping 8.8.8.8 (raw IP, bypasses DNS)",
+    why: "Separates a routing/gateway problem from a pure DNS resolution problem.",
+    ifWorks: "Both succeed → connectivity is fine, issue is DNS-only → try nslookup / ping google.com.",
+    ifNot: "Gateway fails too → local routing table or adapter fault, not just DNS."
+  },
+  {
+    priority: "p2",
+    category: "Local Interference",
+    check: "Device Manager → check for VPN/TAP/TUN/virtual adapters left behind by VPN or DNS-changing apps",
+    why: "A rogue virtual adapter can hijack routing/DHCP even when the VPN client isn't actively connected.",
+    ifWorks: "No suspicious adapters found → rule out VPN interference, move to stack reset.",
+    ifNot: "Found one → disable/uninstall it, then retry ipconfig /renew."
+  },
+  {
+    priority: "p2",
+    category: "Windows Network Stack",
+    check: "netsh winsock reset + netsh int ip reset, then reboot",
+    why: "Resets the TCP/IP stack and Winsock catalog — fixes DHCP silently failing with odd errors.",
+    ifWorks: "Proper IP + gateway after reboot → confirmed: corrupted TCP/IP stack was the root cause.",
+    ifNot: "Still 169.254.x.x → check third-party antivirus/firewall hooking into the network stack."
+  },
+  {
+    priority: "p2",
+    category: "DNS",
+    check: "nslookup google.com and ping google.com vs ping 8.8.8.8",
+    why: "Confirms whether the issue is specifically DNS resolution rather than connectivity.",
+    ifWorks: "Resolves fine → DNS is healthy.",
+    ifNot: "IP ping works but domain fails → bad DNS servers. Try 1.1.1.1 / 8.8.8.8 manually."
+  },
+  {
+    priority: "p3",
+    category: "Security Software",
+    check: "Temporarily disable third-party antivirus/firewall",
+    why: "Some security suites intercept or block network stack calls, mimicking DHCP/DNS failures.",
+    ifWorks: "Connection restores with it disabled → reconfigure or replace the conflicting software.",
+    ifNot: "No change → not a software interference issue."
+  },
+  {
+    priority: "p3",
+    category: "Hardware",
+    check: "Reseat Ethernet cable / try a different port or cable; check NIC status in Device Manager",
+    why: "Physical layer faults (bad cable, damaged port) can mimic higher-layer connectivity issues.",
+    ifWorks: "Link restored → faulty cable/port identified.",
+    ifNot: "No change → not a cabling/NIC hardware issue."
+  },
+  {
+    priority: "p3",
+    category: "ISP",
+    check: "Call ISP to confirm line status / outage in the area",
+    why: "Rules out an upstream outage once everything on your side checks out.",
+    ifWorks: "ISP confirms outage → wait for resolution, nothing more to check locally.",
+    ifNot: "ISP confirms stable connection → issue is fully local (device/router/LAN)."
+  }
+];
+
+/* =========================================================
+   Rendering logic — no need to touch below this line
+   ========================================================= */
+const listEl = document.getElementById('checklist');
+const priorityOrder = { p0: 0, p1: 1, p2: 2, p3: 3 };
+const priorityLabel = { p0: 'P0 · Critical', p1: 'P1 · High', p2: 'P2 · Medium', p3: 'P3 · Low' };
+
+const state = CHECKLIST.map(() => ({ checked: false, open: false }));
+
+function render(){
+  listEl.innerHTML = '';
+  let currentCat = null;
+  CHECKLIST.forEach((item, i) => {
+    if (item.category !== currentCat){
+      currentCat = item.category;
+      const secTitle = document.createElement('div');
+      secTitle.className = 'section-title';
+      secTitle.textContent = currentCat;
+      listEl.appendChild(secTitle);
+      const rail = document.createElement('div');
+      rail.className = 'rail';
+      rail.id = 'rail-' + i;
+      listEl.appendChild(rail);
+    }
+    const rail = listEl.lastElementChild;
+    const itemEl = document.createElement('div');
+    itemEl.className = 'item' + (state[i].checked ? ' done' : '');
+
+    itemEl.innerHTML = `
+      <div class="node ${item.priority} ${state[i].checked ? 'checked' : ''}"></div>
+      <div class="item-top" data-idx="${i}">
+        <div class="checkbox ${state[i].checked ? 'checked' : ''}" data-cb="${i}"></div>
+        <div class="item-head">
+          <div class="item-tags">
+            <span class="badge ${item.priority}">${priorityLabel[item.priority]}</span>
+          </div>
+          <div class="check-text">${item.check}</div>
+        </div>
+        <div class="expand-hint">${state[i].open ? '▲ collapse' : '▼ details'}</div>
+      </div>
+      <div class="details ${state[i].open ? 'open' : ''}">
+        <div class="row"><span class="k">Why</span><span class="v">${item.why}</span></div>
+        <div class="row"><span class="k">If it works</span><span class="v ok">${item.ifWorks}</span></div>
+        <div class="row"><span class="k">If not</span><span class="v no">${item.ifNot}</span></div>
+      </div>
+    `;
+    rail.appendChild(itemEl);
+  });
+  updateProgress();
+}
+
+listEl.addEventListener('click', (e) => {
+  const cb = e.target.closest('[data-cb]');
+  const top = e.target.closest('.item-top');
+  if (cb){
+    const idx = +cb.dataset.cb;
+    state[idx].checked = !state[idx].checked;
+    render();
+    return;
+  }
+  if (top){
+    const idx = +top.dataset.idx;
+    state[idx].open = !state[idx].open;
+    render();
+  }
+});
+
+function updateProgress(){
+  const total = state.length;
+  const done = state.filter(s => s.checked).length;
+  const pct = total ? Math.round((done/total)*100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${done} / ${total} checked`;
+}
+
+function resetAll(){
+  state.forEach(s => s.checked = false);
+  render();
+}
+
+render();
+</script>
+</body>
+</html>
