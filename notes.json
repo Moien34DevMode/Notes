@@ -7,11 +7,11 @@
     {
         "name": "ML notes",
         "description": "Machine Learning notes and tutorials.",
-        "url": "notes/ml/ml.html"
+        "url": "notes/ML.html"
     },
     {
         "name": "ai assistant infrastructure estimate",
         "description": "AI Assistant Infrastructure Estimate",
-        "url": "notes/NetworkTroubleShootingChecklist.html"
+        "url": "notes/legal_ai_infrastructure_estimate.html"
     }
 ]
