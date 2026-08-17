@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html dir="rtl" lang="fa">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>دستیار هوش مصنوعی حقوقی — تخمین هزینه‌های زیرساختی و اجزای محصول</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --ink:#172033;
+    --muted:#5b6474;
+    --line:#d9dee8;
+    --soft:#f5f7fa;
+    --soft2:#eef2f7;
+    --navy:#1f3a5f;
+    --navy2:#2f527f;
+    --green:#2e6b55;
+    --amber:#8b651a;
+    --red:#8a3e3e;
+    --paper:#ffffff;
+  }
+  *{box-sizing:border-box}
+  html{background:#d9dce1; scroll-behavior:smooth}
+  body{
+    margin:0;
+    color:var(--ink);
+    font-family:"Vazirmatn",Tahoma,Arial,sans-serif;
+    font-size:10.7pt;
+    line-height:1.7;
+    font-variant-numeric:tabular-nums;
+  }
+  a{color:var(--navy2); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .page{
+    width:210mm;
+    height:296mm;
+    margin:8mm auto;
+    background:var(--paper);
+    padding:15mm 16mm 14mm 16mm;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 2px 14px rgba(0,0,0,.14);
+    break-after:page;
+    page-break-after:always;
+  }
+  .page:last-child{break-after:auto;page-break-after:auto}
+  .page-footer{
+    position:absolute;
+    right:16mm;
+    left:16mm;
+    bottom:7mm;
+    border-top:1px solid var(--line);
+    padding-top:2mm;
+    display:flex;
+    justify-content:space-between;
+    color:#707887;
+    font-size:8.5pt;
+  }
+  .doc-title-mini{font-weight:600;color:#4b5565}
+  h1,h2,h3,h4{margin:0;color:var(--ink);line-height:1.45}
+  h1{font-size:24pt;font-weight:800;letter-spacing:-.3px}
+  h2{font-size:18pt;font-weight:800;margin-bottom:5mm}
+  h3{font-size:12.6pt;font-weight:750;margin:3mm 0 1.5mm}
+  h4{font-size:10.8pt;font-weight:700;margin:2mm 0 1mm}
+  p{margin:0 0 2.2mm}
+  ul,ol{margin:1.2mm 0 2mm; padding-right:6mm}
+  li{margin:.7mm 0}
+  .lead{font-size:11.4pt;color:#3e4857;line-height:1.85}
+  .small{font-size:8.8pt;color:var(--muted)}
+  .tiny{font-size:8.1pt;color:var(--muted)}
+  .ltr{direction:ltr;unicode-bidi:embed;text-align:left}
+  .en{direction:ltr;unicode-bidi:isolate;display:inline-block;font-family:Arial,sans-serif}
+  .rule{height:1px;background:var(--line);margin:4mm 0}
+  .eyebrow{font-size:9pt;letter-spacing:.2px;color:var(--navy2);font-weight:700;margin-bottom:2mm}
+  .section-no{display:inline-flex;width:8mm;height:8mm;align-items:center;justify-content:center;border:1px solid var(--navy);color:var(--navy);font-weight:800;border-radius:50%;font-size:9pt;margin-left:2mm}
+  .badge{display:inline-block;border:1px solid #cbd3df;background:#f8fafc;border-radius:12px;padding:.4mm 2.2mm;font-size:8.3pt;color:#4d5969;margin-left:1mm}
+  .note,.warning,.success{
+    border-right:3px solid var(--navy2);
+    background:var(--soft);
+    padding:2.4mm 3mm;
+    margin:2.5mm 0;
+    border-radius:2px;
+  }
+  .warning{border-color:var(--amber);background:#fbf8ef}
+  .success{border-color:var(--green);background:#f1f7f4}
+  .note strong,.warning strong,.success strong{color:var(--ink)}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:3mm}
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm}
+  .card{border:1px solid var(--line);background:#fff;padding:3mm;border-radius:3px}
+  .card.soft{background:var(--soft)}
+  .card h3{margin-top:0}
+  .metric{font-size:17pt;font-weight:800;color:var(--navy);line-height:1.3}
+  .metric-label{font-size:8.5pt;color:var(--muted);margin-top:.5mm}
+  table{width:100%;border-collapse:collapse;margin:2mm 0 3mm;font-size:9.2pt}
+  th,td{border:1px solid var(--line);padding:1.55mm 2mm;vertical-align:top}
+  th{background:var(--soft2);font-weight:750;color:#344053}
+  .compact th,.compact td{padding:1.1mm 1.6mm;font-size:8.6pt}
+  .num{direction:ltr;text-align:center;white-space:nowrap;font-family:"Vazirmatn",Tahoma,sans-serif}
+  .center{text-align:center}
+  .cover{display:flex;flex-direction:column;height:100%;padding-top:9mm}
+  .cover .topline{width:26mm;height:1.2mm;background:var(--navy);margin-bottom:7mm}
+  .cover .subtitle{font-size:14pt;font-weight:500;color:#566071;margin-top:2mm}
+  .cover .meta{margin-top:10mm;font-size:11pt;color:#4f5968}
+  .cover .scenario-box{margin-top:15mm;border-top:1px solid var(--line);padding-top:5mm;display:grid;grid-template-columns:1fr 1fr;gap:7mm}
+  .cover .sources{margin-top:auto;margin-bottom:12mm;border-top:1px solid var(--line);padding-top:4mm;font-size:8.5pt;color:#5e6876}
+  .scenario-list{counter-reset:scenario;list-style:none;padding:0;margin:0}
+  .scenario-list li{counter-increment:scenario;padding:1.2mm 0;border-bottom:1px dotted #d8dde5}
+  .scenario-list li:before{content:counter(scenario) ".";display:inline-block;width:7mm;font-weight:800;color:var(--navy)}
+  .toc{margin-top:7mm;border-top:1px solid var(--line)}
+  .toc a{display:flex;align-items:center;padding:3.5mm 0;border-bottom:1px solid var(--line);color:var(--ink)}
+  .toc .t-title{font-weight:650}
+  .toc .dots{flex:1;border-bottom:1px dotted #aab1bd;margin:0 3mm 1mm}
+  .toc .pnum{min-width:10mm;text-align:left;font-weight:800;color:var(--navy)}
+  .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5mm;margin:2mm 0 4mm}
+  .pillar{border-top:3px solid var(--navy2);background:var(--soft);padding:2.5mm 2.8mm;min-height:24mm}
+  .pillar .p-title{font-weight:800;font-size:10.5pt;margin-bottom:1mm}
+  .flow{display:flex;align-items:stretch;gap:1.3mm;margin:3mm 0;direction:rtl}
+  .flow .box{flex:1;border:1px solid #cfd6e1;background:#fff;border-radius:2px;padding:2mm 1.7mm;text-align:center;min-height:18mm;display:flex;flex-direction:column;justify-content:center}
+  .flow .box strong{font-size:9pt}
+  .flow .box span{font-size:7.8pt;color:var(--muted);line-height:1.45;margin-top:.5mm}
+  .flow .arrow{width:5mm;display:flex;align-items:center;justify-content:center;color:#7b8798;font-size:14pt;flex:0 0 5mm}
+  .timeline{margin:3mm 0 1mm;position:relative;padding-top:2mm}
+  .timeline .weeks{display:grid;grid-template-columns:repeat(4,1fr);font-size:8pt;color:#657080;margin-right:31mm}
+  .timeline .track{display:grid;grid-template-columns:29mm repeat(4,1fr);align-items:center;margin:1.4mm 0;gap:1mm}
+  .timeline .label{font-size:8.5pt;font-weight:650}
+  .bar{height:6mm;background:var(--soft2);border:1px solid #cfd6e1;position:relative;border-radius:2px;overflow:hidden;grid-column:span 4}
+  .bar span{position:absolute;top:0;bottom:0;background:#6a7f9e;opacity:.86}
+  .bar.green span{background:#5d806f}.bar.amber span{background:#a4874a}.bar.red span{background:#966060}
+  .timeline6 .weeks{grid-template-columns:repeat(6,1fr)}
+  .timeline6 .track{grid-template-columns:29mm repeat(6,1fr)}
+  .timeline6 .bar{grid-column:span 6}
+  .timeline8 .weeks{grid-template-columns:repeat(8,1fr)}
+  .timeline8 .track{grid-template-columns:29mm repeat(8,1fr)}
+  .timeline8 .bar{grid-column:span 8}
+  .proscons{display:grid;grid-template-columns:1fr 1fr;gap:3mm;margin-top:3mm}
+  .pros,.cons{border:1px solid var(--line);padding:2.5mm 3mm}
+  .pros{border-top:3px solid var(--green)}.cons{border-top:3px solid var(--red)}
+  .pros h3,.cons h3{margin:0 0 1.5mm;font-size:10.5pt}
+  .pros ul,.cons ul{font-size:8.8pt;margin-bottom:0}
+  .formula{direction:ltr;text-align:center;font-family:Consolas,"Courier New",monospace;background:#f8fafc;border:1px solid var(--line);padding:2mm;margin:1.5mm 0;font-size:8.8pt}
+  .architecture{border:1px solid var(--line);padding:2.5mm;background:#fbfcfd;margin:2mm 0}
+  .arch-row{display:grid;grid-template-columns:repeat(4,1fr);gap:2mm;margin:1.5mm 0}
+  .arch-node{border:1px solid #cfd6e1;background:#fff;padding:2mm;text-align:center;font-size:8.5pt;min-height:15mm;display:flex;align-items:center;justify-content:center}
+  .arch-node.primary{border-top:3px solid var(--navy)}
+  .costbox{background:#f8fafc;border:1px solid var(--line);padding:2.5mm;margin:2mm 0}
+  .costline{display:flex;justify-content:space-between;border-bottom:1px dotted #c9d0da;padding:1mm 0;font-size:9pt}
+  .costline:last-child{border-bottom:none;font-weight:800;color:var(--navy)}
+  .footnotes{font-size:7.7pt;line-height:1.55;color:#687282;margin-top:2mm}
+  .source-link{word-break:break-word}
+  .check{color:var(--green);font-weight:800}.cross{color:var(--red);font-weight:800}
+  .scenario-head{display:flex;align-items:flex-start;justify-content:space-between;gap:5mm;margin-bottom:2mm}
+  .scenario-head .tag{border:1px solid #c7d0dc;background:#f7f9fb;padding:1mm 2mm;font-size:8pt;color:#536071;white-space:nowrap}
+  .nowrap{white-space:nowrap}
+  .dense{font-size:9.9pt;line-height:1.58;padding-top:13mm;padding-bottom:13mm}
+  .dense h2{font-size:16.8pt;margin-bottom:3.5mm}
+  .dense h3{font-size:11.3pt;margin:2mm 0 1mm}
+  .dense p{margin-bottom:1.4mm}
+  .dense table{margin:1.2mm 0 2mm}
+  .dense .compact th,.dense .compact td{padding:.85mm 1.35mm;font-size:8.05pt;line-height:1.45}
+  .dense .success,.dense .warning,.dense .note{padding:1.7mm 2.3mm;margin:1.6mm 0}
+  @media print{
+    @page{size:A4;margin:0}
+    html,body{background:#fff}
+    body{margin:0}
+    .page{margin:0;box-shadow:none;width:210mm;height:296mm;break-after:page;page-break-after:always}
+    .page:last-child{break-after:auto;page-break-after:auto}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a{text-decoration:none;color:inherit}
+  }
+
+  .privacy-compact{padding:2.2mm 3mm !important; margin:2mm 0 !important; line-height:1.55;}
+  #api-release .proscons{margin-top:2.5mm;}
+  @media print{#api-release{font-size:10.3pt;} #api-release .architecture{margin:2.5mm 0;} #api-release .timeline{margin-top:2mm;}}
+
+  /* Print-fit refinements */
+  #api-release .lead{font-size:10.8pt;line-height:1.72;}
+  #api-release h3{margin:2.2mm 0 1.1mm;}
+  #api-release .grid3 .card{padding:2.4mm;}
+  #api-release .grid3 .small{font-size:8.35pt;line-height:1.55;}
+  #api-release .proscons{gap:2.5mm;margin-top:2mm;}
+  #api-release .pros,#api-release .cons{padding:2mm 2.6mm;}
+  #api-release .pros ul,#api-release .cons ul{font-size:8.25pt;line-height:1.5;margin-top:.8mm;}
+  #api-release .pros li,#api-release .cons li{margin:.35mm 0;}
+  #costs{font-size:9.35pt;line-height:1.48;padding-top:11mm;padding-bottom:12mm;}
+  #costs h2{font-size:16.2pt;margin-bottom:2.4mm;}
+  #costs h3{font-size:10.9pt;margin:1.45mm 0 .7mm;}
+  #costs p{margin-bottom:1mm;}
+  #costs table{margin:.75mm 0 1.3mm;}
+  #costs .compact th,#costs .compact td{padding:.55mm 1.05mm;font-size:7.65pt;line-height:1.35;}
+  #costs .success,#costs .warning,#costs .note{padding:1.25mm 1.9mm;margin:1.15mm 0;}
+  #costs .footnotes{font-size:6.9pt;line-height:1.35;margin-top:.8mm;}
+
+  /* Print-fit corrections: keep all content clear of the footer line on A4. */
+  #local-release{padding-top:14mm;padding-bottom:13mm;}
+  #local-release h2{margin-bottom:4mm;}
+  #local-release h3{margin:2.5mm 0 1mm;}
+  #local-release .lead{line-height:1.78;margin-bottom:1.8mm;}
+  #local-release .architecture{padding:2mm;margin:1.8mm 0;}
+  #local-release .arch-row{margin:1mm 0;}
+  #local-release .arch-node{min-height:14mm;padding:1.7mm;}
+  #local-release table{margin:1.2mm 0 1.7mm;}
+  #local-release .compact th,#local-release .compact td{padding:.9mm 1.4mm;line-height:1.4;}
+  #local-release .warning{padding:1.8mm 2.5mm;margin:1.5mm 0;line-height:1.5;}
+  #local-release .timeline{margin:2mm 0 .5mm;padding-top:1mm;}
+  #local-release .timeline .track{margin:1mm 0;}
+  #local-release .bar{height:5.5mm;}
+  #local-release .proscons{margin-top:1.8mm;gap:2.5mm;}
+  #local-release .pros,#local-release .cons{padding:2mm 2.6mm;}
+  #local-release .pros h3,#local-release .cons h3{margin:0 0 1mm;}
+  #local-release .pros ul,#local-release .cons ul{line-height:1.45;}
+  #local-release .pros li,#local-release .cons li{margin:.35mm 0;}
+
+  #load{padding-top:14mm;padding-bottom:13mm;}
+  #load h2{margin-bottom:4mm;}
+  #load h3{margin:2.5mm 0 1mm;}
+  #load p{margin-bottom:1.7mm;}
+  #load .grid2{gap:2.6mm;}
+  #load .card{padding:2.6mm;}
+  #load .warning,#load .success{padding:1.8mm 2.5mm;margin:1.5mm 0;line-height:1.5;}
+  #load table{margin:1.2mm 0 1.8mm;}
+  #load .compact th,#load .compact td{padding:.85mm 1.25mm;line-height:1.38;}
+  #load .small{line-height:1.5;}
+  #load .formula{padding:1.5mm;margin:.9mm 0;line-height:1.4;}
+
+  /* Page 8: add a little more breathing room above the footer as a print safeguard. */
+  #client-hosting h3{margin:1.35mm 0 .65mm;}
+  #client-hosting .architecture{margin:1.5mm 0;padding:2.1mm;}
+  #client-hosting .arch-row{margin:1.05mm 0;}
+  #client-hosting .costbox{margin:1.3mm 0;padding:2.1mm;}
+  #client-hosting .costline{padding:.8mm 0;}
+  #client-hosting .footnotes{font-size:6.7pt;line-height:1.32;margin-top:.6mm;}
+</style>
+</head>
+<body>
+<section class="page cover" data-title="جلد" id="cover">
+<div class="topline"></div>
+<div class="eyebrow">گزارش برآورد فنی و زیرساختی</div>
+<h1>دستیار هوش مصنوعی حقوقی</h1>
+<div class="subtitle">تخمین هزینه‌های زیرساختی و اجزای محصول</div>
+<div class="meta">
+<div><strong>معین طالبی</strong></div>
+<div>دوشنبه، ۲۶ مرداد ۱۴۰۵</div>
+</div>
+<div class="scenario-box">
+<div>
+<h3>سناریوهای مطرح‌شده در این سند</h3>
+<ol class="scenario-list">
+<li><span class="en">MVP</span></li>
+<li><span class="en">Release – API-Based LLM</span></li>
+<li><span class="en">Release – Local-LLM</span></li>
+<li><span class="en">Release – Fine-Tuned Local LLM</span></li>
+</ol>
+</div>
+<div>
+<h3>عوامل مؤثر بر عملکرد نهایی سامانه</h3>
+<ol>
+<li>حجم پایگاه دانش</li>
+<li>کیفیت شبکه و پایداری ارتباط</li>
+<li>دقت مدل <span class="en">LLM</span> مورد استفاده</li>
+<li>پیچیدگی پرسش‌های کاربران</li>
+</ol>
+<div class="note small"><strong>ملاحظه: </strong>این سند شامل برآورد اولیه ظرفیت و هزینه است. مقادیر نهایی باید پیش از تصمیم اجرایی، بر اساس آزمون بار، حجم واقعی داده و تعرفه‌های معتبر در زمان اجرا بازبینی شوند.</div>
+</div>
+</div>
+<div class="sources">
+<div><strong>منبع قیمت سرویس زیرساختی API:</strong> <a class="source-link" href="https://gapgpt.app/platform-v2/pricing">قیمت API هوش مصنوعی | GPT، Claude و Gemini در گپ جی‌پی‌تی</a></div>
+<div><strong>منبع قیمت سرویس‌های اجاره GPU:</strong> <a class="source-link" href="https://ferdowsi.cloud/fa/services/gpu">گرافیک ابری، خرید و اجاره سرور GPU ساعتی با تست رایگان — ابر فردوسی</a></div>
+</div>
+<div class="page-footer"><span class="doc-title-mini">دستیار هوش مصنوعی حقوقی</span><span class="page-number"></span></div>
+</section>
+<section class="page" data-title="فهرست" id="toc">
+<div class="eyebrow">فهرست مطالب</div>
+<h2>فهرست</h2>
+<p class="lead">شماره صفحات بر اساس ترتیب بخش‌های سند به‌صورت خودکار درج می‌شود. هر عنوان فهرست به بخش متناظر پیوند داده شده است.</p>
+<div class="toc">
+<a data-toc-target="#mvp" href="#mvp"><span class="t-title">۱. سناریوی MVP — معماری، مسیر پرسش و برنامه یک‌ماهه</span><span class="dots"></span><span class="pnum"></span></a>
+<a data-toc-target="#api-release" href="#api-release"><span class="t-title">۲. Release — API-Based LLM</span><span class="dots"></span><span class="pnum"></span></a>
+<a data-toc-target="#local-release" href="#local-release"><span class="t-title">۳. Release — Local-LLM</span><span class="dots"></span><span class="pnum"></span></a>
+<a data-toc-target="#finetuned-release" href="#finetuned-release"><span class="t-title">۴. Release — Fine-Tuned Local LLM</span><span class="dots"></span><span class="pnum"></span></a>
+<a data-toc-target="#load" href="#load"><span class="t-title">۵. تخمین درخواست، همزمانی و Load Balancing</span><span class="dots"></span><span class="pnum"></span></a>
+<a data-toc-target="#client-hosting" href="#client-hosting"><span class="t-title">۶. Client Hosting — اجزا، RAG و هزینه زیرساخت</span><span class="dots"></span><span class="pnum"></span></a>
+<a data-toc-target="#costs" href="#costs"><span class="t-title">۷. تخمین توکن، کردیت API و سخت‌افزار سناریوهای Local</span><span class="dots"></span><span class="pnum"></span></a>
+</div>
+<div class="warning" style="margin-top:12mm"><strong>راهنمای مطالعه: </strong>سناریوی MVP به‌عنوان نسخه عملیاتی اولیه در نظر گرفته شده است. سه سناریوی Release، گزینه‌های توسعه همان هسته محصول را از منظر هزینه زیرساخت، محل پردازش داده، کیفیت مدل و زمان اجرا مقایسه می‌کنند.</div>
+<div class="page-footer"><span class="doc-title-mini">فهرست</span><span class="page-number"></span></div>
+</section>
+<section class="page" data-title="سناریوی MVP" id="mvp">
+<div class="scenario-head">
+<div><div class="eyebrow">سناریو ۱</div><h2>فاز MVP — نسخه عملیاتی اولیه</h2></div>
+<div class="tag">برآورد زمان اجرا: حدود ۱ ماه</div>
+</div>
+<p class="lead">در این مرحله، مسیر اصلی کاربر، بازیابی دانش و تولید پاسخ به‌صورت عملیاتی قابل استفاده خواهد بود. تکمیل این زنجیره در MVP سبب می‌شود گذار به نسخه Release عمدتاً از طریق افزایش ظرفیت زیرساخت، تکمیل پایش عملیاتی و اعمال الزامات پایداری و امنیت انجام شود و نیاز به بازطراحی اساسی محصول محدود باشد.</p>
+<div class="pillars">
+<div class="pillar"><div class="p-title"><span class="en">Data Cleanup</span></div><div class="small">پاک‌سازی و یکسان‌سازی داده، حذف نسخه‌های تکراری، قطعه‌بندی اسناد و ثبت فراداده و مرجع.</div></div>
+<div class="pillar"><div class="p-title"><span class="en">Client Hosting</span></div><div class="small">پیاده‌سازی API محصول، مدیریت نشست و احراز هویت، بازیابی اطلاعات، ساخت Context، ثبت رویدادها و اتصال به LLM.</div></div>
+<div class="pillar"><div class="p-title"><span class="en">Context Engineering</span></div><div class="small">طراحی System Prompt، ضوابط استناد، انتخاب و فشرده‌سازی شواهد و ارزیابی کیفیت پاسخ.</div></div>
+</div>
+<h3>مسیر پرسش کاربر تا نهایی‌سازی Prompt</h3>
+<div class="flow">
+<div class="box"><strong>پرسش کاربر</strong><span>متن + سابقه مرتبط نشست</span></div><div class="arrow">←</div>
+<div class="box"><strong>Embedding</strong><span><span class="en">multilingual-e5</span> → بردار پرسش</span></div><div class="arrow">←</div>
+<div class="box"><strong>Vector Search</strong><span>یافتن نزدیک‌ترین Chunkها در Vector DB</span></div><div class="arrow">←</div>
+<div class="box"><strong>Rerank / Filter</strong><span>مرتب‌سازی شواهد + حذف موارد ضعیف</span></div><div class="arrow">←</div>
+<div class="box"><strong>Context Builder</strong><span>Compression + citation metadata</span></div><div class="arrow">←</div>
+<div class="box"><strong>Final Prompt</strong><span>Policy + سؤال + شواهد + قالب پاسخ</span></div>
+</div>
+<p class="small">پرسش کاربر ابتدا به نمایش برداری تبدیل می‌شود و نزدیک‌ترین قطعات معنایی در Vector DB بازیابی می‌شوند. نتایج پس از رتبه‌بندی مجدد و حذف بخش‌های کم‌ارتباط، به Context فشرده و مستند برای ارسال به LLM تبدیل خواهند شد.</p>
+<h3>برنامه زمانی پیشنهادی تا پایان ماه نخست</h3>
+<div class="timeline">
+<div class="weeks"><span>هفته ۱</span><span>هفته ۲</span><span>هفته ۳</span><span>هفته ۴</span></div>
+<div class="track"><div class="label">Data Cleanup</div><div class="bar green"><span style="right:0;width:90%"></span></div></div>
+<div class="track"><div class="label">Client Hosting</div><div class="bar"><span style="right:0;width:100%"></span></div></div>
+<div class="track"><div class="label">Context Eng.</div><div class="bar amber"><span style="right:18%;width:76%"></span></div></div>
+<div class="track"><div class="label">Eval / QA</div><div class="bar red"><span style="right:58%;width:42%"></span></div></div>
+</div>
+<div class="grid2" style="margin-top:3mm">
+<div class="success"><strong>خروجی مورد انتظار پایان ماه:</strong> قابلیت جست‌وجوی دانش، تولید پاسخ مبتنی بر Context، استناد داخلی، کلاینت عملیاتی، ثبت رویدادها و مجموعه آزمون اولیه.</div>
+<div class="warning"><strong>ملاحظه زمانی: </strong>در صورت پایین بودن کیفیت داده‌ها، وجود اسناد اسکن‌شده، ناسازگاری ساختاری یا فقدان فراداده، مرحله Data Cleanup می‌تواند حدود ۱ تا ۳ هفته به زمان اجرا اضافه کند.</div>
+</div>
+<div class="page-footer"><span class="doc-title-mini">سناریوی MVP</span><span class="page-number"></span></div>
+</section>
+<section class="page" data-title="Release – API-Based LLM" id="api-release">
+<div class="scenario-head">
+<div><div class="eyebrow">سناریو ۲</div><h2><span class="en">Release – API-Based LLM</span></h2></div>
+<div class="tag">برآورد زمان پس از MVP: حدود ۳ تا ۴ هفته</div>
+</div>
+<p class="lead">در این سناریو، هسته MVP حفظ می‌شود و لایه سرویس برای بهره‌برداری در محیط Release توسعه می‌یابد. این توسعه شامل چند Instance، Load Balancer، Queue، Monitoring، سازوکار Failover و Model Routing است. به‌منظور کنترل هزینه، تخصیص درخواست‌ها به مدل‌ها بر اساس سطح پیچیدگی انجام می‌شود.</p>
+<div class="architecture">
+<div class="arch-row">
+<div class="arch-node primary">Client / Web</div><div class="arch-node primary">API Gateway + Auth</div><div class="arch-node primary">RAG / Context Engine</div><div class="arch-node primary">Model Router</div>
+</div>
+<div class="arch-row">
+<div class="arch-node">Qwen 3.6<br/><span class="tiny">مسیر عادی / کم‌هزینه</span></div><div class="arch-node">gpt-5.6-terra<br/><span class="tiny">پرونده پیچیده / حساس</span></div><div class="arch-node">gpt-5.6-sol<br/><span class="tiny">تصویر یا پردازش پیشرفته</span></div><div class="arch-node">Observability<br/><span class="tiny">Cost / latency / quality</span></div>
+</div>
+</div>
+<h3>سازوکارهای کنترل هزینه در Release</h3>
+<div class="grid3">
+<div class="card soft"><strong>۱. Routing</strong><div class="small">در برآورد پایه، ۸۵٪ درخواست‌های استاندارد به Qwen 3.6 و ۱۵٪ درخواست‌های پیچیده به Terra تخصیص داده می‌شود.</div></div>
+<div class="card soft"><strong>۲. Context Compression</strong><div class="small">حذف قطعات تکراری و نگهداری شواهد لازم با هدف کاهش حجم توکن ورودی، بدون حذف اطلاعات مرجع.</div></div>
+<div class="card soft"><strong>۳. Cache</strong><div class="small">استفاده از Cache برای بخش‌های ثابت System/Policy در مدل‌های پشتیبان این قابلیت؛ داده اختصاصی هر پرونده در Cache عمومی قرار نمی‌گیرد.</div></div>
+</div>
+<h3>ملاحظات حریم داده و محل پردازش</h3>
+<div class="note privacy-compact"><strong>ملاحظه: </strong>در استفاده از API ثالث، پرسش و Context در زیرساخت ارائه‌دهنده پردازش می‌شود. استفاده از سرویس میزبانی‌شده در ایران، مانند GapGPT Qwen 3.6، می‌تواند محل پردازش را داخل کشور نگه دارد؛ با این حال داده همچنان خارج از زیرساخت سازمان است و الزامات نگهداری و ثبت داده باید در قرارداد و ارزیابی امنیتی بررسی شود.</div>
+<h3>برنامه زمانی Release مبتنی بر API</h3>
+<div class="timeline">
+<div class="weeks"><span>هفته ۱</span><span>هفته ۲</span><span>هفته ۳</span><span>هفته ۴</span></div>
+<div class="track"><div class="label">Hardening</div><div class="bar"><span style="right:0;width:55%"></span></div></div>
+<div class="track"><div class="label">Routing/Cache</div><div class="bar green"><span style="right:15%;width:65%"></span></div></div>
+<div class="track"><div class="label">Load Test</div><div class="bar amber"><span style="right:52%;width:35%"></span></div></div>
+<div class="track"><div class="label">Release QA</div><div class="bar red"><span style="right:72%;width:28%"></span></div></div>
+</div>
+<div class="proscons">
+<div class="pros"><h3>مزیت‌های اصلی</h3><ul><li>کوتاه‌تر بودن زمان گذار از MVP به محیط Production در مقایسه با سناریوهای Local.</li><li>امکان استفاده انتخابی از مدل‌های پیشرفته‌تر برای درخواست‌های با پیچیدگی بالاتر.</li><li>نیاز محدود به سرمایه‌گذاری سخت‌افزاری اختصاصی و سهولت بیشتر در مقیاس‌پذیری.</li></ul></div>
+<div class="cons"><h3>محدودیت‌ها و ملاحظات</h3><ul><li>پردازش پرسش و Context در زیرساخت ارائه‌دهنده سرویس API.</li><li>وابستگی عملیاتی به کیفیت شبکه، تعرفه و SLA ارائه‌دهنده سرویس.</li><li>هزینه متناسب با میزان مصرف بوده و مستلزم تعریف سقف بودجه و کنترل مصرف است.</li></ul></div>
+</div>
+<div class="page-footer"><span class="doc-title-mini">Release – API-Based LLM</span><span class="page-number"></span></div>
+</section>
+<section class="page" data-title="Release – Local-LLM" id="local-release">
+<div class="scenario-head">
+<div><div class="eyebrow">سناریو ۳</div><h2><span class="en">Release – Local-LLM</span></h2></div>
+<div class="tag">برآورد زمان اجرا: حدود ۶ تا ۱۰ هفته</div>
+</div>
+<p class="lead">در این سناریو، LLM در زیرساخت اختصاصی یا اجاره‌ای تحت کنترل سازمان اجرا می‌شود. در نتیجه، پرسش، Context، رویدادهای ثبت‌شده و پاسخ می‌توانند در محدوده زیرساخت سازمان نگهداری و پردازش شوند. در مقابل، نیاز به منابع GPU و الزامات عملیاتی MLOps به‌طور قابل ملاحظه‌ای افزایش می‌یابد.</p>
+<div class="architecture">
+<div class="arch-row">
+<div class="arch-node primary">Client Hosting</div><div class="arch-node primary">Vector + Graph Retrieval</div><div class="arch-node primary">Local Inference Gateway</div><div class="arch-node primary">Local LLM on GPU</div>
+</div>
+<div class="arch-row">
+<div class="arch-node">Model Weights</div><div class="arch-node">vLLM / Serving</div><div class="arch-node">GPU Metrics</div><div class="arch-node">Private Logs</div>
+</div>
+</div>
+<h3>الزامات افزوده نسبت به Release مبتنی بر API</h3>
+<table class="compact">
+<tr><th>لایه</th><th>فعالیت مورد نیاز</th><th>اثر</th></tr>
+<tr><td>انتخاب مدل</td><td>ارزیابی چند مدل و چند سطح Quantization با استفاده از مجموعه پرسش‌های حقوقی نماینده.</td><td>انتخاب نقطه تعادل میان دقت، VRAM و Latency</td></tr>
+<tr><td>Inference</td><td>راه‌اندازی Serving، batching، KV-cache، محدودیت Context و کنترل OOM.</td><td>نیاز به GPU و تنظیم مستمر سرویس</td></tr>
+<tr><td>عملیات</td><td>Health Check، failover، نسخه‌بندی مدل، patch امنیتی و مانیتورینگ GPU.</td><td>ایجاد چرخه MLOps درون‌سازمانی</td></tr>
+<tr><td>کیفیت</td><td>Regression suite برای پاسخ حقوقی، استناد و hallucination.</td><td>کاهش فاصله کیفی با مدل‌های پیشرفته API</td></tr>
+</table>
+<div class="warning"><strong>ملاحظه کیفی: </strong>اجرای محلی به‌تنهایی به معنای کاهش دقت نیست؛ با این حال، در محدوده بودجه سخت‌افزاری متعارف، مدل قابل استقرار محلی ممکن است در استدلال‌های پیچیده و پایداری پاسخ نسبت به مدل‌های پیشرفته API عملکرد پایین‌تری داشته باشد. طراحی مناسب RAG و ارزیابی منظم می‌تواند بخشی از این فاصله را در دامنه حقوقی کاهش دهد.</div>
+<h3>برنامه زمانی پیشنهادی</h3>
+<div class="timeline timeline6">
+<div class="weeks"><span>۱</span><span>۲</span><span>۳</span><span>۴</span><span>۵</span><span>۶–۱۰</span></div>
+<div class="track"><div class="label">Benchmark</div><div class="bar"><span style="right:0;width:35%"></span></div></div>
+<div class="track"><div class="label">GPU/Serving</div><div class="bar green"><span style="right:15%;width:55%"></span></div></div>
+<div class="track"><div class="label">RAG Adapt</div><div class="bar amber"><span style="right:28%;width:48%"></span></div></div>
+<div class="track"><div class="label">Load/Eval</div><div class="bar red"><span style="right:62%;width:38%"></span></div></div>
+</div>
+<div class="proscons">
+<div class="pros"><h3>مزیت‌های اصلی</h3><ul><li>امکان نگهداری و پردازش داده در زیرساخت تحت کنترل سازمان.</li><li>حذف وابستگی مستقیم هزینه استنتاج به تعرفه API خارجی.</li><li>کنترل مستقیم بر ثبت رویدادها، نسخه مدل و سیاست نگهداری داده.</li></ul></div>
+<div class="cons"><h3>محدودیت‌ها و ملاحظات</h3><ul><li>هزینه منابع GPU در بار فعلی به‌طور معناداری بیشتر از سناریوی API است.</li><li>نیاز به توانمندی MLOps و ظرفیت‌سنجی مستمر.</li><li>افزایش اندازه مدل یا طول Context به افزایش مستقیم نیاز سخت‌افزاری منجر می‌شود.</li></ul></div>
+</div>
+<div class="page-footer"><span class="doc-title-mini">Release – Local-LLM</span><span class="page-number"></span></div>
+</section>
+<section class="page" data-title="Release – Fine-Tuned Local LLM" id="finetuned-release">
+<div class="scenario-head">
+<div><div class="eyebrow">سناریو ۴</div><h2><span class="en">Release – Fine-Tuned Local LLM</span></h2></div>
+<div class="tag">برآورد زمان اجرا: حدود ۱۲ تا ۱۸ هفته</div>
+</div>
+<p class="lead">این سناریو الزامات استقرار Local-LLM را حفظ کرده و یک چرخه آموزش دامنه‌ای به آن اضافه می‌کند. Fine-Tuning می‌تواند کیفیت مدل را در ساختار پاسخ حقوقی، پیروی از دستور، طبقه‌بندی مسائل و الگوهای پرتکرار بهبود دهد؛ با این حال، برای دانش متغیر و مقررات به‌روز همچنان به RAG نیاز خواهد بود.</p>
+<h3>چرخه توسعه و ارزیابی</h3>
+<div class="flow">
+<div class="box"><strong>Clean Corpus</strong><span>اسناد قابل اعتماد</span></div><div class="arrow">←</div>
+<div class="box"><strong>Training Set</strong><span>سؤال/پاسخ + مرجع</span></div><div class="arrow">←</div>
+<div class="box"><strong>Label / Review</strong><span>بازبینی حقوقی</span></div><div class="arrow">←</div>
+<div class="box"><strong>SFT / LoRA</strong><span>آموزش کنترل‌شده</span></div><div class="arrow">←</div>
+<div class="box"><strong>Eval</strong><span>Golden Set + Safety</span></div><div class="arrow">←</div>
+<div class="box"><strong>Serve</strong><span>نسخه‌بندی و Rollback</span></div>
+</div>
+<table class="compact">
+<tr><th>مرحله</th><th>فعالیت کلیدی</th><th>ریسک/کنترل</th></tr>
+<tr><td>Dataset Design</td><td>تعریف taxonomy مسائل حقوقی، قالب پاسخ و سطح استناد.</td><td>کیفیت پایین نمونه‌ها می‌تواند مستقیماً موجب افت رفتار مدل شود.</td></tr>
+<tr><td>Labeling</td><td>ساخت نمونه‌های باکیفیت و بازبینی توسط متخصص حقوقی.</td><td>این مرحله معمولاً بیشترین هزینه نیروی تخصصی را ایجاد می‌کند.</td></tr>
+<tr><td>Training</td><td>برای کنترل هزینه، استفاده از LoRA/QLoRA در اولویت است؛ Full Fine-Tuning صرفاً در صورت وجود توجیه فنی توصیه می‌شود.</td><td>نیاز موقت اما قابل ملاحظه به منابع GPU.</td></tr>
+<tr><td>Evaluation</td><td>مقایسه Base vs Fine-tuned روی Golden Set و آزمون عدم افت عمومی.</td><td>بهبود عملکرد باید با شاخص‌های کمی و مجموعه آزمون ثابت تأیید شود.</td></tr>
+<tr><td>Production</td><td>استفاده از زیرساخت Local همراه با نسخه جدید مدل و سازوکار Rollback.</td><td>هزینه Serving همچنان تابع اندازه مدل است.</td></tr>
+</table>
+<h3>برنامه زمانی پیشنهادی</h3>
+<div class="timeline timeline8">
+<div class="weeks"><span>۱–۲</span><span>۳–۴</span><span>۵–۶</span><span>۷–۸</span><span>۹–۱۰</span><span>۱۱–۱۲</span><span>۱۳–۱۵</span><span>۱۶–۱۸</span></div>
+<div class="track"><div class="label">Dataset</div><div class="bar"><span style="right:0;width:34%"></span></div></div>
+<div class="track"><div class="label">Label/Review</div><div class="bar green"><span style="right:12%;width:47%"></span></div></div>
+<div class="track"><div class="label">Training</div><div class="bar amber"><span style="right:45%;width:30%"></span></div></div>
+<div class="track"><div class="label">Eval/Red Team</div><div class="bar red"><span style="right:63%;width:29%"></span></div></div>
+<div class="track"><div class="label">Release</div><div class="bar"><span style="right:83%;width:17%"></span></div></div>
+</div>
+<div class="proscons">
+<div class="pros"><h3>مزیت‌های اصلی</h3><ul><li>امکان بهبود دقت دامنه‌ای در وظایف از پیش تعریف‌شده.</li><li>کنترل مستقیم بر داده و وزن‌های مدل.</li><li>امکان استانداردسازی ساختار پاسخ و رفتار مدل در حوزه حقوقی.</li></ul></div>
+<div class="cons"><h3>محدودیت‌ها و ملاحظات</h3><ul><li>بالاترین هزینه توسعه و منابع GPU در میان سناریوهای بررسی‌شده.</li><li>زمان توسعه بیشتر و وابستگی مستقیم به کیفیت Labeling و بازبینی تخصصی.</li><li>نیازمند چرخه مستمر ارزیابی، نسخه‌بندی و در صورت لزوم بازآموزی.</li></ul></div>
+</div>
+<div class="page-footer"><span class="doc-title-mini">Release – Fine-Tuned Local LLM</span><span class="page-number"></span></div>
+</section>
+<section class="page" data-title="تخمین بار و Load Balancing" id="load">
+<div class="eyebrow">ظرفیت‌سنجی</div>
+<h2>تخمین درخواست‌های ماهانه، همزمانی و Load Balancing</h2>
+<div class="grid2">
+<div class="card soft">
+<h3>داده مرجع اینترنت</h3>
+<p>بر اساس طرح آمارگیری منتسب به مرکز آمار ایران: ضریب نفوذ جمعیت کاربر اینترنت کشور <strong>۷۹٪</strong>، نقاط شهری <strong>۸۳٪</strong>، نقاط روستایی <strong>۶۶٪</strong> و دسترسی خانوار به اینترنت در محل سکونت حدود <strong>۸۰٪</strong> گزارش شده است.</p>
+<div class="tiny">منبع بازنشر داده: <a href="https://iranstatis.com/d0701-internet001/">IranStatis — وضعیت دسترسی به اینترنت</a></div>
+</div>
+<div class="card soft">
+<h3>داده مرجع تقاضای حقوقی</h3>
+<p>در گزارش سال ۱۴۰۴، رئیس کانون وکلای دادگستری مرکز از ارائه بیش از <strong>۱۷۴ هزار مشاوره حقوقی رایگان</strong> در طول یک سال خبر داده است.</p>
+<div class="tiny">منبع: <a href="https://www.irib-news.ir/fa/news/4526840/">خبرگزاری صدا و سیما — ارائه بیش از ۱۷۴ هزار مشاوره حقوقی رایگان</a></div>
+</div>
+</div>
+<div class="warning"><strong>ملاحظه روش‌شناختی: </strong>عدد ۱۷۴ هزار مربوط به یک کانال مشخص ارائه مشاوره در کانون وکلای مرکز است و نماینده کل بازار خدمات حقوقی ایران محسوب نمی‌شود. در این سند، این مقدار صرفاً به‌عنوان خط مبنای محافظه‌کارانه برای ظرفیت‌سنجی اولیه استفاده شده است.</div>
+<h3>محاسبه خط مبنا</h3>
+<table class="compact">
+<tr><th>مرحله</th><th>فرمول</th><th>نتیجه</th></tr>
+<tr><td>تقاضای سالانه قابل دسترس آنلاین</td><td class="num">174,000 × 0.79</td><td class="num">137,460 session/year</td></tr>
+<tr><td>نشست ماهانه</td><td class="num">137,460 ÷ 12</td><td class="num">11,455 session/month</td></tr>
+<tr><td>فرض پیام در هر نشست</td><td>میانگین ۴ پرسش/پیام کاربر در هر مشاوره</td><td class="num">4 calls/session</td></tr>
+<tr><td>فراخوان ماهانه LLM</td><td class="num">11,455 × 4</td><td class="num"><strong>45,820 calls/month</strong></td></tr>
+</table>
+<h3>از ماهانه تا درخواست همزمان</h3>
+<p class="small">فرض‌های ظرفیت‌سنجی عبارت‌اند از: تمرکز ۸۰٪ ترافیک در ۱۲ ساعت فعال روز، ضریب پیک معادل ۵ برابر میانگین ساعات فعال، متوسط زمان اشغال هر درخواست در مسیر Retrieval + LLM برابر با ۱۲ ثانیه و ضریب اطمینان ظرفیت معادل ۳ برابر.</p>
+<div class="formula">Active RPM = (45,820 × 0.80) ÷ (30 × 12 × 60) = 1.697 RPM</div>
+<div class="formula">Peak RPM = 1.697 × 5 = 8.485 RPM</div>
+<div class="formula">In-flight = 8.485 × (12 ÷ 60) = 1.697 → Design = ceil(1.697 × 3) = 6 concurrent</div>
+<table class="compact">
+<tr><th>مقیاس</th><th>Calls / ماه</th><th>Peak RPM</th><th>همزمانی طراحی</th><th>پیشنهاد App Nodes</th></tr>
+<tr><td>Baseline</td><td class="num">45,820</td><td class="num">8.49</td><td class="num">6</td><td>۲ Instance برای HA</td></tr>
+<tr><td>رشد ×۵</td><td class="num">229,100</td><td class="num">42.43</td><td class="num">26</td><td>۲ تا ۳ Instance + Autoscale</td></tr>
+<tr><td>رشد ×۱۰</td><td class="num">458,200</td><td class="num">84.85</td><td class="num">51</td><td>۳ تا ۵ Instance + Queue</td></tr>
+</table>
+<div class="success"><strong>معماری پیشنهادی Load Balancing:</strong> حداقل ۲ App Instance پشت Load Balancer، Redis برای Session/Rate Limit، Queue برای کارهای سنگین، Timeout و Circuit Breaker برای API مدل، و Autoscale بر اساس CPU، طول Queue و P95 latency. ظرفیت LLM خارجی مستقل از App Server است و باید Rate Limit قرارداد API نیز جداگانه کنترل شود.</div>
+<div class="page-footer"><span class="doc-title-mini">ظرفیت‌سنجی و Load Balancing</span><span class="page-number"></span></div>
+</section>
+<section class="page dense" data-title="Client Hosting" id="client-hosting">
+<div class="eyebrow">زیرساخت هسته محصول</div>
+<h2>Client Hosting — لایه واسط میان درخواست کاربر و موتور استنتاج LLM</h2>
+<p class="lead">Client Hosting صرفاً نقش میزبانی رابط کاربری را ندارد؛ این لایه مسئول دریافت و مدیریت درخواست، بازیابی دانش مرتبط، بهینه‌سازی Context، اعمال سیاست‌های امنیتی و ارسال درخواست نهایی به LLM است. کیفیت طراحی این بخش بر دقت پاسخ، مصرف توکن و قابلیت استناد اثر مستقیم دارد.</p>
+<div class="architecture">
+<div class="arch-row">
+<div class="arch-node primary">API + Session</div><div class="arch-node primary">Query Router</div><div class="arch-node primary">E5 Embedding</div><div class="arch-node primary">Vector DB</div>
+</div>
+<div class="arch-row">
+<div class="arch-node">Agentic RAG</div><div class="arch-node">GraphRAG</div><div class="arch-node">Reranker</div><div class="arch-node">Context Compression</div>
+</div>
+<div class="arch-row">
+<div class="arch-node">Prompt Builder</div><div class="arch-node">Policy / Guardrail</div><div class="arch-node">LLM Adapter</div><div class="arch-node">Logs / Metrics</div>
+</div>
+</div>
+<div class="grid3">
+<div class="card"><h3>Agentic RAG</h3><p class="small">در پرسش‌های چندمرحله‌ای، Agent ابزار یا ایندکس مورد نیاز را تعیین کرده، بازیابی‌های لازم را انجام می‌دهد و نتایج را پیش از تولید پاسخ تجمیع می‌کند. تعداد مراحل Agentic باید با سقف مصرف و محدودیت Latency کنترل شود.</p></div>
+<div class="card"><h3>GraphRAG</h3><p class="small">روابط میان قانون، ماده، تبصره، رأی، مرجع و موضوع در ساختار گرافی نگهداری می‌شود. در پرسش‌هایی که ارتباط میان چند سند اهمیت دارد، بازیابی گرافی در کنار Vector Search می‌تواند کیفیت Retrieval را بهبود دهد.</p></div>
+<div class="card"><h3>Compression</h3><p class="small">پس از Retrieval، شواهد تکراری یا کم‌ارتباط حذف شده و صرفاً بندهای مورد نیاز حفظ می‌شوند. این فرایند موجب کاهش حجم Context و مصرف توکن و افزایش تمرکز مدل بر شواهد مرتبط می‌شود.</p></div>
+</div>
+<h3>Embedding پیشنهادی</h3>
+<p>برای پردازش فارسی، مدل intfloat/multilingual-e5-large به‌عنوان گزینه مبنا برای Embedding در نظر گرفته شده است. اسناد به‌صورت Offline/Batch بردارسازی می‌شوند و در زمان پاسخ‌گویی صرفاً Embedding پرسش تولید خواهد شد. در بار پایه، اجرای این بخش بر CPU قابل قبول است و GPU اختصاصی برای E5 الزامی نیست؛ در مقیاس بالاتر یا در صورت نیاز به Latency کمتر، افزودن GPU سبک‌تر قابل بررسی است.</p>
+<h3>سرورهای محاسباتی پیشنهادی برای Release مبتنی بر API</h3>
+<table class="compact">
+<tr><th>نقش</th><th>پیشنهاد منابع</th><th>تعداد</th><th>کاربرد</th></tr>
+<tr><td>App / API Node</td><td class="num">8 vCPU / 16 GB RAM / 160 GB SSD</td><td class="num">2</td><td>API، Session، Context Builder، Routing و HA</td></tr>
+<tr><td>Retrieval / DB Node</td><td class="num">16 vCPU / 32 GB RAM / 320 GB SSD</td><td class="num">1</td><td>Vector DB، Graph DB سبک، Redis/Queue یا تفکیک منطقی سرویس‌ها</td></tr>
+</table>
+<div class="costbox">
+<div class="costline"><span>۲ × پلن ۸ vCPU / 16GB</span><span class="num">2 × 5,750,000 = 11,500,000 تومان/ماه</span></div>
+<div class="costline"><span>۱ × پلن ۱۶ vCPU / 32GB</span><span class="num">10,050,000 تومان/ماه</span></div>
+<div class="costline"><span>جمع خام</span><span class="num">21,550,000 تومان/ماه</span></div>
+<div class="costline"><span>بودجه پیشنهادی با ۱۵٪ ذخیره Backup/Monitoring</span><span class="num">≈ 24,800,000 تومان/ماه</span></div>
+</div>
+<div class="footnotes">مرجع بودجه CPU/RAM برای قابل‌محاسبه شدن سند: قیمت جاری پلن‌های Cloud Server لیارا در زمان تدوین؛ پلن ۸vCPU/16GB برابر ۵٫۷۵ میلیون و ۱۶vCPU/32GB برابر ۱۰٫۰۵ میلیون تومان در ماه. <a href="https://liara.ir/products/cloud-server/">منبع قیمت</a>. این اعداد Vendor-specific هستند و با دیتاسنتر/ترافیک/ذخیره‌سازی تغییر می‌کنند.</div>
+<div class="page-footer"><span class="doc-title-mini">Client Hosting</span><span class="page-number"></span></div>
+</section>
+<section class="page dense" data-title="توکن و سخت‌افزار" id="costs">
+<div class="eyebrow">برآورد هزینه</div>
+<h2>توکن ماهانه، کردیت API و زیرساخت سخت‌افزاری</h2>
+<h3>تعرفه‌های مبنای API</h3>
+<table class="compact">
+<tr><th>مدل</th><th>ورودی / 1M</th><th>Cache / 1M</th><th>خروجی / 1M</th><th>نقش پیشنهادی</th></tr>
+<tr><td><span class="en">gapgpt-qwen-3.6</span> — میزبانی ایران</td><td class="num">$0.25</td><td class="num">—</td><td class="num">$2.00</td><td>مسیر پیش‌فرض کم‌هزینه</td></tr>
+<tr><td><span class="en">gpt-5.6-terra</span></td><td class="num">$2.00</td><td class="num">$0.20</td><td class="num">$12.00</td><td>درخواست پیچیده / Release</td></tr>
+<tr><td><span class="en">gpt-5.6-sol</span></td><td class="num">$5.00</td><td class="num">$0.50</td><td class="num">$30.00</td><td>پردازش تصویر و وظایف پیشرفته؛ خارج از Baseline</td></tr>
+</table>
+<div class="tiny">تعرفه‌های فوق طبق اعداد ارائه‌شده برای این سند و صفحه قیمت GapGPT مبنای محاسبه قرار گرفته‌اند.</div>
+<h3>سناریو ۱ — MVP</h3>
+<p class="small">فرض: ۴۵٬۸۲۰ فراخوان در ماه؛ میانگین هر فراخوان ۲٬۸۰۰ توکن ورودی (Policy + History + RAG Context) و ۵۰۰ توکن خروجی؛ ۱۵٪ سربار برای Retry/Metadata/انحراف مصرف. مدل: Qwen 3.6.</p>
+<table class="compact">
+<tr><th>آیتم</th><th>محاسبه</th><th>نتیجه</th></tr>
+<tr><td>Input</td><td class="num">45,820 × 2,800 × 1.15</td><td class="num">147.5404M tokens</td></tr>
+<tr><td>Output</td><td class="num">45,820 × 500 × 1.15</td><td class="num">26.3465M tokens</td></tr>
+<tr><td>کردیت ورودی</td><td class="num">147.5404 × $0.25</td><td class="num">$36.89</td></tr>
+<tr><td>کردیت خروجی</td><td class="num">26.3465 × $2.00</td><td class="num">$52.69</td></tr>
+<tr><th colspan="2">جمع تخمینی ماهانه MVP</th><th class="num">≈ $89.58</th></tr>
+</table>
+<h3>سناریو ۲ — API Release با Model Routing بهینه‌شده</h3>
+<p class="small">فرض: ۴٬۰۰۰ Input و ۶۵۰ Output به‌ازای فراخوان + ۱۵٪ سربار. ۸۵٪ درخواست‌ها Qwen و ۱۵٪ Terra. برای سهم Terra، ۴۰٪ Input به‌عنوان Prefix ثابت قابل Cache فرض شده است.</p>
+<table class="compact">
+<tr><th>بخش</th><th>توکن ماهانه</th><th>هزینه</th></tr>
+<tr><td>کل Input / Output</td><td class="num">210.772M / 34.25045M</td><td>—</td></tr>
+<tr><td>Qwen — 85%</td><td class="num">179.1562M in / 29.1129M out</td><td class="num">≈ $103.01</td></tr>
+<tr><td>Terra — 15% + 40% cache on Terra input</td><td class="num">31.6158M in / 5.1376M out</td><td class="num">≈ $102.12</td></tr>
+<tr><th colspan="2">جمع تخمینی ماهانه Release</th><th class="num">≈ $205.13</th></tr>
+</table>
+<div class="success small"><strong>مقایسه هزینه: </strong>در صورت اجرای کامل همین بار روی Terra و با الگوی توکن یکسان، هزینه ماهانه حدود <span class="en">$832.55/month</span> برآورد می‌شود. Model Routing مفروض، هزینه مدل را به حدود ۲۵٪ این مقدار کاهش می‌دهد. استفاده از Sol تنها برای درخواست‌های نیازمند پردازش تصویر یا وظایف پیشرفته در نظر گرفته شده و در Baseline محاسبه نشده است.</div>
+<h3>سناریوهای ۳ و ۴ — زیرساخت Local</h3>
+<p class="small">سخت‌افزار دقیق به مدل، Quantization، طول Context و همزمانی بستگی دارد. برای داشتن عدد بودجه، تعرفه مبنا: <span class="en">GPU-TeslaA100-32c-64r-200d-x1</span> با Nvidia Tesla A100، ۳۲ vCPU، ۶۴GB RAM، ۲۰۰GB Disk و <strong>۱۲۱٬۶۰۰ تومان/ساعت</strong>.</p>
+<table class="compact">
+<tr><th>ظرفیت GPU</th><th>محاسبه ۳۰ روز 24/7</th><th>هزینه GPU / ماه</th><th>مبنای کاربرد</th></tr>
+<tr><td>1 × A100</td><td class="num">121,600 × 24 × 30</td><td class="num">87,552,000 تومان</td><td>مناسب برای POC یا مدل‌های سبک‌تر؛ تناسب نهایی با VRAM باید بر روی SKU انتخابی آزمون شود.</td></tr>
+<tr><td>2 × A100</td><td class="num">87,552,000 × 2</td><td class="num">175,104,000 تومان</td><td>مناسب برای بار Production بالاتر، مدل بزرگ‌تر یا همزمانی بیشتر.</td></tr>
+<tr><td>4 × A100</td><td class="num">87,552,000 × 4</td><td class="num">350,208,000 تومان</td><td>مناسب برای مدل سنگین‌تر یا ظرفیت بالاتر؛ رقم صرفاً به‌عنوان مرجع بودجه ارائه شده است.</td></tr>
+<tr><td>Fine-tune Burst: 2 × A100 × 120h</td><td class="num">121,600 × 2 × 120</td><td class="num">29,184,000 تومان / cycle</td><td>برآورد نمونه برای LoRA/QLoRA؛ مدت واقعی تابع مدل و حجم Dataset خواهد بود.</td></tr>
+</table>
+<div class="warning small"><strong>جمع‌بندی زیرساخت Local: </strong>برای سناریوی ۳، ابتدا Benchmark روی یک A100 انجام و سپس تعداد GPU بر اساس مدل، VRAM، Latency و همزمانی تعیین می‌شود. در سناریوی ۴، منابع آموزش به‌صورت Burst محاسبه می‌شوند و منابع Serving پس از آموزش تابع همان الزامات سناریوی ۳ خواهند بود. هزینه Client Hosting نیز مستقل از این مقادیر محاسبه می‌شود.</div>
+<div class="footnotes">منبع GPU: <a href="https://ferdowsi.cloud/fa/services/gpu">ابر فردوسی — GPU Cloud</a>. قیمت ۱۲۱٬۶۰۰ تومان/ساعت طبق تعرفه ارائه‌شده برای این سند در محاسبات قفل شده است. منبع تعرفه API: <a href="https://gapgpt.app/platform-v2/pricing">GapGPT Pricing</a>.</div>
+<div class="page-footer"><span class="doc-title-mini">هزینه توکن و سخت‌افزار</span><span class="page-number"></span></div>
+</section>
+<script>
+(function(){
+  const pages=[...document.querySelectorAll('.page')];
+  const total=pages.length;
+  pages.forEach((p,i)=>{
+    const no=i+1;
+    p.dataset.page=String(no);
+    const footer=p.querySelector('.page-number');
+    if(footer) footer.textContent=`صفحه ${no} از ${total}`;
+  });
+  document.querySelectorAll('[data-toc-target]').forEach(a=>{
+    const target=document.querySelector(a.dataset.tocTarget);
+    const cell=a.querySelector('.pnum');
+    if(target && cell) cell.textContent=target.dataset.page || '—';
+  });
+})();
+</script>
+</body>
+</html>

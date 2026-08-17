@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جزوه مصاحبه هوش مصنوعی — مبانی ML و Deep Learning</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #f4f6f8;
+    color: #17202a;
+    font-family: Tahoma, Arial, sans-serif;
+    line-height: 1.9;
+  }
+  .page {
+    max-width: 900px;
+    margin: 32px auto;
+    background: #fff;
+    padding: 42px 52px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.07);
+  }
+  h1 { margin-top: 0; font-size: 30px; }
+  h2 {
+    font-size: 21px;
+    margin-top: 38px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #e8edf2;
+  }
+  h3 { font-size: 17px; margin-bottom: 6px; }
+  .intro {
+    background: #f7f9fb;
+    border-right: 4px solid #34495e;
+    padding: 16px 18px;
+    margin: 22px 0 30px;
+  }
+  .concept {
+    background: #fbfcfd;
+    border: 1px solid #e5e9ed;
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-top: 12px;
+  }
+  .interview {
+    background: #f5f7f9;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+  .interview strong { display: block; margin-bottom: 6px; }
+  code, pre {
+    direction: ltr;
+    text-align: left;
+    font-family: Consolas, monospace;
+  }
+  pre {
+    background: #1e242b;
+    color: #f2f4f5;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+  ul { padding-right: 24px; }
+  .key {
+    font-weight: bold;
+  }
+  .formula {
+    direction: ltr;
+    text-align: center;
+    font-family: Consolas, monospace;
+    background: #f7f8fa;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 7px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+  }
+  th, td {
+    border: 1px solid #dfe4e8;
+    padding: 10px;
+    text-align: right;
+  }
+  th { background: #f4f6f8; }
+  .summary {
+    margin-top: 42px;
+    padding: 20px;
+    border: 1px solid #dfe4e8;
+    border-radius: 10px;
+  }
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; max-width: none; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <h1>جزوه مصاحبه هوش مصنوعی</h1>
+  <p><strong>موضوع:</strong> مبانی Machine Learning و Deep Learning</p>
+
+  <div class="intro">
+    هدف این جزوه حفظ کردن جواب‌ها نیست؛ باید رابطه بین مفاهیم را بفهمی تا بتوانی در مصاحبه، سؤال را با بیان خودت پاسخ بدهی.
+  </div>
+
+  <h2>1. Machine Learning چیست؟</h2>
+  <div class="concept">
+    <p><strong>Machine Learning</strong> شاخه‌ای از هوش مصنوعی است که در آن به‌جای تعریف دستی تمام قوانین تصمیم‌گیری، به مدل داده می‌دهیم تا الگوهای موجود در داده را یاد بگیرد و سپس برای داده‌های جدید پیش‌بینی یا تصمیم‌گیری کند.</p>
+    <pre>Data → Learning Algorithm → Model → Prediction</pre>
+    <p>مثلاً در تشخیص سبک نقاشی، به‌جای نوشتن قوانین دستی برای تشخیص Van Gogh یا Picasso، تصاویر برچسب‌دار را به مدل می‌دهیم تا ویژگی‌های مرتبط با سبک را یاد بگیرد.</p>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    Machine Learning is a field where models learn patterns from data and use those learned patterns to make predictions or decisions instead of relying entirely on explicitly programmed rules.
+  </div>
+
+  <h2>2. Supervised و Unsupervised Learning چه تفاوتی دارند؟</h2>
+  <div class="concept">
+    <h3>Supervised Learning</h3>
+    <p>داده‌ها دارای <strong>Label</strong> هستند و مدل یاد می‌گیرد ورودی را به خروجی مورد انتظار مرتبط کند.</p>
+    <pre>Image → Label
+Painting → Van Gogh
+Painting → Picasso</pre>
+
+    <h3>Unsupervised Learning</h3>
+    <p>داده‌ها <strong>Label ندارند</strong> و مدل تلاش می‌کند ساختار یا الگوهای موجود در داده را خودش پیدا کند؛ مانند Clustering.</p>
+    <pre>Unlabeled Data → Model → Discovered Groups / Patterns</pre>
+
+    <p class="key">نکته پروژه‌ای:</p>
+    <p>پروژه PaintingStyleRecognition یک مسئله <strong>Supervised Learning</strong> است، چون تصاویر دارای Label هستند.</p>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    In supervised learning, the model learns from labeled data, while in unsupervised learning, the model tries to discover patterns or structures in unlabeled data.
+  </div>
+
+  <h2>3. Classification و Regression</h2>
+  <div class="concept">
+    <p>هر دو معمولاً از مسائل <strong>Supervised Learning</strong> هستند، اما نوع خروجی متفاوت است.</p>
+    <table>
+      <tr><th>نوع</th><th>خروجی</th><th>مثال</th></tr>
+      <tr><td>Classification</td><td>یک کلاس یا دسته</td><td>Cat / Dog، Van Gogh / Picasso</td></tr>
+      <tr><td>Regression</td><td>یک مقدار عددی پیوسته</td><td>قیمت خانه، دما</td></tr>
+    </table>
+    <p><strong>ترفند ذهنی:</strong></p>
+    <ul>
+      <li>Classification → <strong>What category?</strong></li>
+      <li>Regression → <strong>How much?</strong></li>
+    </ul>
+  </div>
+
+  <h2>4. Overfitting چیست؟</h2>
+  <div class="concept">
+    <p><strong>Overfitting</strong> زمانی رخ می‌دهد که مدل Training Data را بیش از حد به‌صورت اختصاصی یاد می‌گیرد و در داده‌های جدید عملکرد ضعیفی دارد.</p>
+    <pre>Training Accuracy   = 99%
+Validation Accuracy = 72%</pre>
+    <p>مدل در Training بسیار خوب است، اما قدرت <strong>Generalization</strong> ندارد.</p>
+
+    <h3>Underfitting</h3>
+    <p>در Underfitting مدل حتی روی Training Data هم عملکرد خوبی ندارد؛ یعنی مدل یا بیش از حد ساده است، یا آموزش کافی ندیده است.</p>
+
+    <h3>راه‌های کاهش Overfitting</h3>
+    <ul>
+      <li>Data Augmentation</li>
+      <li>Regularization</li>
+      <li>Dropout</li>
+      <li>Early Stopping</li>
+      <li>افزایش Dataset</li>
+      <li>کاهش پیچیدگی مدل</li>
+      <li>استفاده مناسب از Transfer Learning</li>
+    </ul>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    Overfitting happens when a model learns the training data too specifically and fails to generalize to unseen data.
+  </div>
+
+  <h2>5. Train / Validation / Test</h2>
+  <div class="concept">
+    <table>
+      <tr><th>بخش</th><th>کاربرد</th></tr>
+      <tr><td>Training Set</td><td>یادگیری پارامترهای مدل</td></tr>
+      <tr><td>Validation Set</td><td>انتخاب مدل و تنظیم Hyperparameterها</td></tr>
+      <tr><td>Test Set</td><td>ارزیابی نهایی روی داده‌هایی که در فرآیند توسعه استفاده نشده‌اند</td></tr>
+    </table>
+
+    <pre>Dataset
+├── Training   → Learn
+├── Validation → Tune / Select
+└── Test       → Final Evaluation</pre>
+
+    <p>یک تقسیم‌بندی نمونه می‌تواند 70٪ Training، 15٪ Validation و 15٪ Test باشد؛ اما نسبت مناسب به Dataset و مسئله بستگی دارد.</p>
+    <p class="key">نکته مهم:</p>
+    <p>Test Set نباید در انتخاب مدل یا تنظیم Hyperparameterها دخالت داشته باشد، چون در غیر این صورت ارزیابی نهایی دیگر کاملاً مستقل نیست.</p>
+  </div>
+
+  <h2>6. چرا CNN برای Image مناسب است؟</h2>
+  <div class="concept">
+    <p><strong>CNN (Convolutional Neural Network)</strong> برای داده‌های تصویری مناسب است چون می‌تواند الگوهای محلی و ساختار فضایی تصویر را با استفاده از Convolution Filters استخراج کند.</p>
+
+    <pre>Pixels
+  ↓
+Edges / Lines
+  ↓
+Textures / Shapes
+  ↓
+Complex Features
+  ↓
+Classification</pre>
+
+    <p>در لایه‌های ابتدایی معمولاً ویژگی‌های ساده‌تر مانند Edge و Line استخراج می‌شوند و در لایه‌های عمیق‌تر ویژگی‌های پیچیده‌تر شکل می‌گیرند.</p>
+
+    <p>دو مزیت مهم CNN:</p>
+    <ul>
+      <li><strong>Local Connectivity:</strong> فیلتر روی نواحی محلی تصویر کار می‌کند.</li>
+      <li><strong>Weight Sharing:</strong> یک فیلتر در نقاط مختلف تصویر استفاده می‌شود و تعداد پارامترها را نسبت به یک شبکه Fully Connected بزرگ کاهش می‌دهد.</li>
+    </ul>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    CNNs are well suited for images because they preserve spatial structure and use convolution filters to learn local patterns such as edges, textures, and shapes.
+  </div>
+
+  <h2>7. چرا EfficientNet-B3 را انتخاب کردی؟</h2>
+  <div class="concept">
+    <p>EfficientNet خانواده‌ای از CNNهاست که روی ایجاد تعادل بین <strong>Accuracy، Model Size و Computational Cost</strong> تمرکز دارد.</p>
+
+    <h3>Compound Scaling</h3>
+    <p>ایده مهم EfficientNet این است که به‌جای بزرگ کردن فقط یک بخش از شبکه، چند بُعد اصلی مدل را به‌صورت متوازن افزایش دهیم:</p>
+
+    <pre>Compound Scaling
+├── Depth       → تعداد / عمق لایه‌ها
+├── Width       → تعداد کانال‌ها
+└── Resolution  → وضوح ورودی تصویر</pre>
+
+    <p>این کار باعث می‌شود منابع محاسباتی به شکل متوازن‌تری بین عمق، عرض و Resolution مدل استفاده شوند.</p>
+
+    <h3>چرا B3؟</h3>
+    <p>B3 یک نقطه میانی و عملی در خانواده EfficientNet است که می‌تواند تعادل مناسبی بین دقت و هزینه محاسباتی ایجاد کند. برای پروژه Classification، انتخاب آن می‌تواند یک Trade-off عملی بین Performance و Resource Usage باشد.</p>
+
+    <p class="key">نکته مصاحبه:</p>
+    <p>اگر در پروژه خودت Benchmark دقیقی بین B0 تا B7 انجام نداده‌ای، ادعا نکن که B3 «بهترین» مدل بوده است. دقیق‌تر است بگویی که B3 را به‌عنوان یک Trade-off مناسب بین دقت و هزینه محاسباتی انتخاب کردی.</p>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    I chose EfficientNet-B3 because it provided a practical balance between classification performance and computational cost. EfficientNet also uses compound scaling to scale depth, width, and input resolution in a more balanced way.
+  </div>
+
+  <h2>8. Transfer Learning چیست؟</h2>
+  <div class="concept">
+    <p>در <strong>Transfer Learning</strong> از دانش یک مدل که قبلاً روی یک Dataset بزرگ آموزش دیده، برای یک مسئله جدید استفاده می‌کنیم.</p>
+
+    <pre>Large Dataset
+     ↓
+Pretrained Model
+     ↓
+Learned Features
+     ↓
+New Dataset / Task
+     ↓
+Fine-tuning</pre>
+
+    <p>مثلاً EfficientNet که روی یک Dataset بزرگ آموزش دیده، قبلاً ویژگی‌هایی مانند Edge، Texture و Shape را یاد گرفته است. به‌جای آموزش CNN از صفر، می‌توانیم از این دانش استفاده کنیم و مدل را برای Painting Style Classification تطبیق دهیم.</p>
+
+    <h3>مزایا</h3>
+    <ul>
+      <li>نیاز کمتر به Dataset بزرگ</li>
+      <li>کاهش زمان Training</li>
+      <li>کاهش هزینه محاسباتی</li>
+      <li>شروع از Featureهای از قبل یادگرفته‌شده</li>
+    </ul>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    Transfer learning means reusing knowledge learned by a pretrained model on a large dataset and adapting it to a new task, usually through feature reuse and fine-tuning.
+  </div>
+
+  <h2>9. Data Augmentation چه کاری می‌کند؟</h2>
+  <div class="concept">
+    <p>Data Augmentation از داده‌های موجود، نمونه‌های متنوع‌تری ایجاد می‌کند تا مدل نسبت به تغییرات طبیعی داده مقاوم‌تر شود و <strong>Generalization</strong> بهتری داشته باشد.</p>
+
+    <pre>Original Image
+     ↓
+ ┌───────────────┐
+ │ Rotation      │
+ │ Crop          │
+ │ Flip          │
+ │ Resize        │
+ │ Color Change  │
+ └───────────────┘
+     ↓
+More Diverse Training Samples</pre>
+
+    <p>مثلاً اگر تصویر یک نقاشی کمی چرخیده باشد، هدف این است که مدل به‌خاطر تغییر جزئی در زاویه یا Crop دچار خطا نشود.</p>
+
+    <p><strong>نکته:</strong> Data Augmentation لزوماً به معنی جمع‌آوری داده واقعی جدید نیست؛ بلکه از داده موجود، نمونه‌های تغییر‌یافته تولید می‌کند.</p>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    Data augmentation creates diverse variations of training samples, helping the model generalize better and reducing the risk of overfitting.
+  </div>
+
+  <h2>10. Accuracy کافی است؟</h2>
+  <div class="concept">
+    <p><strong>نه، همیشه.</strong> Accuracy فقط نسبت پیش‌بینی‌های درست به کل پیش‌بینی‌هاست:</p>
+
+    <div class="formula">Accuracy = Correct Predictions / Total Predictions</div>
+
+    <p>مشکل زمانی مشخص می‌شود که Dataset نامتوازن باشد.</p>
+
+    <p>مثلاً:</p>
+    <pre>95% → Cat
+ 5% → Dog</pre>
+
+    <p>اگر مدل همیشه Cat بگوید، Accuracy آن 95٪ می‌شود؛ اما برای Dog عملاً هیچ چیزی یاد نگرفته است.</p>
+
+    <h3>Precision</h3>
+    <p>از بین مواردی که مدل Positive اعلام کرده، چند مورد واقعاً Positive بوده‌اند؟</p>
+    <div class="formula">Precision = TP / (TP + FP)</div>
+
+    <h3>Recall</h3>
+    <p>از تمام Positiveهای واقعی، مدل چند مورد را پیدا کرده است؟</p>
+    <div class="formula">Recall = TP / (TP + FN)</div>
+
+    <h3>F1-Score</h3>
+    <p>ترکیبی از Precision و Recall است:</p>
+    <div class="formula">F1 = 2 × (Precision × Recall) / (Precision + Recall)</div>
+
+    <p>بنابراین بسته به مسئله ممکن است علاوه بر Accuracy به <strong>Precision، Recall، F1، Confusion Matrix</strong> و حتی معیارهای دیگر نیاز داشته باشیم.</p>
+  </div>
+  <div class="interview">
+    <strong>جواب مناسب مصاحبه:</strong>
+    Accuracy is not always sufficient, especially for imbalanced datasets. Depending on the problem, I would also evaluate metrics such as precision, recall, F1-score, and the confusion matrix.
+  </div>
+
+  <div class="summary">
+    <h2>جمع‌بندی مفهومی</h2>
+    <pre>Machine Learning
+      ↓
+Supervised Learning
+      ↓
+Classification
+      ↓
+CNN
+      ↓
+Transfer Learning
+      ↓
+EfficientNet-B3
+      ↓
+Training / Validation / Test
+      ↓
+Overfitting + Data Augmentation
+      ↓
+Evaluation
+      ↓
+Accuracy + Precision + Recall + F1</pre>
+
+    <p><strong>برای پروژه PaintingStyleRecognition خودت:</strong></p>
+    <p>
+      یک مسئله Supervised Classification داری؛ از CNN و EfficientNet-B3 استفاده می‌کنی،
+      با Transfer Learning شروع می‌کنی، برای Generalization از Data Augmentation بهره می‌بری،
+      Overfitting را با مقایسه Training و Validation بررسی می‌کنی و برای ارزیابی فقط به Accuracy محدود نمی‌شوی.
+    </p>
+  </div>
+</main>
+</body>
+</html>
