@@ -5,18 +5,13 @@
         "url": "notes/NetworkTroubleShootingChecklist.html"
     },
     {
-        "name": "Unreal Engine Profiling",
-        "description": "Performance profiling, Unreal Insights, CPU and GPU optimization.",
-        "url": "notes/unreal/profiling.html"
+        "name": "ML notes",
+        "description": "Machine Learning notes and tutorials.",
+        "url": "notes/ml/ml.html"
     },
     {
-        "name": "MetaHuman",
-        "description": "MetaHuman Creator, Identity, DNA, and animation workflow.",
-        "url": "notes/unreal/metahuman.html"
-    },
-    {
-        "name": "Networking",
-        "description": "TCP, UDP, DNS, HTTP, and networking fundamentals.",
-        "url": "notes/networking/networking.html"
+        "name": "ai assistant infrastructure estimate",
+        "description": "AI Assistant Infrastructure Estimate",
+        "url": "notes/NetworkTroubleShootingChecklist.html"
     }
 ]
