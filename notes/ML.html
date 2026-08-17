@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>جزوه هوش مصنوعی — مبانی ML و Deep Learning</title>
+<title>جزوه آموزشی هوش مصنوعی — مبانی ML و Deep Learning</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -99,22 +98,22 @@
 </head>
 <body>
 <main class="page">
-  <h1>جزوه هوش مصنوعی</h1>
+  <h1>جزوه آموزشی هوش مصنوعی</h1>
   <p><strong>موضوع:</strong> مبانی Machine Learning و Deep Learning</p>
 
   <div class="intro">
-    هدف این جزوه ارائه یک دید مفهومی و منسجم از مبانی یادگیری ماشین و یادگیری عمیق است. مفاهیم به‌گونه‌ای ارائه شده‌اند که ارتباط میان الگوریتم‌ها، داده، آموزش مدل و ارزیابی عملکرد به‌صورت مرحله‌به‌مرحله قابل درک باشد.
+    هدف این جزوه، مرور مفهومی مباحث پایه یادگیری ماشین و یادگیری عمیق است. سعی شده رابطه میان مفاهیم به‌صورت منسجم بیان شود تا خواننده علاوه بر آشنایی با تعاریف، بتواند ارتباط آن‌ها با یکدیگر را نیز درک کند.
   </div>
 
   <h2>1. Machine Learning چیست؟</h2>
   <div class="concept">
     <p><strong>Machine Learning</strong> شاخه‌ای از هوش مصنوعی است که در آن به‌جای تعریف دستی تمام قوانین تصمیم‌گیری، به مدل داده می‌دهیم تا الگوهای موجود در داده را یاد بگیرد و سپس برای داده‌های جدید پیش‌بینی یا تصمیم‌گیری کند.</p>
     <pre>Data → Learning Algorithm → Model → Prediction</pre>
-    <p>مثلاً در تشخیص سبک نقاشی، به‌جای نوشتن قوانین دستی برای تشخیص Van Gogh یا Picasso، تصاویر برچسب‌دار را به مدل می‌دهیم تا ویژگی‌های مرتبط با سبک را یاد بگیرد.</p>
+    <p>برای مثال، در مسئله تشخیص سبک نقاشی، به‌جای نوشتن قوانین دستی برای تشخیص سبک Van Gogh یا Picasso، تصاویر برچسب‌دار به مدل داده می‌شود تا ویژگی‌های مرتبط با هر سبک را خودش یاد بگیرد.</p>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    در یادگیری ماشین، هدف اصلی یادگیری رابطه یا الگوی موجود در داده‌هاست؛ به‌طوری که مدل بتواند پس از آموزش، روی نمونه‌هایی که قبلاً مشاهده نکرده است نیز عملکرد مناسبی داشته باشد.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    Machine Learning is a field where models learn patterns from data and use those learned patterns to make predictions or decisions instead of relying entirely on explicitly programmed rules.
   </div>
 
   <h2>2. Supervised و Unsupervised Learning چه تفاوتی دارند؟</h2>
@@ -125,19 +124,16 @@
 Painting → Van Gogh
 Painting → Picasso</pre>
 
-```
-<h3>Unsupervised Learning</h3>
-<p>داده‌ها <strong>Label ندارند</strong> و مدل تلاش می‌کند ساختار یا الگوهای موجود در داده را خودش پیدا کند؛ مانند Clustering.</p>
-<pre>Unlabeled Data → Model → Discovered Groups / Patterns</pre>
+    <h3>Unsupervised Learning</h3>
+    <p>داده‌ها <strong>Label ندارند</strong> و مدل تلاش می‌کند ساختار یا الگوهای موجود در داده را خودش پیدا کند؛ مانند Clustering.</p>
+    <pre>Unlabeled Data → Model → Discovered Groups / Patterns</pre>
 
-<p class="key">نکته کاربردی:</p>
-<p>پروژه PaintingStyleRecognition یک مسئله <strong>Supervised Learning</strong> است، چون تصاویر دارای Label هستند.</p>
-```
-
+    <p class="key">مثال کاربردی:</p>
+    <p>مسئله تشخیص سبک نقاشی، در صورتی‌که تصاویر دارای Label باشند، نمونه‌ای از یک مسئله <strong>Supervised Learning</strong> است.</p>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    در Supervised Learning، وجود نمونه‌های برچسب‌دار امکان یادگیری رابطه میان ورودی و خروجی را فراهم می‌کند؛ در حالی که در Unsupervised Learning، الگوریتم بدون دریافت خروجی صحیح، ساختارهای درونی داده را بررسی می‌کند.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    In supervised learning, the model learns from labeled data, while in unsupervised learning, the model tries to discover patterns or structures in unlabeled data.
   </div>
 
   <h2>3. Classification و Regression</h2>
@@ -148,7 +144,7 @@ Painting → Picasso</pre>
       <tr><td>Classification</td><td>یک کلاس یا دسته</td><td>Cat / Dog، Van Gogh / Picasso</td></tr>
       <tr><td>Regression</td><td>یک مقدار عددی پیوسته</td><td>قیمت خانه، دما</td></tr>
     </table>
-    <p><strong>تفاوت اصلی:</strong></p>
+    <p><strong>ترفند ذهنی برای تمایز این دو:</strong></p>
     <ul>
       <li>Classification → <strong>What category?</strong></li>
       <li>Regression → <strong>How much?</strong></li>
@@ -157,31 +153,28 @@ Painting → Picasso</pre>
 
   <h2>4. Overfitting چیست؟</h2>
   <div class="concept">
-    <p><strong>Overfitting</strong> زمانی رخ می‌دهد که مدل Training Data را بیش از حد به‌صورت اختصاصی یاد می‌گیرد و در داده‌های جدید عملکرد ضعیفی دارد.</p>
+    <p><strong>Overfitting</strong> زمانی رخ می‌دهد که مدل Training Data را بیش از حد به‌صورت اختصاصی یاد می‌گیرد و در نتیجه در داده‌های جدید عملکرد ضعیفی دارد.</p>
     <pre>Training Accuracy   = 99%
 Validation Accuracy = 72%</pre>
-    <p>مدل در Training بسیار خوب است، اما قدرت <strong>Generalization</strong> ندارد.</p>
+    <p>در این حالت مدل روی داده‌های آموزشی بسیار خوب عمل می‌کند، اما قدرت <strong>Generalization</strong> ندارد.</p>
 
-```
-<h3>Underfitting</h3>
-<p>در Underfitting مدل حتی روی Training Data هم عملکرد خوبی ندارد؛ یعنی مدل یا بیش از حد ساده است، یا آموزش کافی ندیده است.</p>
+    <h3>Underfitting</h3>
+    <p>در Underfitting مدل حتی روی Training Data هم عملکرد خوبی ندارد؛ یعنی مدل یا بیش از حد ساده است، یا آموزش کافی ندیده است.</p>
 
-<h3>راه‌های کاهش Overfitting</h3>
-<ul>
-  <li>Data Augmentation</li>
-  <li>Regularization</li>
-  <li>Dropout</li>
-  <li>Early Stopping</li>
-  <li>افزایش Dataset</li>
-  <li>کاهش پیچیدگی مدل</li>
-  <li>استفاده مناسب از Transfer Learning</li>
-</ul>
-```
-
+    <h3>راه‌های کاهش Overfitting</h3>
+    <ul>
+      <li>Data Augmentation</li>
+      <li>Regularization</li>
+      <li>Dropout</li>
+      <li>Early Stopping</li>
+      <li>افزایش حجم Dataset</li>
+      <li>کاهش پیچیدگی مدل</li>
+      <li>استفاده مناسب از Transfer Learning</li>
+    </ul>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    Overfitting نشان‌دهنده ضعف در Generalization است. بنابراین هنگام آموزش مدل باید علاوه بر عملکرد روی داده‌های آموزشی، عملکرد آن روی داده‌های مستقل مانند Validation و Test نیز بررسی شود.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    Overfitting happens when a model learns the training data too specifically and fails to generalize to unseen data.
   </div>
 
   <h2>5. Train / Validation / Test</h2>
@@ -193,189 +186,151 @@ Validation Accuracy = 72%</pre>
       <tr><td>Test Set</td><td>ارزیابی نهایی روی داده‌هایی که در فرآیند توسعه استفاده نشده‌اند</td></tr>
     </table>
 
-```
-<pre>Dataset
-```
-
+    <pre>Dataset
 ├── Training   → Learn
 ├── Validation → Tune / Select
 └── Test       → Final Evaluation</pre>
 
-```
-<p>یک تقسیم‌بندی نمونه می‌تواند 70٪ Training، 15٪ Validation و 15٪ Test باشد؛ اما نسبت مناسب به Dataset و مسئله بستگی دارد.</p>
-<p class="key">نکته مهم:</p>
-<p>Test Set نباید در انتخاب مدل یا تنظیم Hyperparameterها دخالت داشته باشد، چون در غیر این صورت ارزیابی نهایی دیگر کاملاً مستقل نیست.</p>
-```
-
+    <p>یک تقسیم‌بندی نمونه می‌تواند 70٪ Training، 15٪ Validation و 15٪ Test باشد؛ اما نسبت مناسب به Dataset و مسئله بستگی دارد.</p>
+    <p class="key">نکته مهم:</p>
+    <p>Test Set نباید در انتخاب مدل یا تنظیم Hyperparameterها دخالت داشته باشد، چون در غیر این صورت ارزیابی نهایی دیگر کاملاً مستقل نخواهد بود.</p>
   </div>
 
-  <h2>6. چرا CNN برای Image مناسب است؟</h2>
+  <h2>6. چرا CNN برای داده‌های تصویری مناسب است؟</h2>
   <div class="concept">
-    <p><strong>CNN (Convolutional Neural Network)</strong> برای داده‌های تصویری مناسب است چون می‌تواند الگوهای محلی و ساختار فضایی تصویر را با استفاده از Convolution Filters استخراج کند.</p>
+    <p><strong>CNN (Convolutional Neural Network)</strong> برای داده‌های تصویری مناسب است، چون می‌تواند الگوهای محلی و ساختار فضایی تصویر را با استفاده از Convolution Filters استخراج کند.</p>
 
-```
-<pre>Pixels
-```
-
-↓
+    <pre>Pixels
+  ↓
 Edges / Lines
-↓
+  ↓
 Textures / Shapes
-↓
+  ↓
 Complex Features
-↓
+  ↓
 Classification</pre>
 
-```
-<p>در لایه‌های ابتدایی معمولاً ویژگی‌های ساده‌تر مانند Edge و Line استخراج می‌شوند و در لایه‌های عمیق‌تر ویژگی‌های پیچیده‌تر شکل می‌گیرند.</p>
+    <p>در لایه‌های ابتدایی معمولاً ویژگی‌های ساده‌تری مانند Edge و Line استخراج می‌شوند و در لایه‌های عمیق‌تر، ویژگی‌های پیچیده‌تر شکل می‌گیرند.</p>
 
-<p>دو مزیت مهم CNN:</p>
-<ul>
-  <li><strong>Local Connectivity:</strong> فیلتر روی نواحی محلی تصویر کار می‌کند.</li>
-  <li><strong>Weight Sharing:</strong> یک فیلتر در نقاط مختلف تصویر استفاده می‌شود و تعداد پارامترها را نسبت به یک شبکه Fully Connected بزرگ کاهش می‌دهد.</li>
-</ul>
-```
-
+    <p>دو مزیت اصلی CNN عبارت‌اند از:</p>
+    <ul>
+      <li><strong>Local Connectivity:</strong> فیلتر روی نواحی محلی تصویر کار می‌کند.</li>
+      <li><strong>Weight Sharing:</strong> یک فیلتر در نقاط مختلف تصویر استفاده می‌شود و در نتیجه تعداد پارامترها نسبت به یک شبکه Fully Connected کاهش می‌یابد.</li>
+    </ul>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    CNN با استفاده از عملیات Convolution ساختار فضایی تصویر را حفظ کرده و ویژگی‌های محلی را استخراج می‌کند. این ویژگی‌ها می‌توانند از الگوهای ساده مانند لبه‌ها شروع شده و در لایه‌های عمیق‌تر به الگوهای پیچیده‌تر تبدیل شوند.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    CNNs are well suited for images because they preserve spatial structure and use convolution filters to learn local patterns such as edges, textures, and shapes.
   </div>
 
-  <h2>7. چرا EfficientNet-B3 را انتخاب کردی؟</h2>
+  <h2>7. خانواده EfficientNet و ایده Compound Scaling</h2>
   <div class="concept">
     <p>EfficientNet خانواده‌ای از CNNهاست که روی ایجاد تعادل بین <strong>Accuracy، Model Size و Computational Cost</strong> تمرکز دارد.</p>
 
-```
-<h3>Compound Scaling</h3>
-<p>ایده مهم EfficientNet این است که به‌جای بزرگ کردن فقط یک بخش از شبکه، چند بُعد اصلی مدل را به‌صورت متوازن افزایش دهیم:</p>
+    <h3>Compound Scaling</h3>
+    <p>ایده اصلی EfficientNet این است که به‌جای بزرگ کردن فقط یک بخش از شبکه، چند بُعد اصلی مدل به‌صورت متوازن افزایش داده شوند:</p>
 
-<pre>Compound Scaling
-```
-
+    <pre>Compound Scaling
 ├── Depth       → تعداد / عمق لایه‌ها
 ├── Width       → تعداد کانال‌ها
 └── Resolution  → وضوح ورودی تصویر</pre>
 
-```
-<p>این کار باعث می‌شود منابع محاسباتی به شکل متوازن‌تری بین عمق، عرض و Resolution مدل استفاده شوند.</p>
+    <p>این رویکرد باعث می‌شود منابع محاسباتی به شکل متوازن‌تری بین عمق، عرض و Resolution مدل توزیع شوند.</p>
 
-<h3>موقعیت B3 در خانواده EfficientNet</h3>
-<p>B3 یک نقطه میانی و عملی در خانواده EfficientNet است که می‌تواند تعادل مناسبی بین دقت و هزینه محاسباتی ایجاد کند. برای پروژه Classification، انتخاب آن می‌تواند یک Trade-off عملی بین Performance و Resource Usage باشد.</p>
+    <h3>انتخاب نسخه مناسب در خانواده EfficientNet</h3>
+    <p>خانواده EfficientNet از B0 تا B7 نسخه‌های مختلفی دارد که هرچه شماره بالاتر برود، مدل بزرگ‌تر و دقیق‌تر ولی پرهزینه‌تر از نظر محاسباتی می‌شود. نسخه B3 نقطه‌ای میانی و عملی در این طیف است که معمولاً تعادل مناسبی بین دقت و هزینه محاسباتی ایجاد می‌کند و در بسیاری از مسائل Classification به‌عنوان یک Trade-off منطقی انتخاب می‌شود.</p>
 
-<p class="key">نکته آموزشی:</p>
-<p>انتخاب یک معماری شبکه عصبی باید بر اساس ویژگی‌های مسئله، اندازه Dataset، منابع محاسباتی، زمان آموزش و معیارهای ارزیابی انجام شود. بنابراین انتخاب B3 لزوماً به معنای برتری آن نسبت به تمام مدل‌های دیگر نیست.</p>
-```
-
+    <p class="key">نکته روش‌شناسی:</p>
+    <p>بدون انجام Benchmark دقیق بین نسخه‌های مختلف (B0 تا B7) روی یک Dataset مشخص، نمی‌توان ادعا کرد که یک نسخه خاص به‌صورت مطلق «بهترین» است. صحیح‌تر آن است که انتخاب یک نسخه را بر اساس Trade-off میان دقت و هزینه محاسباتی توجیه کرد.</p>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    EfficientNet با استفاده از Compound Scaling تلاش می‌کند Depth، Width و Input Resolution را به‌صورت متوازن افزایش دهد. EfficientNet-B3 یکی از مدل‌های این خانواده است که می‌تواند میان دقت و هزینه محاسباتی تعادل مناسبی ایجاد کند.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    EfficientNet-B3 offers a practical balance between classification performance and computational cost. EfficientNet uses compound scaling to scale depth, width, and input resolution in a more balanced way.
   </div>
 
   <h2>8. Transfer Learning چیست؟</h2>
   <div class="concept">
-    <p>در <strong>Transfer Learning</strong> از دانش یک مدل که قبلاً روی یک Dataset بزرگ آموزش دیده، برای یک مسئله جدید استفاده می‌کنیم.</p>
+    <p>در <strong>Transfer Learning</strong> از دانش یک مدل که قبلاً روی یک Dataset بزرگ آموزش دیده، برای یک مسئله جدید استفاده می‌شود.</p>
 
-```
-<pre>Large Dataset
- ↓
-```
-
+    <pre>Large Dataset
+     ↓
 Pretrained Model
-↓
+     ↓
 Learned Features
-↓
+     ↓
 New Dataset / Task
-↓
+     ↓
 Fine-tuning</pre>
 
-```
-<p>مثلاً EfficientNet که روی یک Dataset بزرگ آموزش دیده، قبلاً ویژگی‌هایی مانند Edge، Texture و Shape را یاد گرفته است. به‌جای آموزش CNN از صفر، می‌توانیم از این دانش استفاده کنیم و مدل را برای Painting Style Classification تطبیق دهیم.</p>
+    <p>برای مثال، EfficientNetی که روی یک Dataset بزرگ آموزش دیده، پیش از این ویژگی‌هایی مانند Edge، Texture و Shape را یاد گرفته است. به‌جای آموزش CNN از صفر، می‌توان از این دانش استفاده کرد و مدل را برای یک مسئله جدید Classification، مانند تشخیص سبک نقاشی، تطبیق داد.</p>
 
-<h3>مزایا</h3>
-<ul>
-  <li>نیاز کمتر به Dataset بزرگ</li>
-  <li>کاهش زمان Training</li>
-  <li>کاهش هزینه محاسباتی</li>
-  <li>شروع از Featureهای از قبل یادگرفته‌شده</li>
-</ul>
-```
-
+    <h3>مزایا</h3>
+    <ul>
+      <li>نیاز کمتر به Dataset بزرگ</li>
+      <li>کاهش زمان Training</li>
+      <li>کاهش هزینه محاسباتی</li>
+      <li>شروع از Featureهای از قبل یادگرفته‌شده</li>
+    </ul>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    Transfer Learning به معنای استفاده مجدد از دانش یک مدل ازپیش‌آموزش‌دیده برای یک مسئله جدید است. این روش به‌ویژه زمانی اهمیت دارد که Dataset جدید نسبتاً کوچک باشد یا آموزش کامل یک مدل از ابتدا هزینه محاسباتی زیادی داشته باشد.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    Transfer learning means reusing knowledge learned by a pretrained model on a large dataset and adapting it to a new task, usually through feature reuse and fine-tuning.
   </div>
 
-  <h2>9. Data Augmentation چه کاری می‌کند؟</h2>
+  <h2>9. Data Augmentation چه کاری انجام می‌دهد؟</h2>
   <div class="concept">
-    <p>Data Augmentation از داده‌های موجود، نمونه‌های متنوع‌تری ایجاد می‌کند تا مدل نسبت به تغییرات طبیعی داده مقاوم‌تر شود و <strong>Generalization</strong> بهتری داشته باشد.</p>
+    <p>Data Augmentation از داده‌های موجود، نمونه‌های متنوع‌تری تولید می‌کند تا مدل نسبت به تغییرات طبیعی داده مقاوم‌تر شود و <strong>Generalization</strong> بهتری داشته باشد.</p>
 
-```
-<pre>Original Image
- ↓
-```
-
-┌───────────────┐
-│ Rotation      │
-│ Crop          │
-│ Flip          │
-│ Resize        │
-│ Color Change  │
-└───────────────┘
-↓
+    <pre>Original Image
+     ↓
+ ┌───────────────┐
+ │ Rotation      │
+ │ Crop          │
+ │ Flip          │
+ │ Resize        │
+ │ Color Change  │
+ └───────────────┘
+     ↓
 More Diverse Training Samples</pre>
 
-```
-<p>مثلاً اگر تصویر یک نقاشی کمی چرخیده باشد، هدف این است که مدل به‌خاطر تغییر جزئی در زاویه یا Crop دچار خطا نشود.</p>
+    <p>برای مثال، اگر تصویر یک نقاشی کمی چرخیده باشد، هدف این است که مدل به‌خاطر تغییر جزئی در زاویه یا Crop دچار خطا نشود.</p>
 
-<p><strong>نکته:</strong> Data Augmentation لزوماً به معنی جمع‌آوری داده واقعی جدید نیست؛ بلکه از داده موجود، نمونه‌های تغییر‌یافته تولید می‌کند.</p>
-```
-
+    <p><strong>نکته:</strong> Data Augmentation لزوماً به معنی جمع‌آوری داده واقعی جدید نیست؛ بلکه از داده موجود، نمونه‌های تغییر‌یافته تولید می‌کند.</p>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    Data Augmentation با ایجاد تغییرات کنترل‌شده در نمونه‌های آموزشی، تنوع داده را افزایش می‌دهد. انتخاب نوع Augmentation باید با ماهیت مسئله سازگار باشد؛ زیرا بعضی تغییرات ممکن است معنای اصلی داده یا Label آن را تغییر دهند.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    Data augmentation creates diverse variations of training samples, helping the model generalize better and reducing the risk of overfitting.
   </div>
 
-  <h2>10. Accuracy کافی است؟</h2>
+  <h2>10. آیا Accuracy به‌تنهایی معیار کافی است؟</h2>
   <div class="concept">
-    <p><strong>نه، همیشه.</strong> Accuracy فقط نسبت پیش‌بینی‌های درست به کل پیش‌بینی‌هاست:</p>
+    <p><strong>خیر، همیشه کافی نیست.</strong> Accuracy فقط نسبت پیش‌بینی‌های درست به کل پیش‌بینی‌هاست:</p>
 
-```
-<div class="formula">Accuracy = Correct Predictions / Total Predictions</div>
+    <div class="formula">Accuracy = Correct Predictions / Total Predictions</div>
 
-<p>مشکل زمانی مشخص می‌شود که Dataset نامتوازن باشد.</p>
+    <p>مشکل اصلی زمانی مشخص می‌شود که Dataset نامتوازن باشد. برای مثال:</p>
+    <pre>95% → Cat
+ 5% → Dog</pre>
 
-<p>مثلاً:</p>
-<pre>95% → Cat
-```
+    <p>اگر مدل همیشه Cat پیش‌بینی کند، Accuracy آن 95٪ خواهد بود؛ در حالی‌که عملاً چیزی درباره کلاس Dog یاد نگرفته است.</p>
 
-5% → Dog</pre>
+    <h3>Precision</h3>
+    <p>از بین مواردی که مدل Positive اعلام کرده، چند مورد واقعاً Positive بوده‌اند؟</p>
+    <div class="formula">Precision = TP / (TP + FP)</div>
 
-```
-<p>اگر مدل همیشه Cat بگوید، Accuracy آن 95٪ می‌شود؛ اما برای Dog عملاً هیچ چیزی یاد نگرفته است.</p>
+    <h3>Recall</h3>
+    <p>از تمام Positiveهای واقعی، مدل چند مورد را به‌درستی پیدا کرده است؟</p>
+    <div class="formula">Recall = TP / (TP + FN)</div>
 
-<h3>Precision</h3>
-<p>از بین مواردی که مدل Positive اعلام کرده، چند مورد واقعاً Positive بوده‌اند؟</p>
-<div class="formula">Precision = TP / (TP + FP)</div>
+    <h3>F1-Score</h3>
+    <p>ترکیبی هارمونیک از Precision و Recall است:</p>
+    <div class="formula">F1 = 2 × (Precision × Recall) / (Precision + Recall)</div>
 
-<h3>Recall</h3>
-<p>از تمام Positiveهای واقعی، مدل چند مورد را پیدا کرده است؟</p>
-<div class="formula">Recall = TP / (TP + FN)</div>
-
-<h3>F1-Score</h3>
-<p>ترکیبی از Precision و Recall است:</p>
-<div class="formula">F1 = 2 × (Precision × Recall) / (Precision + Recall)</div>
-
-<p>بنابراین بسته به مسئله ممکن است علاوه بر Accuracy به <strong>Precision، Recall، F1، Confusion Matrix</strong> و حتی معیارهای دیگر نیاز داشته باشیم.</p>
-```
-
+    <p>بنابراین بسته به ماهیت مسئله، معمولاً لازم است علاوه بر Accuracy، معیارهایی مانند <strong>Precision، Recall، F1</strong> و <strong>Confusion Matrix</strong> نیز بررسی شوند.</p>
   </div>
   <div class="interview">
-    <strong>نکته مفهومی:</strong>
-    انتخاب معیار ارزیابی باید متناسب با ماهیت مسئله و توزیع کلاس‌ها انجام شود. در Datasetهای نامتوازن، Accuracy ممکن است تصویر دقیقی از عملکرد مدل ارائه نکند و استفاده از Precision، Recall، F1-Score و Confusion Matrix اطلاعات کامل‌تری فراهم می‌کند.
+    <strong>تعریف به زبان انگلیسی:</strong>
+    Accuracy is not always sufficient, especially for imbalanced datasets. Depending on the problem, additional metrics such as precision, recall, F1-score, and the confusion matrix should also be evaluated.
   </div>
 
   <div class="summary">
@@ -400,15 +355,13 @@ Evaluation
       ↓
 Accuracy + Precision + Recall + F1</pre>
 
-```
-<p><strong>مطالعه موردی: PaintingStyleRecognition</strong></p>
-<p>
-  این پروژه یک مسئله Supervised Classification است؛ از CNN و EfficientNet-B3 استفاده می‌کند،
-  با Transfer Learning شروع می‌شود، برای Generalization از Data Augmentation بهره می‌برد،
-  Overfitting با مقایسه Training و Validation بررسی می‌شود و برای ارزیابی عملکرد، مجموعه‌ای از معیارها مانند Accuracy، Precision، Recall و F1 مورد استفاده قرار می‌گیرد.
-</p>
-```
-
+    <p><strong>مثال کاربردی — پیاده‌سازی یک مسئله Image Classification:</strong></p>
+    <p>
+      فرض کنید مسئله تشخیص سبک نقاشی به‌عنوان یک مسئله Supervised Classification تعریف شده است.
+      در چنین مسئله‌ای معمولاً از CNN و به‌طور خاص EfficientNet-B3 استفاده می‌شود،
+      کار با Transfer Learning آغاز می‌شود، برای بهبود Generalization از Data Augmentation بهره گرفته می‌شود،
+      وضعیت Overfitting با مقایسه دقت Training و Validation بررسی می‌شود، و در ارزیابی نهایی، ارزیابی صرفاً به Accuracy محدود نمی‌ماند.
+    </p>
   </div>
 </main>
 </body>
