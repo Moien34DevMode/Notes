@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>برنامه درسی</title>
+
+    <style>
+@import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css');
+
+:root {
+    --bg: #f4f6fb;
+    --surface: #ffffff;
+    --surface-2: #f8fafc;
+    --text: #172033;
+    --muted: #6b7280;
+    --border: #e5e9f2;
+    --border-strong: #d7ddea;
+    --accent: #5b5ce2;
+    --accent-soft: #eef0ff;
+    --success: #16a36a;
+    --danger: #e05252;
+    --shadow: 0 10px 35px rgba(24, 32, 56, .07);
+    --shadow-hover: 0 16px 45px rgba(24, 32, 56, .11);
+}
+
+html.dark {
+    --bg: #0d1117;
+    --surface: #151b24;
+    --surface-2: #1b222d;
+    --text: #edf2f7;
+    --muted: #9aa6b5;
+    --border: #293241;
+    --border-strong: #354052;
+    --accent: #8586ff;
+    --accent-soft: #22264a;
+    --success: #35c58b;
+    --danger: #ff7373;
+    --shadow: 0 12px 40px rgba(0,0,0,.24);
+    --shadow-hover: 0 18px 50px rgba(0,0,0,.32);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    margin: 0;
+    background:
+        radial-gradient(circle at 10% 0%, rgba(91,92,226,.08), transparent 28%),
+        radial-gradient(circle at 90% 8%, rgba(22,163,106,.06), transparent 25%),
+        var(--bg);
+    color: var(--text);
+    font-family: Vazir, Vazirmatn, Tahoma, Arial, sans-serif;
+    line-height: 1.8;
+    transition: background .25s ease, color .25s ease;
+}
+
+.container {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 34px 0 70px;
+}
+
+.page-header {
+    position: relative;
+    text-align: center;
+    margin-bottom: 28px;
+    padding: 30px 72px 26px;
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: clamp(26px, 4vw, 36px);
+    letter-spacing: -.6px;
+    color: var(--text);
+}
+
+.page-header p {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    width: 42px;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface-2);
+    color: var(--text);
+    cursor: pointer;
+    font-size: 18px;
+    transition: .2s ease;
+}
+.theme-toggle:hover { transform: translateY(-2px); border-color: var(--accent); }
+
+.courses-grid {
+    column-count: 2;
+    column-gap: 14px;
+}
+
+.courses-grid .course {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 14px;
+    vertical-align: top;
+    break-inside: avoid;
+}
+
+.course {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px 24px;
+    margin-bottom: 14px;
+    box-shadow: var(--shadow);
+    transition: .2s ease;
+}
+.course:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+.course-title {
+    margin: 0 0 15px;
+    font-size: 20px;
+    color: var(--text);
+}
+
+.course-info {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 6px 15px;
+    font-size: 14px;
+}
+
+.label { color: var(--muted); font-weight: 700; }
+
+.group {
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+    margin-top: 16px;
+}
+.group:first-of-type { border-top: none; padding-top: 0; margin-top: 0; }
+
+.group-title {
+    margin: 0 0 10px;
+    font-size: 15px;
+    color: var(--text);
+}
+
+.code {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    direction: ltr;
+    background: var(--surface-2);
+    border: 1px solid var(--border-strong);
+    color: var(--text);
+    border-radius: 9px;
+    padding: 3px 9px;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+    cursor: pointer;
+    transition: .2s ease;
+}
+.code:hover { border-color: var(--accent); color: var(--accent); }
+
+.copy-icon { font-family: Arial,sans-serif; font-size: 12px; opacity: .6; }
+
+.section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px;
+    margin-top: 26px;
+    box-shadow: var(--shadow);
+}
+
+.section-title {
+    margin: 0 0 18px;
+    font-size: 21px;
+    color: var(--text);
+}
+
+.checklist-note {
+    margin: -8px 0 17px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 9px 11px;
+    margin: 4px 0;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    transition: .2s ease;
+}
+.check-item:hover { background: var(--surface-2); border-color: var(--border); }
+
+.check-item input {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 auto;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.check-item label {
+    flex: 1;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.check-item input:checked + label {
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+.check-item.is-disabled {
+    opacity: .38;
+    background: transparent;
+}
+.check-item.is-disabled label,
+.check-item.is-disabled input { cursor: not-allowed; }
+
+.digital-selector {
+    margin: 4px 0 8px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: var(--surface-2);
+}
+.digital-selector > .group-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.digital-selector > .group-title::before {
+    content: "↳";
+    color: var(--accent);
+}
+.group-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+.group-option:hover { background: var(--surface); }
+.group-option input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+.group-option label { cursor: pointer; font-size: 14px; }
+.group-option.disabled { opacity: .35; }
+.group-option.disabled label,
+.group-option.disabled input { cursor: not-allowed; }
+
+.checklist-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.check-card {
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    border-radius: 14px;
+    padding: 13px 14px;
+    transition: .2s ease;
+}
+.check-card:hover { border-color: var(--border-strong); }
+.check-card.is-disabled { opacity: .42; }
+.check-card.conflict {
+    border-color: var(--danger);
+    animation: conflictShake .28s ease;
+}
+.check-card-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--text);
+}
+.check-card-title input {
+    width: 19px; height: 19px; margin: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+    flex: 0 0 auto;
+}
+.check-card-title label { cursor: pointer; }
+.check-card-subtitle {
+    margin: 6px 0 0 29px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+.group-options {
+    display: grid;
+    gap: 6px;
+    margin-top: 10px;
+}
+.group-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    padding: 8px 9px;
+    border-radius: 10px;
+    transition: .2s ease;
+}
+.group-option:hover { background: var(--surface); }
+.group-option input {
+    width: 17px; height: 17px; margin-top: 2px;
+    accent-color: var(--accent); cursor: pointer; flex: 0 0 auto;
+}
+.group-option label { cursor: pointer; font-size: 12px; line-height: 1.7; }
+.group-option.selected {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
+}
+.checklist-error {
+    display: none;
+    margin: 0 0 12px;
+    padding: 11px 13px;
+    border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+    background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+    color: var(--danger);
+    border-radius: 11px;
+    font-size: 13px;
+}
+.checklist-error.show { display: block; }
+@keyframes conflictShake {
+    0%,100% { transform: translateX(0); }
+    35% { transform: translateX(-4px); }
+    70% { transform: translateX(4px); }
+}
+
+.progress {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 13px;
+}
+.progress-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+.progress-summary strong { color: var(--text); }
+.progress-bar {
+    height: 9px;
+    margin-top: 9px;
+    background: var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), #7c83ff);
+    border-radius: 20px;
+    transition: width .3s ease;
+}
+
+.calendar-section { margin-top: 26px; }
+
+.calendar-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    padding: 2px 2px 8px;
+    scrollbar-width: thin;
+}
+
+.calendar {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: separate;
+    border-spacing: 6px;
+    table-layout: fixed;
+}
+
+.calendar th {
+    background: var(--surface-2);
+    color: var(--muted);
+    padding: 11px 7px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+.calendar th.day-header { width: 88px; }
+.calendar th.day {
+    color: var(--text);
+    background: var(--surface-2);
+}
+
+.calendar td {
+    height: 100px;
+    padding: 5px;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--surface-2) 70%, var(--surface));
+    vertical-align: middle;
+    text-align: center;
+    transition: .2s ease;
+}
+.calendar td:hover { border-color: var(--border-strong); }
+.calendar td:empty { background: var(--surface-2); }
+
+.class-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 82px;
+    padding: 7px 6px;
+    border-radius: 9px;
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--border));
+    margin: 2px;
+}
+.class-name {
+    font-size: 11px;
+    font-weight: 800;
+    line-height: 1.5;
+    color: var(--text);
+}
+.class-teacher {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 9px;
+    line-height: 1.4;
+}
+.class-code {
+    margin-top: 3px;
+    font-family: Consolas, monospace;
+    font-size: 8px;
+    color: var(--muted);
+    direction: ltr;
+}
+
+.no-classes {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 14px 0 4px;
+}
+
+.copy-message {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--text);
+    color: var(--surface);
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: .25s ease;
+    z-index: 1000;
+    box-shadow: var(--shadow);
+}
+.copy-message.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 820px) {
+    .courses-grid { column-count: 1; }
+    .checklist-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+    .container { width: calc(100% - 16px); padding-top: 18px; }
+    .page-header { padding: 25px 50px 22px; }
+    .page-header h1 { font-size: 25px; }
+    .course { padding: 18px; }
+    .course-title { font-size: 18px; }
+    .course-info { grid-template-columns: 65px 1fr; font-size: 13px; }
+    .section { padding: 17px; }
+}
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================
+         Page Header
+    ========================= -->
+
+    <header class="page-header">
+
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="تغییر حالت نمایش" title="تغییر حالت نمایش">☾</button>
+
+        <h1>برنامه درسی</h1>
+
+        <p>
+            برنامه کلاس‌ها و دروس انتخابی
+        </p>
+
+    </header>
+
+    <div class="courses-grid">
+
+    <!-- =========================
+         Course 1
+    ========================= -->
+
+    <div class="course">
+
+        <h2 class="course-title">
+            مهندسی نرم‌افزار
+        </h2>
+
+        <div class="course-info">
+
+            <div class="label">
+                استاد:
+            </div>
+
+            <div>
+                صدیقیان کاشی سعید
+            </div>
+
+
+            <div class="label">
+                زمان:
+            </div>
+
+            <div>
+                شنبه، دوشنبه — 7:30
+            </div>
+
+
+            <div class="label">
+                کد:
+            </div>
+
+            <div>
+
+                <span
+                    class="code"
+                    onclick="copyCode('۱۹۱۲۰۳۳_۱۹')"
+                    title="برای کپی کلیک کنید"
+                >
+                    ۱۹۱۲۰۳۳_۱۹
+
+                    <span class="copy-icon">
+                        ⧉
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Course 2
+    ========================= -->
+
+    <div class="course">
+
+        <h2 class="course-title">
+            طراحی کامپیوتری سیستم‌های دیجیتال
+        </h2>
+
+
+        <!-- Group 18 -->
+
+        <div class="group">
+
+            <h3 class="group-title">
+                گروه ۱۸
+            </h3>
+
+            <div class="course-info">
+
+                <div class="label">
+                    استاد:
+                </div>
+
+                <div>
+                    صیفوری
+                </div>
+
+
+                <div class="label">
+                    زمان:
+                </div>
+
+                <div>
+                    دوشنبه، چهارشنبه — 9:00
+                </div>
+
+
+                <div class="label">
+                    کد:
+                </div>
+
+                <div>
+
+                    <span
+                        class="code"
+                        onclick="copyCode('۱۹۲۰۰۰۴_۱۸')"
+                        title="برای کپی کلیک کنید"
+                    >
+                        ۱۹۲۰۰۰۴_۱۸
+
+                        <span class="copy-icon">
+                            ⧉
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Group 19 -->
+
+        <div class="group">
+
+            <h3 class="group-title">
+                گروه ۱۹
+            </h3>
+
+            <div class="course-info">
+
+                <div class="label">
+                    استاد:
+                </div>
+
+                <div>
+                    حسینی‌نژاد
+                </div>
+
+
+                <div class="label">
+                    زمان:
+                </div>
+
+                <div>
+                    یکشنبه، سه‌شنبه — 15:00
+                </div>
+
+
+                <div class="label">
+                    کد:
+                </div>
+
+                <div>
+
+                    <span
+                        class="code"
+                        onclick="copyCode('۱۹۲۰۰۰۴_۱۹')"
+                        title="برای کپی کلیک کنید"
+                    >
+                        ۱۹۲۰۰۰۴_۱۹
+
+                        <span class="copy-icon">
+                            ⧉
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Course 3
+    ========================= -->
+
+    <div class="course">
+
+        <h2 class="course-title">
+            الکترونیک دیجیتال و طراحی مدارهای مجتمع پرتراکم
+        </h2>
+
+        <div class="course-info">
+
+            <div class="label">
+                استاد:
+            </div>
+
+            <div>
+                ده‌یادگاری مسعود
+            </div>
+
+
+            <div class="label">
+                زمان:
+            </div>
+
+            <div>
+                یکشنبه، سه‌شنبه — 7:30
+            </div>
+
+
+            <div class="label">
+                کد:
+            </div>
+
+            <div>
+
+                <span
+                    class="code"
+                    onclick="copyCode('۱۹۱۰۰۲۰_۱۹')"
+                    title="برای کپی کلیک کنید"
+                >
+                    ۱۹۱۰۰۲۰_۱۹
+
+                    <span class="copy-icon">
+                        ⧉
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Course 4
+    ========================= -->
+
+    <div class="course">
+
+        <h2 class="course-title">
+            فیزیک ۲
+        </h2>
+
+        <div class="course-info">
+
+            <div class="label">
+                استاد:
+            </div>
+
+            <div>
+                افضل‌زاده رضا
+            </div>
+
+
+            <div class="label">
+                زمان:
+            </div>
+
+            <div>
+                شنبه، دوشنبه — 10:30
+            </div>
+
+
+            <div class="label">
+                کد:
+            </div>
+
+            <div>
+
+                <span
+                    class="code"
+                    onclick="copyCode('۴۲۱۰۱۱۵_۴۳')"
+                    title="برای کپی کلیک کنید"
+                >
+                    ۴۲۱۰۱۱۵_۴۳
+
+                    <span class="copy-icon">
+                        ⧉
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Course 5 — آز فیزیک ۲
+    ========================= -->
+
+    <div class="course">
+        <h2 class="course-title">آز فیزیک ۲</h2>
+        <div class="course-info">
+            <div class="label">استاد:</div>
+            <div>كشي زاده هادي / جم نژاد حسن / خانم یاوری</div>
+            <div class="label">زمان:</div>
+            <div>گروه‌های ۱۱ تا ۲۷ در زمان‌های مختلف</div>
+            <div class="label">کد:</div>
+            <div>۱۱۱۰۲۷۴_۱۱ تا ۱۱۱۰۲۷۴_۲۷</div>
+        </div>
+    </div>
+
+
+    <!-- =========================
+         Course 6
+    ========================= -->
+
+    <div class="course">
+
+        <h2 class="course-title">
+            پروژه
+        </h2>
+
+        <div class="course-info">
+
+            <div class="label">
+                استاد:
+            </div>
+
+            <div>
+                اساتيد گروه آموزشي
+            </div>
+
+
+            <div class="label">
+                زمان:
+            </div>
+
+            <div>
+                فلان فلان
+            </div>
+
+
+            <div class="label">
+                کد:
+            </div>
+
+            <div>
+
+                <span
+                    class="code"
+                    onclick="copyCode('۱۹۱۰۰۲۱_۱۹')"
+                    title="برای کپی کلیک کنید"
+                >
+                    ۱۹۱۰۰۲۱_۱۹
+
+                    <span class="copy-icon">
+                        ⧉
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         Course 6
+    ========================= -->
+
+    <div class="course">
+
+        <h2 class="course-title">
+            آمار و احتمالات مهندسی
+        </h2>
+
+        <div class="course-info">
+
+            <div class="label">
+                استاد:
+            </div>
+
+            <div>
+                مرادیان معصومه
+            </div>
+
+
+            <div class="label">
+                زمان:
+            </div>
+
+            <div>
+                یکشنبه، سه‌شنبه — 7:30
+            </div>
+
+
+            <div class="label">
+                کد:
+            </div>
+
+            <div>
+
+                <span
+                    class="code"
+                    onclick="copyCode('۱۹۱۰۰۲۹_۱۹')"
+                    title="برای کپی کلیک کنید"
+                >
+                    ۱۹۱۰۰۲۹_۱۹
+
+                    <span class="copy-icon">
+                        ⧉
+                    </span>
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    </div>
+
+    <!-- =========================
+         Checklist
+    ========================= -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            لیست انتخاب دروس
+        </h2>
+
+        <p class="checklist-note">دروس را انتخاب کنید؛ در صورت تداخل زمانی، انتخاب هم‌زمان دو درس امکان‌پذیر نیست.</p>
+
+        <div id="checklistError" class="checklist-error" role="alert"></div>
+
+        <div class="checklist-grid">
+
+            <div class="check-card" id="card-software">
+                <div class="check-card-title">
+                    <input type="checkbox" id="software">
+                    <label for="software">مهندسی نرم‌افزار</label>
+                </div>
+                <div class="check-card-subtitle">شنبه و دوشنبه — ۷:۳۰ تا ۹:۰۰</div>
+            </div>
+
+            <div class="check-card" id="card-digital">
+                <div class="check-card-title">
+                    <strong>طراحی کامپیوتری سیستم‌های دیجیتال</strong>
+                </div>
+                <div class="check-card-subtitle">فقط یکی از گروه‌ها را انتخاب کنید.</div>
+                <div class="group-options">
+                    <div class="group-option" id="group18Option">
+                        <input type="radio" name="digitalGroup" id="digital18">
+                        <label for="digital18">گروه ۱۸ — صیفوری — دوشنبه و چهارشنبه، ۹:۰۰ تا ۱۰:۳۰ — ۱۹۲۰۰۰۴_۱۸</label>
+                    </div>
+                    <div class="group-option" id="group19Option">
+                        <input type="radio" name="digitalGroup" id="digital19">
+                        <label for="digital19">گروه ۱۹ — حسینی‌نژاد — یکشنبه و سه‌شنبه، ۱۵:۰۰ تا ۱۶:۳۰ — ۱۹۲۰۰۰۴_۱۹</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="check-card" id="card-electronics">
+                <div class="check-card-title">
+                    <input type="checkbox" id="electronics">
+                    <label for="electronics">الکترونیک دیجیتال و طراحی مدارهای مجتمع پرتراکم</label>
+                </div>
+                <div class="check-card-subtitle">یکشنبه و سه‌شنبه — ۷:۳۰ تا ۹:۰۰</div>
+            </div>
+
+            <div class="check-card" id="card-physics">
+                <div class="check-card-title">
+                    <input type="checkbox" id="physics">
+                    <label for="physics">فیزیک ۲</label>
+                </div>
+                <div class="check-card-subtitle">شنبه و دوشنبه — ۱۰:۳۰ تا ۱۲:۰۰</div>
+            </div>
+
+            <div class="check-card" id="card-project">
+                <div class="check-card-title">
+                    <input type="checkbox" id="project">
+                    <label for="project">پروژه</label>
+                </div>
+                <div class="check-card-subtitle">زمان مشخصی ندارد.</div>
+            </div>
+
+            <div class="check-card" id="card-statistics">
+                <div class="check-card-title">
+                    <input type="checkbox" id="statistics">
+                    <label for="statistics">آمار و احتمالات مهندسی</label>
+                </div>
+                <div class="check-card-subtitle">یکشنبه و سه‌شنبه — ۷:۳۰ تا ۹:۰۰</div>
+            </div>
+
+            <div class="check-card" id="card-physicsLab">
+                <div class="check-card-title">
+                    <strong>آز فیزیک ۲</strong>
+                </div>
+                <div class="check-card-subtitle">یک گروه را انتخاب کنید.</div>
+                <div class="group-options">
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab11"><label for="lab11">گروه ۱۱ — كشي زاده هادي — شنبه ۱۳:۳۰ تا ۱۵:۰۰ — ۱۱۱۰۲۷۴_۱۱</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab12"><label for="lab12">گروه ۱۲ — كشي زاده هادي — شنبه ۱۵:۰۰ تا ۱۶:۳۰ — ۱۱۱۰۲۷۴_۱۲</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab13"><label for="lab13">گروه ۱۳ — كشي زاده هادي — شنبه ۱۶:۳۰ تا ۱۸:۰۰ — ۱۱۱۰۲۷۴_۱۳</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab14"><label for="lab14">گروه ۱۴ — كشي زاده هادي — یکشنبه ۰۷:۳۰ تا ۱۰:۳۰ — ۱۱۱۰۲۷۴_۱۴</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab15"><label for="lab15">گروه ۱۵ — كشي زاده هادي — یکشنبه ۱۰:۳۰ تا ۱۲:۳۰ — ۱۱۱۰۲۷۴_۱۵</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab16"><label for="lab16">گروه ۱۶ — كشي زاده هادي — یکشنبه ۱۳:۳۰ تا ۱۵:۰۰ — ۱۱۱۰۲۷۴_۱۶</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab17"><label for="lab17">گروه ۱۷ — جم نژاد حسن — یکشنبه ۱۵:۰۰ تا ۱۶:۳۰ — ۱۱۱۰۲۷۴_۱۷</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab18"><label for="lab18">گروه ۱۸ — جم نژاد حسن — یکشنبه ۱۶:۳۰ تا ۱۸:۰۰ — ۱۱۱۰۲۷۴_۱۸</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab22"><label for="lab22">گروه ۲۲ — جم نژاد حسن — سه‌شنبه ۱۵:۰۰ تا ۱۶:۳۰ — ۱۱۱۰۲۷۴_۲۲</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab23"><label for="lab23">گروه ۲۳ — جم نژاد حسن — سه‌شنبه ۱۶:۳۰ تا ۱۸:۰۰ — ۱۱۱۰۲۷۴_۲۳</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab19"><label for="lab19">گروه ۱۹ — خانم یاوری — سه‌شنبه ۰۷:۳۰ تا ۱۰:۳۰ — ۱۱۱۰۲۷۴_۱۹</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab20"><label for="lab20">گروه ۲۰ — خانم یاوری — سه‌شنبه ۱۰:۳۰ تا ۱۲:۳۰ — ۱۱۱۰۲۷۴_۲۰</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab21"><label for="lab21">گروه ۲۱ — خانم یاوری — سه‌شنبه ۱۳:۳۰ تا ۱۵:۰۰ — ۱۱۱۰۲۷۴_۲۱</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab24"><label for="lab24">گروه ۲۴ — خانم یاوری — چهارشنبه ۰۷:۳۰ تا ۱۰:۳۰ — ۱۱۱۰۲۷۴_۲۴</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab25"><label for="lab25">گروه ۲۵ — خانم یاوری — چهارشنبه ۱۰:۳۰ تا ۱۲:۳۰ — ۱۱۱۰۲۷۴_۲۵</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab26"><label for="lab26">گروه ۲۶ — خانم یاوری — چهارشنبه ۱۳:۳۰ تا ۱۵:۰۰ — ۱۱۱۰۲۷۴_۲۶</label></div>
+                    <div class="group-option"><input type="radio" name="physicsLabGroup" id="lab27"><label for="lab27">گروه ۲۷ — خانم یاوری — چهارشنبه ۱۵:۰۰ تا ۱۶:۳۰ — ۱۱۱۰۲۷۴_۲۷</label></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Progress -->
+
+        <div class="progress">
+
+            انتخاب شده:
+
+            <strong id="count">
+                0
+            </strong>
+
+            از 7 درس
+
+
+            <div class="progress-bar">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         Weekly Calendar
+    ========================= -->
+
+    <section class="section calendar-section">
+
+        <h2 class="section-title">
+            تقویم هفتگی
+        </h2>
+
+
+        <div class="calendar-wrapper">
+
+            <table class="calendar">
+
+                <thead>
+
+                    <tr>
+
+                        <!-- روزها سطر هستند -->
+                        <th class="day-header">
+                            روز
+                        </th>
+
+                        <!-- ساعت‌ها ستون هستند -->
+
+                        <th>
+                            7:30-9:00
+                        </th>
+
+                        <th>
+                            9:00-10:30
+                        </th>
+
+                        <th>
+                            10:30-12:00
+                        </th>
+
+                        <th>
+                            13:30-15:00
+                        </th>
+
+                        <th>
+                            15:00-16:30
+                        </th>
+
+                        <th>
+                            16:30-18:00
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+
+                    <!-- =====================
+                         شنبه
+                    ====================== -->
+
+                    <tr>
+
+                        <th class="day">
+                            شنبه
+                        </th>
+
+                        <td id="sat-730"></td>
+                        <td id="sat-900"></td>
+                        <td id="sat-1030"></td>
+                        <td id="sat-1330"></td>
+                        <td id="sat-1500"></td>
+                        <td id="sat-1630"></td>
+
+                    </tr>
+
+
+                    <!-- =====================
+                         یکشنبه
+                    ====================== -->
+
+                    <tr>
+
+                        <th class="day">
+                            یکشنبه
+                        </th>
+
+                        <td id="sun-730"></td>
+                        <td id="sun-900"></td>
+                        <td id="sun-1030"></td>
+                        <td id="sun-1330"></td>
+                        <td id="sun-1500"></td>
+                        <td id="sun-1630"></td>
+
+                    </tr>
+
+
+                    <!-- =====================
+                         دوشنبه
+                    ====================== -->
+
+                    <tr>
+
+                        <th class="day">
+                            دوشنبه
+                        </th>
+
+                        <td id="mon-730"></td>
+                        <td id="mon-900"></td>
+                        <td id="mon-1030"></td>
+                        <td id="mon-1330"></td>
+                        <td id="mon-1500"></td>
+                        <td id="mon-1630"></td>
+
+                    </tr>
+
+
+                    <!-- =====================
+                         سه‌شنبه
+                    ====================== -->
+
+                    <tr>
+
+                        <th class="day">
+                            سه‌شنبه
+                        </th>
+
+                        <td id="tue-730"></td>
+                        <td id="tue-900"></td>
+                        <td id="tue-1030"></td>
+                        <td id="tue-1330"></td>
+                        <td id="tue-1500"></td>
+                        <td id="tue-1630"></td>
+
+                    </tr>
+
+
+                    <!-- =====================
+                         چهارشنبه
+                    ====================== -->
+
+                    <tr>
+
+                        <th class="day">
+                            چهارشنبه
+                        </th>
+
+                        <td id="wed-730"></td>
+                        <td id="wed-900"></td>
+                        <td id="wed-1030"></td>
+                        <td id="wed-1330"></td>
+                        <td id="wed-1500"></td>
+                        <td id="wed-1630"></td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="noClasses"
+            class="no-classes"
+        >
+            هنوز درسی انتخاب نشده است.
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- Copy notification -->
+
+<div
+    id="copyMessage"
+    class="copy-message"
+>
+    کد کپی شد ✓
+</div>
+
+
+<script>
+const courses = {
+    software: { name: "مهندسی نرم‌افزار", teacher: "صدیقیان کاشی سعید", code: "۱۹۱۲۰۳۳_۱۹", classes: [["شنبه", "7:30", "9:00"], ["دوشنبه", "7:30", "9:00"]] },
+    digital18: { name: "طراحی کامپیوتری سیستم‌های دیجیتال", teacher: "صیفوری — گروه ۱۸", code: "۱۹۲۰۰۰۴_۱۸", classes: [["دوشنبه", "9:00", "10:30"], ["چهارشنبه", "9:00", "10:30"]] },
+    digital19: { name: "طراحی کامپیوتری سیستم‌های دیجیتال", teacher: "حسینی‌نژاد — گروه ۱۹", code: "۱۹۲۰۰۰۴_۱۹", classes: [["یکشنبه", "15:00", "16:30"], ["سه‌شنبه", "15:00", "16:30"]] },
+    electronics: { name: "الکترونیک دیجیتال و طراحی مدارهای مجتمع پرتراکم", teacher: "ده‌یادگاری مسعود", code: "۱۹۱۰۰۲۰_۱۹", classes: [["یکشنبه", "7:30", "9:00"], ["سه‌شنبه", "7:30", "9:00"]] },
+    physics: { name: "فیزیک ۲", teacher: "افضل‌زاده رضا", code: "۴۲۱۰۱۱۵_۴۳", classes: [["شنبه", "10:30", "12:00"], ["دوشنبه", "10:30", "12:00"]] },
+    project: { name: "پروژه", teacher: "اساتيد گروه آموزشي", code: "۱۹۱۰۰۲۱_۱۹", classes: [] },
+    statistics: { name: "آمار و احتمالات مهندسی", teacher: "مرادیان معصومه", code: "۱۹۱۰۰۲۹_۱۹", classes: [["یکشنبه", "7:30", "9:00"], ["سه‌شنبه", "7:30", "9:00"]] },
+    lab11: { name: "آز فیزیک ۲", teacher: "كشي زاده هادي — گروه ۱۱", code: "۱۱۱۰۲۷۴_۱۱", classes: [["شنبه", "13:30", "15:00"]] },
+    lab12: { name: "آز فیزیک ۲", teacher: "كشي زاده هادي — گروه ۱۲", code: "۱۱۱۰۲۷۴_۱۲", classes: [["شنبه", "15:00", "16:30"]] },
+    lab13: { name: "آز فیزیک ۲", teacher: "كشي زاده هادي — گروه ۱۳", code: "۱۱۱۰۲۷۴_۱۳", classes: [["شنبه", "16:30", "18:00"]] },
+    lab14: { name: "آز فیزیک ۲", teacher: "كشي زاده هادي — گروه ۱۴", code: "۱۱۱۰۲۷۴_۱۴", classes: [["یکشنبه", "7:30", "10:30"]] },
+    lab15: { name: "آز فیزیک ۲", teacher: "كشي زاده هادي — گروه ۱۵", code: "۱۱۱۰۲۷۴_۱۵", classes: [["یکشنبه", "10:30", "12:30"]] },
+    lab16: { name: "آز فیزیک ۲", teacher: "كشي زاده هادي — گروه ۱۶", code: "۱۱۱۰۲۷۴_۱۶", classes: [["یکشنبه", "13:30", "15:00"]] },
+    lab17: { name: "آز فیزیک ۲", teacher: "جم نژاد حسن — گروه ۱۷", code: "۱۱۱۰۲۷۴_۱۷", classes: [["یکشنبه", "15:00", "16:30"]] },
+    lab18: { name: "آز فیزیک ۲", teacher: "جم نژاد حسن — گروه ۱۸", code: "۱۱۱۰۲۷۴_۱۸", classes: [["یکشنبه", "16:30", "18:00"]] },
+    lab22: { name: "آز فیزیک ۲", teacher: "جم نژاد حسن — گروه ۲۲", code: "۱۱۱۰۲۷۴_۲۲", classes: [["سه‌شنبه", "15:00", "16:30"]] },
+    lab23: { name: "آز فیزیک ۲", teacher: "جم نژاد حسن — گروه ۲۳", code: "۱۱۱۰۲۷۴_۲۳", classes: [["سه‌شنبه", "16:30", "18:00"]] },
+    lab19: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۱۹", code: "۱۱۱۰۲۷۴_۱۹", classes: [["سه‌شنبه", "7:30", "10:30"]] },
+    lab20: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۲۰", code: "۱۱۱۰۲۷۴_۲۰", classes: [["سه‌شنبه", "10:30", "12:30"]] },
+    lab21: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۲۱", code: "۱۱۱۰۲۷۴_۲۱", classes: [["سه‌شنبه", "13:30", "15:00"]] },
+    lab24: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۲۴", code: "۱۱۱۰۲۷۴_۲۴", classes: [["چهارشنبه", "7:30", "10:30"]] },
+    lab25: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۲۵", code: "۱۱۱۰۲۷۴_۲۵", classes: [["چهارشنبه", "10:30", "12:30"]] },
+    lab26: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۲۶", code: "۱۱۱۰۲۷۴_۲۶", classes: [["چهارشنبه", "13:30", "15:00"]] },
+    lab27: { name: "آز فیزیک ۲", teacher: "خانم یاوری — گروه ۲۷", code: "۱۱۱۰۲۷۴_۲۷", classes: [["چهارشنبه", "15:00", "16:30"]] }
+};
+
+const normalCourseIds = ["software", "electronics", "physics", "project", "statistics"];
+const digitalGroupIds = ["digital18", "digital19"];
+const labGroupIds = ["lab11", "lab12", "lab13", "lab14", "lab15", "lab16", "lab17", "lab18", "lab22", "lab23", "lab19", "lab20", "lab21", "lab24", "lab25", "lab26", "lab27"];
+
+const dayMap = { "شنبه": "sat", "یکشنبه": "sun", "دوشنبه": "mon", "سه‌شنبه": "tue", "چهارشنبه": "wed" };
+const timeMap = { "7:30": "730", "9:00": "900", "10:30": "1030", "13:30": "1330", "15:00": "1500", "16:30": "1630" };
+
+function toMinutes(value) {
+    const [h, m] = value.split(":").map(Number);
+    return h * 60 + m;
+}
+
+function copyCode(code) {
+    navigator.clipboard.writeText(code).then(() => {
+        const message = document.getElementById("copyMessage");
+        message.classList.add("show");
+        setTimeout(() => message.classList.remove("show"), 1500);
+    });
+}
+
+function clearCalendar() {
+    document.querySelectorAll(".calendar td").forEach(cell => cell.innerHTML = "");
+}
+
+function createClassElement(course) {
+    const item = document.createElement("div");
+    item.className = "class-item";
+    item.innerHTML = `<div class="class-name">${course.name}</div><div class="class-teacher">${course.teacher}</div><div class="class-code">${course.code}</div>`;
+    return item;
+}
+
+function getSelectedCourseIds() {
+    const selected = normalCourseIds.filter(id => document.getElementById(id)?.checked);
+    digitalGroupIds.forEach(id => { if (document.getElementById(id)?.checked) selected.push(id); });
+    labGroupIds.forEach(id => { if (document.getElementById(id)?.checked) selected.push(id); });
+    return selected;
+}
+
+function getCourseLabel(id) {
+    if (digitalGroupIds.includes(id)) return "طراحی کامپیوتری سیستم‌های دیجیتال";
+    if (labGroupIds.includes(id)) return "آز فیزیک ۲";
+    return courses[id]?.name || id;
+}
+
+function getConflicts(candidateId, selectedIds) {
+    const candidate = courses[candidateId];
+    if (!candidate) return [];
+    const conflicts = [];
+    selectedIds.forEach(id => {
+        if (id === candidateId) return;
+        const other = courses[id];
+        if (!other) return;
+        const conflict = candidate.classes.some(([day, start, end]) =>
+            other.classes.some(([otherDay, otherStart, otherEnd]) =>
+                day === otherDay && toMinutes(start) < toMinutes(otherEnd) && toMinutes(otherStart) < toMinutes(end)
+            )
+        );
+        if (conflict) conflicts.push(id);
+    });
+    return conflicts;
+}
+
+function showConflict(candidateId, conflictIds) {
+    const error = document.getElementById("checklistError");
+    const names = conflictIds.map(getCourseLabel);
+    error.textContent = `تداخل زمانی: «${getCourseLabel(candidateId)}» با «${names.join("» و «") }» تداخل دارد و نمی‌توان هر دو را انتخاب کرد.`;
+    error.classList.add("show");
+
+    [candidateId, ...conflictIds].forEach(id => {
+        document.getElementById(`card-${id}`)?.classList.add("conflict");
+    });
+    setTimeout(() => {
+        error.classList.remove("show");
+        document.querySelectorAll(".check-card.conflict").forEach(card => card.classList.remove("conflict"));
+    }, 3500);
+}
+
+function updateCalendar() {
+    clearCalendar();
+    let hasClass = false;
+    getSelectedCourseIds().forEach(courseId => {
+        const course = courses[courseId];
+        course.classes.forEach(([day, time]) => {
+            const cell = document.getElementById(`${dayMap[day]}-${timeMap[time]}`);
+            if (!cell) return;
+            hasClass = true;
+            cell.appendChild(createClassElement(course));
+        });
+    });
+    document.getElementById("noClasses").style.display = hasClass ? "none" : "block";
+}
+
+function updateProgress() {
+    const selected = getSelectedCourseIds();
+    const digitalSelected = selected.some(id => digitalGroupIds.includes(id));
+    const labSelected = selected.some(id => labGroupIds.includes(id));
+    const normalSelected = normalCourseIds.filter(id => selected.includes(id)).length;
+    const checked = normalSelected + (digitalSelected ? 1 : 0) + (labSelected ? 1 : 0);
+    const total = 7;
+    document.getElementById("count").textContent = checked;
+    document.getElementById("progressFill").style.width = `${(checked / total) * 100}%`;
+    updateCalendar();
+}
+
+function saveState() {
+    [...normalCourseIds, ...digitalGroupIds, ...labGroupIds].forEach(id => {
+        const input = document.getElementById(id);
+        localStorage.setItem(`course_${id}`, input?.checked ? "true" : "false");
+    });
+}
+
+function restoreState() {
+    const allIds = [...normalCourseIds, ...digitalGroupIds, ...labGroupIds];
+    const accepted = [];
+    allIds.forEach(id => {
+        const input = document.getElementById(id);
+        if (localStorage.getItem(`course_${id}`) !== "true") return;
+        if (getConflicts(id, accepted).length === 0) {
+            input.checked = true;
+            accepted.push(id);
+        }
+    });
+}
+
+function updateGroupDisabledStates() {
+    // گروه‌های دیگر نباید واقعاً disabled شوند؛ کاربر باید بتواند
+    // هر زمان گروه انتخاب‌شده را با یک گروه دیگر جایگزین کند.
+    // فقط وضعیت انتخاب‌شده را از نظر ظاهری مشخص می‌کنیم.
+    [...digitalGroupIds, ...labGroupIds].forEach(id => {
+        const input = document.getElementById(id);
+        const option = input?.closest(".group-option");
+        if (!input || !option) return;
+
+        input.disabled = false;
+        option.classList.remove("disabled");
+        option.classList.toggle("selected", input.checked);
+    });
+}
+
+function getPreviousGroupSelection(groupIds, currentId) {
+    // چون radio قبلی هنگام انتخاب گزینه جدید خودکار uncheck می‌شود،
+    // وضعیت ذخیره‌شده را برای پیدا کردن انتخاب قبلی استفاده می‌کنیم.
+    return groupIds.find(id => id !== currentId && localStorage.getItem(`course_${id}`) === "true");
+}
+
+function handleSelectionChange(id) {
+    const input = document.getElementById(id);
+    if (!input) return;
+
+    const isDigitalGroup = digitalGroupIds.includes(id);
+    const isLabGroup = labGroupIds.includes(id);
+    const groupIds = isDigitalGroup ? digitalGroupIds : (isLabGroup ? labGroupIds : null);
+    const previousGroupId = groupIds ? getPreviousGroupSelection(groupIds, id) : null;
+
+    if (input.checked) {
+        const selectedBefore = getSelectedCourseIds().filter(selectedId => selectedId !== id);
+        const conflicts = getConflicts(id, selectedBefore);
+
+        if (conflicts.length) {
+            input.checked = false;
+
+            // اگر کاربر قصد تعویض گروه داشته ولی گروه جدید تداخل دارد،
+            // گروه قبلی را برمی‌گردانیم تا انتخاب قبلی از بین نرود.
+            if (previousGroupId) {
+                const previousInput = document.getElementById(previousGroupId);
+                if (previousInput) previousInput.checked = true;
+            }
+
+            showConflict(id, conflicts);
+            updateGroupDisabledStates();
+            updateProgress();
+            return;
+        }
+    }
+
+    saveState();
+    updateGroupDisabledStates();
+    updateProgress();
+}
+
+[...normalCourseIds, ...digitalGroupIds, ...labGroupIds].forEach(id => {
+    document.getElementById(id)?.addEventListener("change", () => handleSelectionChange(id));
+});
+
+const themeToggle = document.getElementById("themeToggle");
+
+function applyTheme(theme) {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    themeToggle.textContent = theme === "dark" ? "☀" : "☾";
+    themeToggle.title = theme === "dark" ? "حالت روشن" : "حالت تاریک";
+    localStorage.setItem("theme", theme);
+}
+
+themeToggle.addEventListener("click", () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    applyTheme(isDark ? "light" : "dark");
+});
+
+const savedTheme = localStorage.getItem("theme");
+applyTheme(savedTheme || "light");
+
+restoreState();
+updateDigitalGroupState();
+updateProgress();
+</script>
+
+</body>
+
+</html>
