@@ -18,5 +18,10 @@
         "name": "study - plan (Term 9)",
         "description": "A page to help me during my ENTEKHAB VAHED process you know...",
         "url": "notes/study-plan-improved.htm"
+    },
+    {
+        "name": "kian-battery-ai-proposal",
+        "description": "AI powered assistant for Kian Battery: Why and What",
+        "url": "notes/kian-battery-ai-proposal.html"
     }
 ]
