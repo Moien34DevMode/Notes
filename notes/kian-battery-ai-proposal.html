@@ -63,6 +63,8 @@
       color: #64748b;
     }
 
+    /* Cover */
+
     .cover {
       min-height: 245mm;
       display: flex;
@@ -108,6 +110,62 @@
       font-size: 14px;
     }
 
+    .website-preview {
+      height: 105px;
+      border: 1px solid #dbe3ec;
+      border-radius: 12px;
+      position: relative;
+      background: linear-gradient(145deg, #fafcff, #f1f5f9);
+      overflow: hidden;
+    }
+
+    .website-preview .top {
+      height: 15px;
+      background: #e8edf3;
+    }
+
+    .fake-content {
+      padding: 15px;
+    }
+
+    .fake-line {
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 5px;
+      width: 55%;
+      margin-bottom: 8px;
+    }
+
+    .fake-line.short {
+      width: 30%;
+    }
+
+    .assistant-button {
+      position: absolute;
+      left: 14px;
+      bottom: 12px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
+    }
+
+    .preview-label {
+      position: absolute;
+      left: 65px;
+      bottom: 22px;
+      font-size: 9px;
+      color: #64748b;
+    }
+
+    /* Sections */
+
     .section {
       margin-bottom: 24px;
       page-break-inside: avoid;
@@ -126,8 +184,8 @@
       max-width: 175mm;
     }
 
-
     /* Persuasive business decision box */
+
     .decision-box {
       margin-top: 15px;
       padding: 14px 16px;
@@ -150,6 +208,118 @@
       margin: 0;
     }
 
+    /* Benefits */
+
+    .benefits {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .benefit {
+      border: 1px solid #e0e7ef;
+      border-radius: 12px;
+      padding: 13px;
+      background: #fff;
+    }
+
+    .benefit-number {
+      width: 27px;
+      height: 27px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: #eff5ff;
+      color: #2563eb;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .benefit h3 {
+      font-size: 13px;
+    }
+
+    .benefit p {
+      font-size: 10.5px;
+      color: #64748b;
+      margin-bottom: 0;
+    }
+
+    /* Data sources */
+
+    .sources {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .source-card {
+      border: 1px solid #dce4ed;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .source-card h3 {
+      font-size: 13px;
+    }
+
+    .source-card ul {
+      margin: 5px 0 0;
+      padding-right: 18px;
+    }
+
+    .source-card li {
+      font-size: 10.5px;
+      color: #64748b;
+      margin-bottom: 3px;
+    }
+
+    /* RAG explanation */
+
+    .explanation {
+      background: #f8fafc;
+      border-right: 4px solid #2563eb;
+      padding: 12px 15px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      color: #475569;
+    }
+
+    .rag-flow {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 18px 0;
+    }
+
+    .rag-step {
+      flex: 1;
+      text-align: center;
+      padding: 12px 7px;
+      border-radius: 10px;
+      border: 1px solid #dbe3ed;
+      background: #fff;
+    }
+
+    .rag-step strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .rag-step span {
+      display: block;
+      font-size: 9px;
+      color: #64748b;
+      margin-top: 3px;
+    }
+
+    .rag-arrow {
+      color: #94a3b8;
+      font-size: 17px;
+    }
+
     /* Architecture */
 
     .architecture {
@@ -157,6 +327,13 @@
       border-radius: 15px;
       padding: 18px 14px;
       background: #fbfcfe;
+    }
+
+    .source-title {
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+      margin: 5px 0;
     }
 
     .arch-row {
@@ -213,1029 +390,7 @@
       color: #94a3b8;
     }
 
-    .source-title {
-      text-align: center;
-      font-size: 11px;
-      color: #64748b;
-      margin: 5px 0;
-    }
-
-    /* Benefits */
-
-    .benefits {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .benefit {
-      border: 1px solid #e0e7ef;
-      border-radius: 12px;
-      padding: 13px;
-      background: #fff;
-    }
-
-    .benefit-number {
-      width: 27px;
-      height: 27px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 8px;
-      background: #eff5ff;
-      color: #2563eb;
-      font-weight: bold;
-      font-size: 12px;
-      margin-bottom: 6px;
-    }
-
-    .benefit h3 {
-      font-size: 13px;
-    }
-
-    .benefit p {
-      font-size: 10.5px;
-      color: #64748b;
-      margin-bottom: 0;
-    }
-
-    /* RAG explanation */
-
-    .rag-flow {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin: 18px 0;
-    }
-
-    .rag-step {
-      flex: 1;
-      text-align: center;
-      padding: 12px 7px;
-      border-radius: 10px;
-      border: 1px solid #dbe3ed;
-      background: #fff;
-    }
-
-    .rag-step strong {
-      display: block;
-      font-size: 11px;
-    }
-
-    .rag-step span {
-      display: block;
-      font-size: 9px;
-      color: #64748b;
-      margin-top: 3px;
-    }
-
-    .rag-arrow {
-      color: #94a3b8;
-      font-size: 17px;
-    }
-
-    .explanation {
-      background: #f8fafc;
-      border-right: 4px solid #2563eb;
-      padding: 12px 15px;
-      border-radius: 8px;
-      font-size: 11.5px;
-      color: #475569;
-    }
-
-    /* Example */
-
-    .example {
-      border: 1px solid #dbe3ec;
-      border-radius: 14px;
-      overflow: hidden;
-    }
-
-    .example-head {
-      background: #f5f7fa;
-      padding: 11px 14px;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .chat {
-      padding: 15px;
-    }
-
-    .message {
-      max-width: 82%;
-      padding: 10px 13px;
-      border-radius: 11px;
-      font-size: 10.5px;
-      margin-bottom: 9px;
-    }
-
-    .user-msg {
-      background: #eef3f8;
-      margin-left: auto;
-    }
-
-    .ai-msg {
-      background: #edf7f1;
-      margin-right: auto;
-    }
-
-    .backend {
-      background: #101827;
-      color: #d8e1ec;
-      padding: 15px;
-      font-family: Consolas, monospace;
-      direction: ltr;
-      text-align: left;
-      font-size: 9px;
-      line-height: 1.8;
-    }
-
-    .backend-title {
-      color: #93c5fd;
-      margin-bottom: 6px;
-    }
-
-    /* Data sources */
-
-    .sources {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .source-card {
-      border: 1px solid #dce4ed;
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .source-card h3 {
-      font-size: 13px;
-    }
-
-    .source-card ul {
-      margin: 5px 0 0;
-      padding-right: 18px;
-    }
-
-    .source-card li {
-      font-size: 10.5px;
-      color: #64748b;
-      margin-bottom: 3px;
-    }
-
-    /* Dynamic data */
-
-    .dynamic {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      border: 1px solid #dce4ed;
-      padding: 14px;
-      border-radius: 12px;
-      background: #fbfdff;
-    }
-
-    .dynamic-item {
-      flex: 1;
-      text-align: center;
-    }
-
-    .dynamic-item strong {
-      display: block;
-      font-size: 12px;
-    }
-
-    .dynamic-item span {
-      font-size: 9px;
-      color: #64748b;
-    }
-
-    .dynamic-arrow {
-      font-size: 18px;
-      color: #94a3b8;
-    }
-
-    /* Implementation */
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .phase {
-      border-top: 3px solid #2563eb;
-      padding: 10px;
-      background: #f8fafc;
-      border-radius: 0 0 9px 9px;
-    }
-
-    .phase strong {
-      display: block;
-      font-size: 11px;
-      margin-bottom: 4px;
-    }
-
-    .phase span {
-      font-size: 9.5px;
-      color: #64748b;
-    }
-
-    /* Floating widget */
-
-    .website-preview {
-      height: 105px;
-      border: 1px solid #dbe3ec;
-      border-radius: 12px;
-      position: relative;
-      background: linear-gradient(145deg, #fafcff, #f1f5f9);
-      overflow: hidden;
-    }
-
-    .website-preview .top {
-      height: 15px;
-      background: #e8edf3;
-    }
-
-    .fake-content {
-      padding: 15px;
-    }
-
-    .fake-line {
-      height: 7px;
-      background: #e2e8f0;
-      border-radius: 5px;
-      width: 55%;
-      margin-bottom: 8px;
-    }
-
-    .fake-line.short {
-      width: 30%;
-    }
-
-    .assistant-button {
-      position: absolute;
-      left: 14px;
-      bottom: 12px;
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #2563eb;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      box-shadow: 0 5px 18px rgba(37, 99, 235, .25);
-    }
-
-    .preview-label {
-      position: absolute;
-      left: 65px;
-      bottom: 22px;
-      font-size: 9px;
-      color: #64748b;
-    }
-
-    .closing {
-      background: #111827;
-      color: white;
-      border-radius: 15px;
-      padding: 22px;
-      text-align: center;
-    }
-
-    .closing h2 {
-      color: white;
-      margin-bottom: 8px;
-    }
-
-    .closing p {
-      color: #cbd5e1;
-      max-width: 150mm;
-      margin: 0 auto;
-      font-size: 11.5px;
-    }
-
-    .footer {
-      margin-top: 18px;
-      padding-top: 10px;
-      border-top: 1px solid #e5e7eb;
-      color: #94a3b8;
-      font-size: 9px;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    @media print {
-      @page {
-        size: A4;
-        margin: 0;
-      }
-
-      body {
-        background: white;
-      }
-
-      .proposal {
-        width: 210mm;
-        min-height: 297mm;
-        margin: 0;
-        padding: 15mm 15mm;
-      }
-
-      .page-break {
-        break-before: page;
-      }
-    }
-  </style>
-
-
-  <!-- PAGE 1 -->
-
-  <section class="cover">
-
-    <div class="badge">پروپوزال پیاده‌سازی دستیار هوش مصنوعی</div>
-
-    <div class="hero-title">
-      <h1>
-        دستیار هوش مصنوعی
-        <br>
-        برای وب‌سایت <span class="highlight">کیان باتری</span>
-      </h1>
-    </div>
-
-    <p class="subtitle">
-      ایجاد یک دستیار هوشمند در وب‌سایت فروش باتری خودرو،
-      با قابلیت پاسخ‌گویی به سوالات مشتریان بر اساس دانش واقعی و
-      محتوای اختصاصی کیان باتری.
-    </p>
-
-    <div class="hero-box">
-      <strong>ایده اصلی</strong>
-      <p style="margin:7px 0 0;">
-        در گوشه پایین وب‌سایت یک دکمه کوچک با علامت سؤال قرار می‌گیرد.
-        مشتری با انتخاب آن می‌تواند با دستیار هوش مصنوعی گفتگو کند و
-        پاسخ سوالات خود را بدون نیاز به تماس با پشتیبانی دریافت کند.
-      </p>
-    </div>
-
-    <div style="margin-top:24px;">
-      <div class="website-preview">
-        <div class="top"></div>
-        <div class="fake-content">
-          <div class="fake-line"></div>
-          <div class="fake-line short"></div>
-          <div class="fake-line"></div>
-        </div>
-
-        <div class="assistant-button">?</div>
-        <div class="preview-label">دستیار هوش مصنوعی</div>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- EARLY BUSINESS BENEFITS -->
-  <section class="section page-break">
-    <div class="section-label">01 — ارزش پیشنهادی برای کیان باتری</div>
-    <h2>چرا اجرای این پروژه ارزشمند است؟</h2>
-
-    <p class="intro">
-      هدف این پروژه فقط اضافه کردن یک قابلیت جدید به وب‌سایت نیست؛
-      هدف، تبدیل بخشی از دانش موجود کیان باتری به یک ابزار فروش و پشتیبانی
-      همیشه‌در‌دسترس است که بتواند به مشتری در همان لحظه پاسخ بدهد.
-    </p>
-
-    <div class="benefits">
-      <div class="benefit">
-        <div class="benefit-number">۱</div>
-        <h3>پیاده‌سازی نسبتاً ساده و سریع</h3>
-        <p>
-          برای شروع پروژه، لازم نیست یک سیستم پیچیده از صفر ساخته شود.
-          ساختار پیشنهادی بر پایه وب‌سایت فعلی، محتوای موجود و یک لایه
-          هوشمند RAG است و می‌توان آن را مرحله‌به‌مرحله پیاده‌سازی کرد.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-number">۲</div>
-        <h3>استفاده از دانش موجود کیان باتری</h3>
-        <p>
-          مقالات، دانشنامه‌ها و محتوای تخصصی موجود، یک سرمایه آماده برای
-          ساخت پایگاه دانش هستند. بنابراین بخش مهمی از محتوای مورد نیاز
-          پروژه از قبل وجود دارد و فقط باید آماده و قابل جستجو شود.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-number">۳</div>
-        <h3>کاهش تماس‌های تکراری پشتیبانی</h3>
-        <p>
-          سوالات عمومی و پرتکرار مشتریان می‌توانند به صورت خودکار پاسخ داده
-          شوند؛ در نتیجه تیم پشتیبانی زمان بیشتری برای موارد تخصصی و مهم‌تر
-          خواهد داشت.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-number">۴</div>
-        <h3>پاسخ‌گویی ۲۴ ساعته</h3>
-        <p>
-          مشتری برای دریافت پاسخ سوالات عمومی خود به ساعت کاری یا حضور
-          اپراتور وابسته نخواهد بود و می‌تواند مستقیماً از داخل وب‌سایت
-          پاسخ مورد نیازش را دریافت کند.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-number">۵</div>
-        <h3>قابل اتصال به قیمت و موجودی لحظه‌ای</h3>
-        <p>
-          اطلاعات متغیری مانند قیمت، موجودی و مشخصات محصول می‌توانند از
-          فروشگاه یا Backend دریافت شوند تا دستیار فقط به اطلاعات ثابت
-          مقالات وابسته نباشد.
-        </p>
-      </div>
-
-      <div class="benefit">
-        <div class="benefit-number">۶</div>
-        <h3>شروع کوچک، توسعه مرحله‌ای</h3>
-        <p>
-          می‌توان پروژه را ابتدا با سوالات عمومی و اطلاعات موجود اجرا کرد
-          و سپس قابلیت‌هایی مانند پیشنهاد محصول، اطلاعات قیمت، تحلیل
-          مکالمات پشتیبانی و امکانات بیشتر را به آن اضافه کرد.
-        </p>
-      </div>
-    </div>
-
-    <div class="decision-box">
-      <strong>نکته کلیدی برای شروع پروژه</strong>
-      <p>
-        این پروژه از آن دسته قابلیت‌هایی نیست که برای راه‌اندازی اولیه
-        به یک تغییر اساسی در ساختار وب‌سایت نیاز داشته باشد. می‌توان یک
-        نسخه اولیه و کاربردی را در کنار سیستم فعلی ایجاد کرد، نتیجه را
-        سنجید و سپس قابلیت‌ها را توسعه داد.
-      </p>
-    </div>
-  </section>
-
-
-  <!-- PAGE 2 -->
-
-  <section class="section page-break">
-
-    <div class="section-label">02 — مسئله و راهکار</div>
-    <h2>چرا دستیار هوش مصنوعی؟</h2>
-
-    <p class="intro">
-      بخش قابل توجهی از سوالات مشتریان قبل از خرید، سوالاتی عمومی و
-      قابل پیش‌بینی هستند؛ برای مثال انتخاب باتری مناسب، تفاوت محصولات،
-      شرایط گارانتی، نحوه نگهداری، علائم خرابی باتری و بسیاری از سوالات
-      مشابه.
-    </p>
-
-    <p class="intro">
-      هدف این پروژه، ساخت یک لایه هوشمند در کنار وب‌سایت است که بتواند
-      این سوالات را بر اساس اطلاعات واقعی و معتبر موجود در مجموعه پاسخ دهد.
-      در نتیجه، مشتری قبل از تماس با پشتیبانی می‌تواند پاسخ مورد نیاز خود
-      را دریافت کند.
-    </p>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-label">03 — منابع دانش</div>
-    <h2>دستیار از کجا اطلاعات می‌گیرد؟</h2>
-
-    <div class="sources">
-
-      <div class="source-card">
-        <h3>01. مقالات و دانشنامه‌های سایت</h3>
-        <ul>
-          <li>مقالات منتشرشده در وب‌سایت</li>
-          <li>دانشنامه‌ها و راهنماهای تخصصی</li>
-          <li>محتوای آموزشی مرتبط با باتری خودرو</li>
-          <li>اطلاعات فنی و سوالات متداول</li>
-        </ul>
-      </div>
-
-      <div class="source-card">
-        <h3>02. مکالمات پشتیبانی</h3>
-        <ul>
-          <li>تبدیل تماس‌های صوتی به متن</li>
-          <li>استخراج سوالات پرتکرار مشتریان</li>
-          <li>استفاده از تجربه واقعی تیم پشتیبانی</li>
-          <li>شناسایی موضوعاتی که در سایت پوشش داده نشده‌اند</li>
-        </ul>
-      </div>
-
-    </div>
-
-    <p style="margin-top:12px; font-size:10.5px; color:#64748b;">
-      در بخش مکالمات پشتیبانی، پس از تبدیل صوت به متن، می‌توان داده‌ها را
-      پاک‌سازی و دسته‌بندی کرد تا فقط اطلاعات مفید و قابل استفاده وارد
-      پایگاه دانش دستیار شوند.
-    </p>
-
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-label">04 — فناوری RAG</div>
-    <h2>RAG چیست و چگونه کار می‌کند؟</h2>
-
-    <div class="explanation">
-      <strong>RAG</strong> مخفف Retrieval-Augmented Generation است.
-      به زبان ساده، به جای اینکه هوش مصنوعی صرفاً بر اساس اطلاعاتی که
-      قبلاً یاد گرفته پاسخ دهد، ابتدا در دانش اختصاصی مجموعه جستجو می‌کند،
-      اطلاعات مرتبط را پیدا می‌کند و سپس با استفاده از آن‌ها پاسخ تولید می‌کند.
-    </div>
-
-    <div class="rag-flow">
-
-      <div class="rag-step">
-        <strong>سوال مشتری</strong>
-        <span>«برای پژو ۲۰۶ چه باتری‌ای مناسبه؟»</span>
-      </div>
-
-      <div class="rag-arrow">←</div>
-
-      <div class="rag-step">
-        <strong>جستجو در دانش</strong>
-        <span>پیدا کردن محتوای مرتبط</span>
-      </div>
-
-      <div class="rag-arrow">←</div>
-
-      <div class="rag-step">
-        <strong>اطلاعات مرتبط</strong>
-        <span>مقالات، راهنماها و داده‌ها</span>
-      </div>
-
-      <div class="rag-arrow">←</div>
-
-      <div class="rag-step">
-        <strong>هوش مصنوعی</strong>
-        <span>ساخت پاسخ بر اساس منابع</span>
-      </div>
-
-    </div>
-
-    <p style="font-size:10.5px; color:#64748b;">
-      این معماری برای کیان باتری اهمیت ویژه‌ای دارد؛ زیرا مجموعه‌ای از
-      مقالات و دانشنامه‌های تخصصی از قبل در اختیار مجموعه قرار دارد و
-      می‌توان این دانش موجود را مستقیماً به منبع پاسخ‌گویی دستیار تبدیل کرد.
-    </p>
-
-  </section>
-
-
-  <!-- PAGE 3 -->
-
-  <section class="section page-break">
-
-    <div class="section-label">05 — معماری پیشنهادی</div>
-    <h2>دستیار در پشت صحنه چگونه کار می‌کند؟</h2>
-
-    <div class="architecture">
-
-      <div class="source-title">منابع اطلاعاتی</div>
-
-      <div class="arch-row">
-
-        <div class="arch-box">
-          <div class="icon">📚</div>
-          <strong>مقالات سایت</strong>
-          <span>دانشنامه و محتوای آموزشی</span>
-        </div>
-
-        <div class="arch-box">
-          <div class="icon">🎙</div>
-          <strong>تماس‌های پشتیبانی</strong>
-          <span>صوت → متن</span>
-        </div>
-
-        <div class="arch-box">
-          <div class="icon">💾</div>
-          <strong>داده‌های محصولات</strong>
-          <span>قیمت و مشخصات</span>
-        </div>
-
-      </div>
-
-      <div style="text-align:center;color:#94a3b8;">↓</div>
-
-      <div class="arch-row">
-
-        <div class="arch-box arch-main">
-          <div class="icon">🧠</div>
-          <strong>پایگاه دانش RAG</strong>
-          <span>ذخیره و آماده‌سازی اطلاعات برای جستجو</span>
-        </div>
-
-      </div>
-
-      <div style="text-align:center;color:#94a3b8;">↓</div>
-
-      <div class="arch-row">
-
-        <div class="arch-box">
-          <div class="icon">🔎</div>
-          <strong>جستجوی اطلاعات مرتبط</strong>
-          <span>پیدا کردن مناسب‌ترین بخش‌های دانش</span>
-        </div>
-
-        <div class="arrow">←</div>
-
-        <div class="arch-box arch-ai">
-          <div class="icon">🤖</div>
-          <strong>مدل هوش مصنوعی</strong>
-          <span>درک سوال و تولید پاسخ</span>
-        </div>
-
-      </div>
-
-      <div style="text-align:center;color:#94a3b8;">↓</div>
-
-      <div class="arch-row">
-
-        <div class="arch-box">
-          <div class="icon">🌐</div>
-          <strong>وب‌سایت کیان باتری</strong>
-          <span>نمایش پاسخ در پنجره گفتگو</span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="section">
-
-    <!-- PAGE 3 -->
-
-  <section class="section page-break">
-    <div class="section-label">05 — معماری پیشنهادی</div>
-    <h2>دستیار در پشت صحنه چگونه کار می‌کند؟</h2>
-
-    <div class="architecture">
-      <div class="source-title">منابع اطلاعاتی</div>
-      <div class="arch-row">
-        <div class="arch-box"><div class="icon">📚</div><strong>مقالات سایت</strong><span>دانشنامه و محتوای آموزشی</span></div>
-        <div class="arch-box"><div class="icon">🎙</div><strong>تماس‌های پشتیبانی</strong><span>صوت → متن</span></div>
-        <div class="arch-box"><div class="icon">💾</div><strong>داده‌های محصولات</strong><span>قیمت و مشخصات</span></div>
-      </div>
-      <div style="text-align:center;color:#94a3b8;">↓</div>
-      <div class="arch-row"><div class="arch-box arch-main"><div class="icon">🧠</div><strong>پایگاه دانش RAG</strong><span>ذخیره و آماده‌سازی اطلاعات برای جستجو</span></div></div>
-      <div style="text-align:center;color:#94a3b8;">↓</div>
-      <div class="arch-row">
-        <div class="arch-box"><div class="icon">🔎</div><strong>جستجوی اطلاعات مرتبط</strong><span>پیدا کردن مناسب‌ترین بخش‌های دانش</span></div>
-        <div class="arrow">←</div>
-        <div class="arch-box arch-ai"><div class="icon">🤖</div><strong>مدل هوش مصنوعی</strong><span>درک سوال و تولید پاسخ</span></div>
-      </div>
-      <div style="text-align:center;color:#94a3b8;">↓</div>
-      <div class="arch-row"><div class="arch-box"><div class="icon">🌐</div><strong>وب‌سایت کیان باتری</strong><span>نمایش پاسخ در پنجره گفتگو</span></div></div>
-    </div>
-  </section>
-
-  <section class="section page-break">
-    <div class="section-label">06 — نمونه عملی — یک مکالمه واقعی</div>
-    <h2>اگر مشتری بپرسد: «برای پراید ۱۳۲ چه باتری‌ای مناسبه؟»</h2>
-    <p class="intro">نمونه زیر نشان می‌دهد مشتری چه چیزی می‌بیند و دستیار هوش مصنوعی در پشت صحنه چگونه از دانش موجود در کیان باتری برای ساخت پاسخ استفاده می‌کند.</p>
-
-    <div class="chat-demo">
-      <div class="chat-header">
-        <div class="chat-avatar">?</div>
-        <div><strong>دستیار هوش مصنوعی کیان باتری</strong><span>پاسخ‌گویی بر اساس دانش و اطلاعات کیان باتری</span></div>
-        <div class="online"><i></i> آنلاین</div>
-      </div>
-      <div class="chat-body">
-        <div class="chat-row user"><div class="bubble user-bubble">برای پراید ۱۳۲ چه باتری‌ای مناسبه؟</div></div>
-        <div class="chat-row ai">
-          <div class="mini-avatar">AI</div>
-          <div>
-            <div class="bubble ai-bubble">
-              برای پراید ۱۳۲ بنزینی معمولاً باتری <strong>۵۰ آمپر با پلاریته‌ی راست</strong> پیشنهاد می‌شود.
-              <br><br>
-              الان مدل <strong>«سپاهان ۵۰ آمپر»</strong> موجود و با <strong>گارانتی ۱۸ ماهه</strong> در سایت هست.
-              <br><br>
-              <span class="source">منبع: مقاله «راهنمای انتخاب باتری پراید» + تجربه‌ی ۳ تماس پشتیبانی مشابه</span>
-            </div>
-            <div class="ai-note">پاسخ بر اساس اطلاعات موجود در پایگاه دانش کیان باتری</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:25px;">
-      <div class="section-label">پشت صحنه</div>
-      <h2 style="margin-bottom:8px;">حالا در پشت صحنه چه اتفاقی افتاد؟</h2>
-      <p style="font-size:11px;color:#64748b;">چیزی که برای مشتری فقط یک سؤال و یک پاسخ ساده به نظر می‌رسد، در واقع چند مرحله پردازش را طی می‌کند:</p>
-    </div>
-
-    <div class="behind-flow">
-      <div class="behind-step"><div class="step-number">۱</div><div class="step-content"><strong>دریافت سؤال مشتری</strong><p>سیستم سؤال را دریافت می‌کند:</p><code>«برای پراید ۱۳۲ چه باتری‌ای مناسبه؟»</code></div></div>
-      <div class="flow-line"></div>
-      <div class="behind-step"><div class="step-number">۲</div><div class="step-content"><strong>جستجو در پایگاه دانش</strong><p>سیستم به جای جستجوی ساده کلمه به کلمه، مفهوم سؤال را بررسی کرده و بخش‌های مرتبط از دانش موجود را پیدا می‌کند.</p><div class="retrieved-data"><div><span>📄</span><strong>راهنمای انتخاب باتری پراید</strong><small>مقاله سایت</small></div><div><span>🎙</span><strong>۳ تماس پشتیبانی مشابه</strong><small>تجربه واقعی مشتریان</small></div><div><span>🔋</span><strong>سپاهان ۵۰ آمپر</strong><small>اطلاعات محصول</small></div></div></div></div>
-      <div class="flow-line"></div>
-      <div class="behind-step"><div class="step-number">۳</div><div class="step-content"><strong>ترکیب اطلاعات</strong><p>اطلاعات پیدا شده در اختیار مدل هوش مصنوعی قرار می‌گیرد. مدل پاسخ خود را بر اساس این اطلاعات تولید می‌کند، نه صرفاً بر اساس دانش عمومی خودش.</p><div class="context-box"><div class="context-title">اطلاعاتی که مدل دریافت می‌کند</div><div class="context-row"><span>نوع خودرو</span><strong>پراید ۱۳۲ بنزینی</strong></div><div class="context-row"><span>باتری پیشنهادی</span><strong>۵۰ آمپر — پلاریته راست</strong></div><div class="context-row"><span>محصول موجود</span><strong>سپاهان ۵۰ آمپر</strong></div><div class="context-row"><span>گارانتی</span><strong>۱۸ ماه</strong></div><div class="context-row"><span>منابع</span><strong>مقاله + ۳ تماس پشتیبانی</strong></div></div></div></div>
-      <div class="flow-line"></div>
-      <div class="behind-step final-step"><div class="step-number">۴</div><div class="step-content"><strong>تولید پاسخ و نمایش به مشتری</strong><p>مدل اطلاعات مرتبط را به زبان طبیعی تبدیل می‌کند و پاسخ نهایی برای مشتری ارسال می‌شود.</p><div class="final-answer">«برای پراید ۱۳۲ بنزینی معمولاً باتری ۵۰ آمپر با پلاریته‌ی راست پیشنهاد می‌شود...»</div></div></div>
-    </div>
-
-    <div class="important-note"><strong>نکته مهم:</strong> <span>در این معماری، هوش مصنوعی قرار نیست جایگزین دانش کیان باتری شود؛ بلکه به عنوان یک رابط هوشمند، دانش موجود مجموعه را پیدا کرده، ترکیب و به زبان قابل فهم برای مشتری ارائه می‌کند.</span></div>
-  </section>
-
-
-  <section class="section">
-
-    <div class="section-label">07 — اطلاعات همیشه به‌روز</div>
-    <h2>به‌روزرسانی داینامیک قیمت و محصولات</h2>
-
-    <p style="font-size:11px;color:#64748b;">
-      تمام اطلاعات لازم نیست داخل RAG به صورت ثابت ذخیره شوند.
-      داده‌هایی مانند قیمت، موجودی و مشخصات محصول می‌توانند مستقیماً
-      از سیستم فروشگاه یا API دریافت شوند تا پاسخ دستیار به اطلاعات
-      به‌روز وابسته باشد.
-    </p>
-
-    <div class="dynamic">
-
-      <div class="dynamic-item">
-        <strong>فروشگاه</strong>
-        <span>قیمت و موجودی جدید</span>
-      </div>
-
-      <div class="dynamic-arrow">→</div>
-
-      <div class="dynamic-item">
-        <strong>API / Backend</strong>
-        <span>دریافت اطلاعات لحظه‌ای</span>
-      </div>
-
-      <div class="dynamic-arrow">→</div>
-
-      <div class="dynamic-item">
-        <strong>دستیار AI</strong>
-        <span>پاسخ بر اساس داده جدید</span>
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- SAMPLE PRACTICAL CONVERSATION -->
-
-  <section class="section page-break">
-
-    <div class="section-label">نمونه عملی — یک مکالمه واقعی</div>
-    <h2>اگر مشتری بپرسد: «برای پراید ۱۳۲ چه باتری‌ای مناسبه؟»</h2>
-
-    <p class="intro">
-      در این نمونه، ابتدا تجربه‌ای را می‌بینیم که مشتری در وب‌سایت دارد؛
-      سپس همان درخواست را از نگاه سیستم بررسی می‌کنیم تا مشخص شود
-      پاسخ هوش مصنوعی چگونه ساخته می‌شود.
-    </p>
-
-    <div class="chat-demo">
-
-      <div class="chat-header">
-        <div class="chat-avatar">?</div>
-
-        <div>
-          <strong>دستیار هوش مصنوعی کیان باتری</strong>
-          <span>پاسخ‌گویی بر اساس دانش و اطلاعات کیان باتری</span>
-        </div>
-
-        <div class="online">
-          <i></i>
-          آنلاین
-        </div>
-      </div>
-
-      <div class="chat-body">
-
-        <div class="chat-row user">
-          <div class="bubble user-bubble">
-            برای پراید ۱۳۲ چه باتری‌ای مناسبه؟
-          </div>
-        </div>
-
-        <div class="chat-row ai">
-
-          <div class="mini-avatar">AI</div>
-
-          <div>
-            <div class="bubble ai-bubble">
-
-              برای پراید ۱۳۲ بنزینی معمولاً باتری
-              <strong>۵۰ آمپر با پلاریته‌ی راست</strong>
-              پیشنهاد می‌شود.
-
-              <br><br>
-
-              الان مدل
-              <strong>«سپاهان ۵۰ آمپر»</strong>
-              موجود و با
-              <strong>گارانتی ۱۸ ماهه</strong>
-              در سایت هست.
-
-              <br><br>
-
-              <span class="source">
-                منبع:
-                مقاله «راهنمای انتخاب باتری پراید»
-                +
-                تجربه‌ی ۳ تماس پشتیبانی مشابه
-              </span>
-
-            </div>
-
-            <div class="ai-note">
-              پاسخ بر اساس اطلاعات موجود در پایگاه دانش کیان باتری
-            </div>
-          </div>
-
-        </div>
-
-      </div>
-    </div>
-
-
-    <div style="margin-top:25px;">
-      <div class="section-label">پشت صحنه</div>
-
-      <h2 style="margin-bottom:8px;">
-        حالا در پشت صحنه چه اتفاقی می‌افتد؟
-      </h2>
-
-      <p style="font-size:11px;color:#64748b;">
-        چیزی که برای مشتری فقط یک سؤال و یک پاسخ ساده به نظر می‌رسد،
-        در پشت صحنه چند مرحله پردازش را طی می‌کند:
-      </p>
-    </div>
-
-
-    <div class="behind-flow">
-
-      <div class="behind-step">
-        <div class="step-number">۱</div>
-
-        <div class="step-content">
-          <strong>دریافت سؤال مشتری</strong>
-
-          <p>
-            سیستم سؤال را دریافت می‌کند و مفهوم آن را برای جستجو آماده می‌کند:
-          </p>
-
-          <code>«برای پراید ۱۳۲ چه باتری‌ای مناسبه؟»</code>
-        </div>
-      </div>
-
-      <div class="flow-line"></div>
-
-
-      <div class="behind-step">
-        <div class="step-number">۲</div>
-
-        <div class="step-content">
-
-          <strong>پیدا کردن اطلاعات مرتبط در RAG</strong>
-
-          <p>
-            سیستم در پایگاه دانش جستجو می‌کند و مرتبط‌ترین اطلاعات را
-            از منابع مختلف پیدا می‌کند.
-          </p>
-
-          <div class="retrieved-data">
-
-            <div>
-              <span>📄</span>
-              <strong>راهنمای انتخاب باتری پراید</strong>
-              <small>مقاله سایت</small>
-            </div>
-
-            <div>
-              <span>🎙</span>
-              <strong>۳ تماس پشتیبانی مشابه</strong>
-              <small>تجربه واقعی مشتریان</small>
-            </div>
-
-            <div>
-              <span>🔋</span>
-              <strong>سپاهان ۵۰ آمپر</strong>
-              <small>اطلاعات محصول</small>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-      <div class="flow-line"></div>
-
-
-      <div class="behind-step">
-        <div class="step-number">۳</div>
-
-        <div class="step-content">
-
-          <strong>ترکیب اطلاعات و بررسی داده‌های محصول</strong>
-
-          <p>
-            اطلاعات مرتبط به مدل هوش مصنوعی داده می‌شود و در صورت نیاز،
-            داده‌های متغیر محصول مانند موجودی، قیمت و گارانتی از منبع
-            اصلی فروشگاه دریافت می‌شوند.
-          </p>
-
-          <div class="context-box">
-
-            <div class="context-title">
-              اطلاعاتی که در اختیار مدل قرار می‌گیرد
-            </div>
-
-            <div class="context-row">
-              <span>خودرو</span>
-              <strong>پراید ۱۳۲ بنزینی</strong>
-            </div>
-
-            <div class="context-row">
-              <span>باتری پیشنهادی</span>
-              <strong>۵۰ آمپر — پلاریته راست</strong>
-            </div>
-
-            <div class="context-row">
-              <span>محصول موجود</span>
-              <strong>سپاهان ۵۰ آمپر</strong>
-            </div>
-
-            <div class="context-row">
-              <span>گارانتی</span>
-              <strong>۱۸ ماه</strong>
-            </div>
-
-            <div class="context-row">
-              <span>منابع دانش</span>
-              <strong>مقاله + ۳ تماس پشتیبانی</strong>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-      <div class="flow-line"></div>
-
-
-      <div class="behind-step final-step">
-
-        <div class="step-number">۴</div>
-
-        <div class="step-content">
-
-          <strong>تولید پاسخ و نمایش به مشتری</strong>
-
-          <p>
-            مدل هوش مصنوعی اطلاعات جمع‌آوری‌شده را به یک پاسخ طبیعی،
-            کوتاه و قابل فهم تبدیل می‌کند و آن را در پنجره چت نمایش می‌دهد.
-          </p>
-
-          <div class="final-answer">
-            «برای پراید ۱۳۲ بنزینی معمولاً باتری ۵۰ آمپر با پلاریته‌ی راست
-            پیشنهاد می‌شود. الان مدل سپاهان ۵۰ آمپر موجود و با گارانتی
-            ۱۸ ماهه در سایت هست.»
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-
-
-    <div class="important-note">
-      <strong>نکته مهم:</strong>
-      <span>
-        در این معماری، هوش مصنوعی جایگزین دانش کیان باتری نیست؛
-        بلکه مانند یک رابط هوشمند عمل می‌کند که اطلاعات مرتبط را پیدا
-        کرده و آن را به شکل قابل فهم در اختیار مشتری قرار می‌دهد.
-      </span>
-    </div>
-
-  </section>
-
-
-  <style>
+    /* Chat demo (sample conversation) */
 
     .chat-demo {
       border: 1px solid #d9e2ec;
@@ -1523,20 +678,740 @@
       color: #334155;
     }
 
+    /* Dynamic data */
+
+    .dynamic {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid #dce4ed;
+      padding: 14px;
+      border-radius: 12px;
+      background: #fbfdff;
+    }
+
+    .dynamic-item {
+      flex: 1;
+      text-align: center;
+    }
+
+    .dynamic-item strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .dynamic-item span {
+      font-size: 9px;
+      color: #64748b;
+    }
+
+    .dynamic-arrow {
+      font-size: 18px;
+      color: #94a3b8;
+    }
+
+    /* Implementation timeline */
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .phase {
+      border-top: 3px solid #2563eb;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 0 0 9px 9px;
+    }
+
+    .phase strong {
+      display: block;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .phase span {
+      font-size: 9.5px;
+      color: #64748b;
+    }
+
+    /* Closing */
+
+    .closing {
+      background: #111827;
+      color: white;
+      border-radius: 15px;
+      padding: 22px;
+      text-align: center;
+    }
+
+    .closing h2 {
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .closing p {
+      color: #cbd5e1;
+      max-width: 150mm;
+      margin: 0 auto;
+      font-size: 11.5px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid #e5e7eb;
+      color: #94a3b8;
+      font-size: 9px;
+      display: flex;
+      justify-content: space-between;
+    }
+
     @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      body {
+        background: white;
+      }
+
+      .proposal {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        padding: 15mm 15mm;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
       .chat-demo,
       .behind-flow {
         break-inside: avoid;
       }
     }
-
   </style>
 
 
-  <!-- PAGE 4 -->
+  <!-- PAGE 1 — COVER -->
+
+  <section class="cover">
+
+    <div class="badge">پروپوزال پیاده‌سازی دستیار هوش مصنوعی</div>
+
+    <div class="hero-title">
+      <h1>
+        دستیار هوش مصنوعی
+        <br>
+        برای وب‌سایت <span class="highlight">کیان باتری</span>
+      </h1>
+    </div>
+
+    <p class="subtitle">
+      ایجاد یک دستیار هوشمند در وب‌سایت فروش باتری خودرو،
+      با قابلیت پاسخ‌گویی به سوالات مشتریان بر اساس دانش واقعی و
+      محتوای اختصاصی کیان باتری.
+    </p>
+
+    <div class="hero-box">
+      <strong>ایده اصلی</strong>
+      <p style="margin:7px 0 0;">
+        در گوشه پایین وب‌سایت یک دکمه کوچک با علامت سؤال قرار می‌گیرد.
+        مشتری با انتخاب آن می‌تواند با دستیار هوش مصنوعی گفتگو کند و
+        پاسخ سوالات خود را بدون نیاز به تماس با پشتیبانی دریافت کند.
+      </p>
+    </div>
+
+    <div style="margin-top:24px;">
+      <div class="website-preview">
+        <div class="top"></div>
+        <div class="fake-content">
+          <div class="fake-line"></div>
+          <div class="fake-line short"></div>
+          <div class="fake-line"></div>
+        </div>
+
+        <div class="assistant-button">?</div>
+        <div class="preview-label">دستیار هوش مصنوعی</div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 01 — VALUE PROPOSITION -->
+
+  <section class="section page-break">
+    <div class="section-label">01 — ارزش پیشنهادی برای کیان باتری</div>
+    <h2>چرا اجرای این پروژه ارزشمند است؟</h2>
+
+    <p class="intro">
+      هدف این پروژه فقط اضافه کردن یک قابلیت جدید به وب‌سایت نیست؛
+      هدف، تبدیل بخشی از دانش موجود کیان باتری به یک ابزار فروش و پشتیبانی
+      همیشه‌در‌دسترس است که بتواند به مشتری در همان لحظه پاسخ بدهد.
+    </p>
+
+    <div class="benefits">
+      <div class="benefit">
+        <div class="benefit-number">۱</div>
+        <h3>پیاده‌سازی نسبتاً ساده و سریع</h3>
+        <p>
+          برای شروع پروژه، لازم نیست یک سیستم پیچیده از صفر ساخته شود.
+          ساختار پیشنهادی بر پایه وب‌سایت فعلی، محتوای موجود و یک لایه
+          هوشمند RAG است و می‌توان آن را مرحله‌به‌مرحله پیاده‌سازی کرد.
+        </p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-number">۲</div>
+        <h3>استفاده از دانش موجود کیان باتری</h3>
+        <p>
+          مقالات، دانشنامه‌ها و محتوای تخصصی موجود، یک سرمایه آماده برای
+          ساخت پایگاه دانش هستند. بنابراین بخش مهمی از محتوای مورد نیاز
+          پروژه از قبل وجود دارد و فقط باید آماده و قابل جستجو شود.
+        </p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-number">۳</div>
+        <h3>کاهش تماس‌های تکراری پشتیبانی</h3>
+        <p>
+          سوالات عمومی و پرتکرار مشتریان می‌توانند به صورت خودکار پاسخ داده
+          شوند؛ در نتیجه تیم پشتیبانی زمان بیشتری برای موارد تخصصی و مهم‌تر
+          خواهد داشت.
+        </p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-number">۴</div>
+        <h3>پاسخ‌گویی ۲۴ ساعته</h3>
+        <p>
+          مشتری برای دریافت پاسخ سوالات عمومی خود به ساعت کاری یا حضور
+          اپراتور وابسته نخواهد بود و می‌تواند مستقیماً از داخل وب‌سایت
+          پاسخ مورد نیازش را دریافت کند.
+        </p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-number">۵</div>
+        <h3>قابل اتصال به قیمت و موجودی لحظه‌ای</h3>
+        <p>
+          اطلاعات متغیری مانند قیمت، موجودی و مشخصات محصول می‌توانند از
+          فروشگاه یا Backend دریافت شوند تا دستیار فقط به اطلاعات ثابت
+          مقالات وابسته نباشد.
+        </p>
+      </div>
+
+      <div class="benefit">
+        <div class="benefit-number">۶</div>
+        <h3>شروع کوچک، توسعه مرحله‌ای</h3>
+        <p>
+          می‌توان پروژه را ابتدا با سوالات عمومی و اطلاعات موجود اجرا کرد
+          و سپس قابلیت‌هایی مانند پیشنهاد محصول، اطلاعات قیمت، تحلیل
+          مکالمات پشتیبانی و امکانات بیشتر را به آن اضافه کرد.
+        </p>
+      </div>
+    </div>
+
+    <div class="decision-box">
+      <strong>نکته کلیدی برای شروع پروژه</strong>
+      <p>
+        این پروژه از آن دسته قابلیت‌هایی نیست که برای راه‌اندازی اولیه
+        به یک تغییر اساسی در ساختار وب‌سایت نیاز داشته باشد. می‌توان یک
+        نسخه اولیه و کاربردی را در کنار سیستم فعلی ایجاد کرد، نتیجه را
+        سنجید و سپس قابلیت‌ها را توسعه داد.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- SECTION 02 — PROBLEM & SOLUTION -->
+
+  <section class="section page-break">
+
+    <div class="section-label">02 — مسئله و راهکار</div>
+    <h2>چرا دستیار هوش مصنوعی؟</h2>
+
+    <p class="intro">
+      بخش قابل توجهی از سوالات مشتریان قبل از خرید، سوالاتی عمومی و
+      قابل پیش‌بینی هستند؛ برای مثال انتخاب باتری مناسب، تفاوت محصولات،
+      شرایط گارانتی، نحوه نگهداری، علائم خرابی باتری و بسیاری از سوالات
+      مشابه.
+    </p>
+
+    <p class="intro">
+      هدف این پروژه، ساخت یک لایه هوشمند در کنار وب‌سایت است که بتواند
+      این سوالات را بر اساس اطلاعات واقعی و معتبر موجود در مجموعه پاسخ دهد.
+      در نتیجه، مشتری قبل از تماس با پشتیبانی می‌تواند پاسخ مورد نیاز خود
+      را دریافت کند.
+    </p>
+
+  </section>
+
+
+  <!-- SECTION 03 — KNOWLEDGE SOURCES -->
 
   <section class="section">
-    <div class="section-label">09 — استفاده از تماس‌های پشتیبانی</div>
+
+    <div class="section-label">03 — منابع دانش</div>
+    <h2>دستیار از کجا اطلاعات می‌گیرد؟</h2>
+
+    <div class="sources">
+
+      <div class="source-card">
+        <h3>01. مقالات و دانشنامه‌های سایت</h3>
+        <ul>
+          <li>مقالات منتشرشده در وب‌سایت</li>
+          <li>دانشنامه‌ها و راهنماهای تخصصی</li>
+          <li>محتوای آموزشی مرتبط با باتری خودرو</li>
+          <li>اطلاعات فنی و سوالات متداول</li>
+        </ul>
+      </div>
+
+      <div class="source-card">
+        <h3>02. مکالمات پشتیبانی</h3>
+        <ul>
+          <li>تبدیل تماس‌های صوتی به متن</li>
+          <li>استخراج سوالات پرتکرار مشتریان</li>
+          <li>استفاده از تجربه واقعی تیم پشتیبانی</li>
+          <li>شناسایی موضوعاتی که در سایت پوشش داده نشده‌اند</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p style="margin-top:12px; font-size:10.5px; color:#64748b;">
+      در بخش مکالمات پشتیبانی، پس از تبدیل صوت به متن، می‌توان داده‌ها را
+      پاک‌سازی و دسته‌بندی کرد تا فقط اطلاعات مفید و قابل استفاده وارد
+      پایگاه دانش دستیار شوند.
+    </p>
+
+  </section>
+
+
+  <!-- SECTION 04 — RAG EXPLAINER -->
+
+  <section class="section">
+
+    <div class="section-label">04 — فناوری RAG</div>
+    <h2>RAG چیست و چگونه کار می‌کند؟</h2>
+
+    <div class="explanation">
+      <strong>RAG</strong> مخفف Retrieval-Augmented Generation است.
+      به زبان ساده، به جای اینکه هوش مصنوعی صرفاً بر اساس اطلاعاتی که
+      قبلاً یاد گرفته پاسخ دهد، ابتدا در دانش اختصاصی مجموعه جستجو می‌کند،
+      اطلاعات مرتبط را پیدا می‌کند و سپس با استفاده از آن‌ها پاسخ تولید می‌کند.
+    </div>
+
+    <div class="rag-flow">
+
+      <div class="rag-step">
+        <strong>سوال مشتری</strong>
+        <span>«برای پژو ۲۰۶ چه باتری‌ای مناسبه؟»</span>
+      </div>
+
+      <div class="rag-arrow">←</div>
+
+      <div class="rag-step">
+        <strong>جستجو در دانش</strong>
+        <span>پیدا کردن محتوای مرتبط</span>
+      </div>
+
+      <div class="rag-arrow">←</div>
+
+      <div class="rag-step">
+        <strong>اطلاعات مرتبط</strong>
+        <span>مقالات، راهنماها و داده‌ها</span>
+      </div>
+
+      <div class="rag-arrow">←</div>
+
+      <div class="rag-step">
+        <strong>هوش مصنوعی</strong>
+        <span>ساخت پاسخ بر اساس منابع</span>
+      </div>
+
+    </div>
+
+    <p style="font-size:10.5px; color:#64748b;">
+      این معماری برای کیان باتری اهمیت ویژه‌ای دارد؛ زیرا مجموعه‌ای از
+      مقالات و دانشنامه‌های تخصصی از قبل در اختیار مجموعه قرار دارد و
+      می‌توان این دانش موجود را مستقیماً به منبع پاسخ‌گویی دستیار تبدیل کرد.
+    </p>
+
+  </section>
+
+
+  <!-- SECTION 05 — PROPOSED ARCHITECTURE -->
+
+  <section class="section page-break">
+
+    <div class="section-label">05 — معماری پیشنهادی</div>
+    <h2>دستیار در پشت صحنه چگونه کار می‌کند؟</h2>
+
+    <div class="architecture">
+
+      <div class="source-title">منابع اطلاعاتی</div>
+
+      <div class="arch-row">
+
+        <div class="arch-box">
+          <div class="icon">📚</div>
+          <strong>مقالات سایت</strong>
+          <span>دانشنامه و محتوای آموزشی</span>
+        </div>
+
+        <div class="arch-box">
+          <div class="icon">🎙</div>
+          <strong>تماس‌های پشتیبانی</strong>
+          <span>صوت → متن</span>
+        </div>
+
+        <div class="arch-box">
+          <div class="icon">💾</div>
+          <strong>داده‌های محصولات</strong>
+          <span>قیمت و مشخصات</span>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;color:#94a3b8;">↓</div>
+
+      <div class="arch-row">
+
+        <div class="arch-box arch-main">
+          <div class="icon">🧠</div>
+          <strong>پایگاه دانش RAG</strong>
+          <span>ذخیره و آماده‌سازی اطلاعات برای جستجو</span>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;color:#94a3b8;">↓</div>
+
+      <div class="arch-row">
+
+        <div class="arch-box">
+          <div class="icon">🔎</div>
+          <strong>جستجوی اطلاعات مرتبط</strong>
+          <span>پیدا کردن مناسب‌ترین بخش‌های دانش</span>
+        </div>
+
+        <div class="arrow">←</div>
+
+        <div class="arch-box arch-ai">
+          <div class="icon">🤖</div>
+          <strong>مدل هوش مصنوعی</strong>
+          <span>درک سوال و تولید پاسخ</span>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;color:#94a3b8;">↓</div>
+
+      <div class="arch-row">
+
+        <div class="arch-box">
+          <div class="icon">🌐</div>
+          <strong>وب‌سایت کیان باتری</strong>
+          <span>نمایش پاسخ در پنجره گفتگو</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 06 — SAMPLE PRACTICAL CONVERSATION -->
+
+  <section class="section page-break">
+
+    <div class="section-label">06 — نمونه عملی — یک مکالمه واقعی</div>
+    <h2>اگر مشتری بپرسد: «برای پراید ۱۳۲ چه باتری‌ای مناسبه؟»</h2>
+
+    <p class="intro">
+      در این نمونه، ابتدا تجربه‌ای را می‌بینیم که مشتری در وب‌سایت دارد؛
+      سپس همان درخواست را از نگاه سیستم بررسی می‌کنیم تا مشخص شود
+      پاسخ هوش مصنوعی چگونه ساخته می‌شود.
+    </p>
+
+    <div class="chat-demo">
+
+      <div class="chat-header">
+        <div class="chat-avatar">?</div>
+
+        <div>
+          <strong>دستیار هوش مصنوعی کیان باتری</strong>
+          <span>پاسخ‌گویی بر اساس دانش و اطلاعات کیان باتری</span>
+        </div>
+
+        <div class="online">
+          <i></i>
+          آنلاین
+        </div>
+      </div>
+
+      <div class="chat-body">
+
+        <div class="chat-row user">
+          <div class="bubble user-bubble">
+            برای پراید ۱۳۲ چه باتری‌ای مناسبه؟
+          </div>
+        </div>
+
+        <div class="chat-row ai">
+
+          <div class="mini-avatar">AI</div>
+
+          <div>
+            <div class="bubble ai-bubble">
+
+              برای پراید ۱۳۲ بنزینی معمولاً باتری
+              <strong>۵۰ آمپر با پلاریته‌ی راست</strong>
+              پیشنهاد می‌شود.
+
+              <br><br>
+
+              الان مدل
+              <strong>«سپاهان ۵۰ آمپر»</strong>
+              موجود و با
+              <strong>گارانتی ۱۸ ماهه</strong>
+              در سایت هست.
+
+              <br><br>
+
+              <span class="source">
+                منبع:
+                مقاله «راهنمای انتخاب باتری پراید»
+                +
+                تجربه‌ی ۳ تماس پشتیبانی مشابه
+              </span>
+
+            </div>
+
+            <div class="ai-note">
+              پاسخ بر اساس اطلاعات موجود در پایگاه دانش کیان باتری
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <div style="margin-top:25px;">
+      <div class="section-label">پشت صحنه</div>
+
+      <h2 style="margin-bottom:8px;">
+        حالا در پشت صحنه چه اتفاقی می‌افتد؟
+      </h2>
+
+      <p style="font-size:11px;color:#64748b;">
+        چیزی که برای مشتری فقط یک سؤال و یک پاسخ ساده به نظر می‌رسد،
+        در پشت صحنه چند مرحله پردازش را طی می‌کند:
+      </p>
+    </div>
+
+
+    <div class="behind-flow">
+
+      <div class="behind-step">
+        <div class="step-number">۱</div>
+
+        <div class="step-content">
+          <strong>دریافت سؤال مشتری</strong>
+
+          <p>
+            سیستم سؤال را دریافت می‌کند و مفهوم آن را برای جستجو آماده می‌کند:
+          </p>
+
+          <code>«برای پراید ۱۳۲ چه باتری‌ای مناسبه؟»</code>
+        </div>
+      </div>
+
+      <div class="flow-line"></div>
+
+
+      <div class="behind-step">
+        <div class="step-number">۲</div>
+
+        <div class="step-content">
+
+          <strong>پیدا کردن اطلاعات مرتبط در RAG</strong>
+
+          <p>
+            سیستم در پایگاه دانش جستجو می‌کند و مرتبط‌ترین اطلاعات را
+            از منابع مختلف پیدا می‌کند.
+          </p>
+
+          <div class="retrieved-data">
+
+            <div>
+              <span>📄</span>
+              <strong>راهنمای انتخاب باتری پراید</strong>
+              <small>مقاله سایت</small>
+            </div>
+
+            <div>
+              <span>🎙</span>
+              <strong>۳ تماس پشتیبانی مشابه</strong>
+              <small>تجربه واقعی مشتریان</small>
+            </div>
+
+            <div>
+              <span>🔋</span>
+              <strong>سپاهان ۵۰ آمپر</strong>
+              <small>اطلاعات محصول</small>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flow-line"></div>
+
+
+      <div class="behind-step">
+        <div class="step-number">۳</div>
+
+        <div class="step-content">
+
+          <strong>ترکیب اطلاعات و بررسی داده‌های محصول</strong>
+
+          <p>
+            اطلاعات مرتبط به مدل هوش مصنوعی داده می‌شود و در صورت نیاز،
+            داده‌های متغیر محصول مانند موجودی، قیمت و گارانتی از منبع
+            اصلی فروشگاه دریافت می‌شوند.
+          </p>
+
+          <div class="context-box">
+
+            <div class="context-title">
+              اطلاعاتی که در اختیار مدل قرار می‌گیرد
+            </div>
+
+            <div class="context-row">
+              <span>خودرو</span>
+              <strong>پراید ۱۳۲ بنزینی</strong>
+            </div>
+
+            <div class="context-row">
+              <span>باتری پیشنهادی</span>
+              <strong>۵۰ آمپر — پلاریته راست</strong>
+            </div>
+
+            <div class="context-row">
+              <span>محصول موجود</span>
+              <strong>سپاهان ۵۰ آمپر</strong>
+            </div>
+
+            <div class="context-row">
+              <span>گارانتی</span>
+              <strong>۱۸ ماه</strong>
+            </div>
+
+            <div class="context-row">
+              <span>منابع دانش</span>
+              <strong>مقاله + ۳ تماس پشتیبانی</strong>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="flow-line"></div>
+
+
+      <div class="behind-step final-step">
+
+        <div class="step-number">۴</div>
+
+        <div class="step-content">
+
+          <strong>تولید پاسخ و نمایش به مشتری</strong>
+
+          <p>
+            مدل هوش مصنوعی اطلاعات جمع‌آوری‌شده را به یک پاسخ طبیعی،
+            کوتاه و قابل فهم تبدیل می‌کند و آن را در پنجره چت نمایش می‌دهد.
+          </p>
+
+          <div class="final-answer">
+            «برای پراید ۱۳۲ بنزینی معمولاً باتری ۵۰ آمپر با پلاریته‌ی راست
+            پیشنهاد می‌شود. الان مدل سپاهان ۵۰ آمپر موجود و با گارانتی
+            ۱۸ ماهه در سایت هست.»
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="important-note">
+      <strong>نکته مهم:</strong>
+      <span>
+        در این معماری، هوش مصنوعی جایگزین دانش کیان باتری نیست؛
+        بلکه مانند یک رابط هوشمند عمل می‌کند که اطلاعات مرتبط را پیدا
+        کرده و آن را به شکل قابل فهم در اختیار مشتری قرار می‌دهد.
+      </span>
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 07 — DYNAMIC PRICING & INVENTORY -->
+
+  <section class="section">
+
+    <div class="section-label">07 — اطلاعات همیشه به‌روز</div>
+    <h2>به‌روزرسانی داینامیک قیمت و محصولات</h2>
+
+    <p style="font-size:11px;color:#64748b;">
+      تمام اطلاعات لازم نیست داخل RAG به صورت ثابت ذخیره شوند.
+      داده‌هایی مانند قیمت، موجودی و مشخصات محصول می‌توانند مستقیماً
+      از سیستم فروشگاه یا API دریافت شوند تا پاسخ دستیار به اطلاعات
+      به‌روز وابسته باشد.
+    </p>
+
+    <div class="dynamic">
+
+      <div class="dynamic-item">
+        <strong>فروشگاه</strong>
+        <span>قیمت و موجودی جدید</span>
+      </div>
+
+      <div class="dynamic-arrow">→</div>
+
+      <div class="dynamic-item">
+        <strong>API / Backend</strong>
+        <span>دریافت اطلاعات لحظه‌ای</span>
+      </div>
+
+      <div class="dynamic-arrow">→</div>
+
+      <div class="dynamic-item">
+        <strong>دستیار AI</strong>
+        <span>پاسخ بر اساس داده جدید</span>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- SECTION 08 — SUPPORT CALLS AS KNOWLEDGE -->
+
+  <section class="section page-break">
+    <div class="section-label">08 — استفاده از تماس‌های پشتیبانی</div>
     <h2>تبدیل تجربه تیم پشتیبانی به دانش سازمانی</h2>
 
     <p class="intro">
@@ -1583,9 +1458,11 @@
   </section>
 
 
+  <!-- SECTION 09 — ROLLOUT PLAN -->
+
   <section class="section">
 
-    <div class="section-label">10 — مسیر اجرا</div>
+    <div class="section-label">09 — مسیر اجرا</div>
     <h2>مراحل پیشنهادی پیاده‌سازی</h2>
 
     <div class="timeline">
@@ -1623,9 +1500,11 @@
   </section>
 
 
+  <!-- SECTION 10 — EXPECTED OUTCOME -->
+
   <section class="section">
 
-    <div class="section-label">11 — نتیجه نهایی</div>
+    <div class="section-label">10 — نتیجه نهایی</div>
     <h2>خروجی مورد انتظار</h2>
 
     <div class="closing">
