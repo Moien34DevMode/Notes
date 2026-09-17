@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>چک‌لیست MVP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#ECEEE6;
+    --ink-muted:#AEB3BE;
+    --ink-faint:#7A8090;
+    --paper:#000000;
+    --paper-elevated:#1A1E25;
+    --line:#2C3038;
+    --line-soft:#22262D;
+    --accent-green:#6FBE95;
+    --accent-green-soft:#1D2B24;
+    --accent-gold:#D6AD5C;
+    --focus:#6FBE95;
+    --shadow: none;
+  }
+
+  html, body{
+    margin:0;
+    padding:0;
+    background:#000000;
+    min-height:100%;
+  }
+
+  .mvpc, .mvpc *{box-sizing:border-box;}
+  .mvpc{
+    margin:0;
+    padding:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', 'Tahoma', sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .mvpc ::selection{ background: var(--accent-green-soft); }
+  .mvpc a{color:inherit;}
+  .mvpc button{font-family:inherit;}
+
+  .wrap{
+    max-width:960px;
+    margin:0 auto;
+    padding:0 20px 80px;
+  }
+
+  /* ---------- Sticky summary bar ---------- */
+  .summary-bar{
+    position:sticky;
+    top:0;
+    z-index:20;
+    background:color-mix(in srgb, var(--paper) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .summary-inner{
+    max-width:960px;
+    margin:0 auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    gap:18px;
+  }
+  .summary-mark{
+    font-size:20px;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .summary-title{
+    font-size:14px;
+    font-weight:600;
+    color:var(--ink-muted);
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .summary-progress{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    min-width:0;
+  }
+  .progress-track{
+    flex:1;
+    height:6px;
+    border-radius:3px;
+    background:var(--line-soft);
+    overflow:hidden;
+  }
+  .progress-fill{
+    height:100%;
+    background:var(--accent-green);
+    width:0%;
+    transition:width .35s ease;
+    border-radius:3px;
+  }
+  .progress-count{
+    font-size:14px;
+    font-weight:700;
+    color:var(--ink);
+    white-space:nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .progress-count span{ color:var(--ink-faint); font-weight:500; }
+  .btn-print{
+    flex-shrink:0;
+    border:1px solid var(--line);
+    background:var(--paper-elevated);
+    color:var(--ink-muted);
+    padding:8px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .btn-print:hover{ border-color:var(--accent-green); color:var(--accent-green); }
+  .btn-print:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
+
+  @media (max-width:640px){
+    .summary-title{ display:none; }
+    .btn-print{ display:none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:56px 0 40px;
+    border-bottom:1px solid var(--line);
+  }
+  .hero-eyebrow{
+    font-size:13px;
+    color:var(--accent-gold);
+    font-weight:600;
+    margin:0 0 14px;
+  }
+  .hero h1{
+    font-size:clamp(28px, 4vw, 40px);
+    font-weight:800;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+    max-width:16ch;
+  }
+  .hero p{
+    font-size:16px;
+    color:var(--ink-muted);
+    max-width:62ch;
+    margin:0;
+  }
+
+  /* ---------- Checklist ---------- */
+  .list{
+    counter-reset: item;
+  }
+  .item{
+    border-bottom:1px solid var(--line);
+    padding:34px 0;
+    transition: background .2s ease;
+  }
+  .item:first-child{ padding-top:40px; }
+
+  .item-head{
+    display:flex;
+    align-items:flex-start;
+    gap:16px;
+    margin-bottom:14px;
+  }
+  .item-number{
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top:3px;
+    flex-shrink:0;
+    width:28px;
+  }
+  .item.is-checked .item-number{ color:var(--accent-green); }
+
+  .item-check{
+    flex-shrink:0;
+    width:22px;
+    height:22px;
+    margin-top:1px;
+    accent-color: var(--accent-green);
+    cursor:pointer;
+  }
+  .item-check:focus-visible{ outline:2px solid var(--focus); outline-offset:3px; }
+
+  .item-titlewrap{ flex:1; min-width:0; }
+  .item-title{
+    font-size:19px;
+    font-weight:700;
+    margin:0;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .item-tag{
+    font-size:11px;
+    font-weight:700;
+    color:var(--accent-green);
+    background:var(--accent-green-soft);
+    border-radius:5px;
+    padding:3px 8px;
+    display:none;
+  }
+  .item.is-checked .item-tag{ display:inline-block; }
+
+  .item-body{
+    display:grid;
+    grid-template-columns: 1fr 220px;
+    gap:24px;
+    padding-inline-start:44px;
+  }
+  .item-body.no-media{
+    grid-template-columns: 1fr;
+  }
+  @media (max-width:680px){
+    .item-body{ grid-template-columns:1fr; }
+  }
+
+  .item-desc{
+    font-size:15px;
+    color:var(--ink-muted);
+    margin:0 0 18px;
+    max-width:64ch;
+  }
+
+  .item-media{
+    border:1.5px dashed var(--line);
+    border-radius:10px;
+    background:var(--paper-elevated);
+    min-height:120px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color:var(--ink-faint);
+    padding:14px;
+    text-align:center;
+    overflow:hidden;
+  }
+  .item-media svg{ opacity:.55; }
+  .item-media span{ font-size:12px; line-height:1.5; }
+  .item-media.has-image{
+    border-style:solid;
+    padding:0;
+  }
+  .item-media img{
+    width:100%;
+    height:100%;
+    max-height:200px;
+    object-fit:cover;
+    display:block;
+    border-radius:8px;
+  }
+
+  .item-note{
+    padding-inline-start:44px;
+  }
+  .item-note label{
+    display:block;
+    font-size:12px;
+    font-weight:600;
+    color:var(--ink-faint);
+    margin-bottom:6px;
+  }
+  .item-note textarea{
+    width:100%;
+    resize:vertical;
+    min-height:44px;
+    font-family:inherit;
+    font-size:14px;
+    color:var(--ink);
+    background:var(--paper-elevated);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 12px;
+    line-height:1.6;
+  }
+  .item-note textarea::placeholder{ color:var(--ink-faint); }
+  .item-note textarea:focus-visible{ outline:2px solid var(--focus); outline-offset:1px; }
+
+  /* ---------- Footer ---------- */
+  .footer{
+    padding-top:36px;
+    color:var(--ink-faint);
+    font-size:13px;
+  }
+
+  /* ---------- Print ---------- */
+  @media print{
+    html, body{ background:#000 !important; }
+    .mvpc{ background:#000; color:#ECEEE6; }
+    .summary-bar{ position:static; backdrop-filter:none; }
+    .btn-print{ display:none; }
+
+    .item{
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .item-head{
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+    .item-body, .item-note{
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    .hero{
+      break-after: avoid;
+      page-break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="mvpc" dir="rtl" lang="fa" style="direction:rtl; text-align:right;">
+
+  <div class="summary-bar">
+    <div class="summary-inner">
+      <div class="summary-mark">⚖️</div>
+      <div class="summary-title">چک‌لیست MVP</div>
+      <div class="summary-progress">
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="progress-count" id="progressCount">۰ <span>از ۱۲ انتخاب شده</span></div>
+      </div>
+      <button class="btn-print" id="printBtn">چاپ خلاصه</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <p class="hero-eyebrow">تصمیم‌گیری فاز اول محصول</p>
+    </div>
+
+    <div class="list" id="list"></div>
+
+    <div class="footer">تغییرات این صفحه فقط روی همین مرورگر ذخیره می‌شود.</div>
+  </div>
+
+<script>
+/*
+  برای گذاشتن تصویر هر آیتم، مقدار فیلد "image" همون آیتم رو
+  به آدرس (URL) تصویر مورد نظر تغییر بدید. مثال:
+  { id: "infra", title: "Scalability", image: "https://example.com/infra.png", desc: "..." }
+  اگر image خالی بمونه ("")، همون باکس placeholder قبلی نمایش داده می‌شه.
+*/
+const ITEMS = [
+  { id: "infra", title: "Scalability", image: "", desc: "سرور و Hosting، معماری زیرساخت، DevOps، برنامه افزایش ظرفیت با رشد کاربران، Load Management و Backup." },
+  { id: "knowledge-base", title: "Data Cleanup & Knowledge Base", image: "", desc: "پاک‌سازی، استانداردسازی، دسته‌بندی و آماده‌سازی منابع دانش متنوع برای استفاده توسط سیستم هوش مصنوعی." },
+  { id: "home", title: "Home Page", image: "", desc: "صفحه اصلی برای معرفی محصول، خدمات، مزایا و هدایت کاربر به سمت اقدام بعدی." },
+  { id: "seo", title: "SEO", image: "", desc: "بهینه‌سازی ساختار و محتوای سایت برای موتورهای جستجو و جذب کاربران ارگانیک." },
+  { id: "backend", title: "Core Services", image: "", desc: "شامل Authentication و Authorization، مدیریت کاربران و نقش‌ها، ذخیره و مدیریت تاریخچه مکالمات، مدیریت پرونده‌ها و داده‌ها، APIها، و مدیریت سشن و دسترسی‌ها." },
+  { id: "chat", title: "ویژگی‌های Chat", image: "", desc: "چت متنی، تحلیل و درک تصویر، تحلیل فایل‌های PDF و سایر Documentها، آپلود فایل، و چت صوتی Real-time." },
+  { id: "dashboard", title: "User Dashboard", image: "", desc: "داشبورد کاربر برای مشاهده و مدیریت مکالمات، پرونده‌ها، اسناد، وضعیت درخواست‌ها و اطلاعات حساب." },
+  { id: "legal-services", title: "سایر خدمات حقوقی", image: "", desc: "صفحه معرفی خدماتی مانند تنظیم اوراق قضایی، تهیه و بررسی اسناد و سایر خدمات حقوقی." },
+  { id: "security", title: "امنیت و حریم خصوصی داده", image: "", desc: "رمزنگاری اطلاعات و پرونده‌ها، کنترل دسترسی مبتنی بر نقش (وکیل، قاضی، متقاضی و...) و جلوگیری از دسترسی کاربران به داده‌های یکدیگر." },
+  { id: "notifications", title: "Notification System", image: "", desc: "سیستم اعلان شامل Email، SMS و اعلان درون‌برنامه‌ای؛ برای مثال اطلاع‌رسانی هنگام تغییر وضعیت پرونده." },
+  { id: "monitoring", title: "Monitoring & Logging", image: "", desc: "مانیتورینگ عملکرد سیستم، ثبت و بررسی خطاها، لاگ‌گیری و تحلیل رفتار کاربران برای بهبود مستمر محصول." }
+];
+
+const PERSIAN_DIGITS = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
+function toFa(n){
+  return String(n).split("").map(ch => /[0-9]/.test(ch) ? PERSIAN_DIGITS[ch] : ch).join("");
+}
+
+const STORAGE_KEY = "mvp_checklist_state_v1";
+
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return { checked:{}, notes:{} };
+    const parsed = JSON.parse(raw);
+    return { checked: parsed.checked || {}, notes: parsed.notes || {} };
+  }catch(e){
+    return { checked:{}, notes:{} };
+  }
+}
+
+function saveState(state){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){ /* storage unavailable — state just won't persist */ }
+}
+
+let state = loadState();
+
+const mediaIconSVG = `
+  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/>
+    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M21 15l-5.2-4.6a1.5 1.5 0 0 0-1.95.05L7 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+
+const listEl = document.getElementById("list");
+
+ITEMS.forEach((item, idx) => {
+  const num = toFa(String(idx + 1).padStart(2, "0"));
+  const isChecked = !!state.checked[item.id];
+  const noteVal = state.notes[item.id] || "";
+  const hasImage = !!(item.image && item.image.trim());
+
+  const mediaHTML = hasImage
+    ? `<div class="item-media has-image"><img src="${item.image}" alt="${item.title}"></div>`
+    : ``;
+
+  const row = document.createElement("div");
+  row.className = "item" + (isChecked ? " is-checked" : "");
+  row.dataset.id = item.id;
+
+  row.innerHTML = `
+    <div class="item-head">
+      <div class="item-number">${num}</div>
+      <input type="checkbox" class="item-check" id="check-${item.id}" ${isChecked ? "checked" : ""} aria-describedby="desc-${item.id}">
+      <div class="item-titlewrap">
+        <label class="item-title" for="check-${item.id}">
+          ${item.title}
+          <span class="item-tag">در MVP</span>
+        </label>
+      </div>
+    </div>
+    <div class="item-body${hasImage ? "" : " no-media"}">
+      <div>
+        <p class="item-desc" id="desc-${item.id}">${item.desc}</p>
+      </div>
+      ${mediaHTML}
+    </div>
+    <div class="item-note">
+      <label for="note-${item.id}">یادداشت تیم مارکتینگ</label>
+      <textarea id="note-${item.id}" placeholder="نظر، اولویت یا سوال دربارهٔ این قابلیت را اینجا بنویسید…">${noteVal}</textarea>
+    </div>
+  `;
+
+  listEl.appendChild(row);
+
+  const checkbox = row.querySelector(".item-check");
+  checkbox.addEventListener("change", () => {
+    state.checked[item.id] = checkbox.checked;
+    row.classList.toggle("is-checked", checkbox.checked);
+    saveState(state);
+    updateProgress();
+  });
+
+  const textarea = row.querySelector("textarea");
+  textarea.addEventListener("input", () => {
+    state.notes[item.id] = textarea.value;
+    saveState(state);
+  });
+});
+
+function updateProgress(){
+  const total = ITEMS.length;
+  const checkedCount = ITEMS.filter(i => state.checked[i.id]).length;
+  const pct = Math.round((checkedCount / total) * 100);
+  document.getElementById("progressFill").style.width = pct + "%";
+  document.getElementById("progressCount").innerHTML =
+    toFa(checkedCount) + ' <span>از ' + toFa(total) + ' انتخاب شده</span>';
+}
+
+document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+updateProgress();
+</script>
+
+  </div>
+</body>
+</html>
