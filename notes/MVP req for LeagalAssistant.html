@@ -6,7 +6,7 @@
 <title>چک‌لیست MVP</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --ink:#ECEEE6;
@@ -50,6 +50,14 @@
     margin:0 auto;
     padding:0 20px 80px;
   }
+
+  /* ---------- Print-only elements (hidden on screen) ---------- */
+  .print-topbar,
+  .print-header,
+  .item-icon{ display:none; }
+
+  /* ---------- Print-only note mirror (hidden on screen) ---------- */
+  .print-note{ display:none; }
 
   /* ---------- Sticky summary bar ---------- */
   .summary-bar{
@@ -295,35 +303,278 @@
     color:var(--ink-faint);
     font-size:13px;
   }
+  .footer-tagline{ display:none; }
 
-  /* ---------- Print ---------- */
+  /* =======================================================
+     PRINT — سند محصول روشن با کارت‌های سفید، آیکون رنگی هر
+     ویژگی و چیدمان سه‌ستونه (عنوان | توضیح محصول | یادداشت
+     مارکتینگ)، کاملاً متفاوت از تم تیرهٔ صفحه.
+     ======================================================= */
   @media print{
-    html, body{ background:#000 !important; }
-    .mvpc{ background:#000; color:#ECEEE6; }
-    .summary-bar{ position:static; backdrop-filter:none; }
-    .btn-print{ display:none; }
+    @page{ margin: 6mm; }
 
+    * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+
+    html, body{ background:#F6F7FB !important; }
+
+    .mvpc{
+      background:#F6F7FB;
+      color:#20232D;
+      font-family:'Vazirmatn','Tahoma',sans-serif;
+      line-height:1.7;
+      padding:12mm 10mm;
+    }
+
+    /* عناصر تعاملی/ناوبری صفحه که در خروجی چاپی معنا ندارند */
+    .summary-bar,
+    .btn-print,
+    .hero{ display:none !important; }
+
+    .wrap{ max-width:100%; padding:0; margin:0; }
+
+    /* ---- نوار برند بالای سند ---- */
+    .print-topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding-bottom:10px;
+      margin-bottom:16px;
+      border-bottom:1px solid #E3E6EF;
+    }
+    .print-brand{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:12pt;
+      font-weight:800;
+      color:#20232D;
+    }
+    .print-brand-mark{ font-size:16pt; }
+    .print-meta{
+      font-size:8.5pt;
+      color:#9297A6;
+    }
+
+    /* ---- سربرگ: عنوان + توضیح + کارت هدف ---- */
+    .print-header{
+      display:grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap:20px;
+      align-items:stretch;
+      margin-bottom:20px;
+    }
+    .print-eyebrow{
+      font-size:9pt;
+      font-weight:800;
+      letter-spacing:.03em;
+      color:#3B6FE0;
+      margin:0 0 10px;
+    }
+    .print-title{
+      font-size:21pt;
+      font-weight:800;
+      color:#161923;
+      margin:0 0 10px;
+    }
+    .print-intro{
+      font-size:10pt;
+      color:#5B5F6E;
+      margin:0;
+      max-width:56ch;
+    }
+    .print-goal-card{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      background:#EAF1FF;
+      border:1px solid #D6E4FE;
+      border-radius:14px;
+      padding:16px;
+    }
+    .print-goal-icon{
+      flex-shrink:0;
+      width:30px;
+      height:30px;
+      border-radius:9px;
+      background:#FFFFFF;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:14pt;
+    }
+    .print-goal-title{
+      font-size:9.5pt;
+      font-weight:800;
+      color:#1F3E8C;
+      margin:0 0 4px;
+    }
+    .print-goal-text{
+      font-size:8.8pt;
+      color:#38507F;
+      margin:0;
+      line-height:1.6;
+    }
+
+    /* فقط آیتم‌های تیک‌خورده در چاپ ظاهر می‌شوند */
+    .item:not(.is-checked){ display:none !important; }
+
+    .list{ display:block; }
+
+    /* هر آیتم یک کارت سفید با سه ستون کنار هم است:
+       عنوان+آیکون / توضیح محصول / یادداشت تیم مارکتینگ */
     .item{
-      break-inside: avoid;
-      page-break-inside: avoid;
+      display:grid;
+      grid-template-columns: 1.05fr 1fr 1fr;
+      column-gap:20px;
+      align-items:start;
+      background:#FFFFFF;
+      border:1px solid #E7E9F1;
+      border-radius:14px;
+      padding:16px 18px;
+      margin-bottom:12px;
+      break-inside:avoid;
+      page-break-inside:avoid;
     }
+
     .item-head{
-      break-after: avoid;
-      page-break-after: avoid;
+      grid-column:1;
+      grid-row:1;
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
     }
-    .item-body, .item-note{
-      break-inside: avoid;
-      page-break-inside: avoid;
+    .item-number{ display:none; }
+    .item-check{ display:none; }
+    .item-tag{ display:none !important; }
+
+    .item-icon{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      font-size:16pt;
+      flex-shrink:0;
     }
-    .hero{
-      break-after: avoid;
-      page-break-after: avoid;
+    .item-title{
+      font-size:12pt;
+      font-weight:800;
+      color:#181B24;
+      display:block;
+    }
+
+    .item-body{
+      grid-column:2;
+      grid-row:1;
+      display:block !important;
+      padding-inline-start:16px;
+      padding-inline-end:0;
+      border-inline-start:1px solid #EEF0F6;
+    }
+    .item-body > div::before{
+      content:"توضیحات محصول";
+      display:block;
+      font-size:7.5pt;
+      font-weight:800;
+      color:#9297A6;
+      margin-bottom:6px;
+    }
+    .item-desc{
+      font-size:9.3pt;
+      color:#41465A;
+      text-align:justify;
+      max-width:none;
+      margin:0;
+    }
+
+    /* باکس placeholder تصویر در چاپ بی‌معناست؛ فقط تصویر واقعی نمایش داده می‌شود */
+    .item-media{ display:none; }
+    .item-media.has-image{
+      display:flex;
+      max-width:100%;
+      margin-top:10px;
+      border:1px solid #E7E9F1;
+      background:#fff;
+    }
+    .item-media.has-image img{
+      max-height:110px;
+      border-radius:0;
+    }
+
+    .item-note{
+      grid-column:3;
+      grid-row:1;
+      padding-inline-start:16px;
+      padding-inline-end:0;
+      border-inline-start:1px solid #EEF0F6;
+    }
+    .item-note label{ display:none; }
+    .item-note textarea{ display:none; }
+
+    .print-note{
+      display:block;
+      font-size:9.3pt;
+      color:#41465A;
+      margin:0;
+    }
+    .print-note::before{
+      content:"توضیحات تیم مارکتینگ";
+      display:block;
+      font-size:7.5pt;
+      font-weight:800;
+      color:#9297A6;
+      margin-bottom:6px;
+    }
+    .print-note:empty{ display:none; }
+    .print-note:empty::before{ display:none; }
+
+    /* ---- فوتر سند ---- */
+    .footer{
+      display:flex !important;
+      align-items:center;
+      justify-content:flex-end;
+      padding-top:14px;
+      margin-top:4px;
+      border-top:1px solid #E3E6EF;
+      color:#9297A6;
+      font-size:8.5pt;
+    }
+    .footer > span:first-child{ display:none !important; }
+    .footer .footer-tagline{
+      display:inline;
+      font-style:italic;
+      color:#3B6FE0;
     }
   }
 </style>
 </head>
 <body>
   <div class="mvpc" dir="rtl" lang="fa" style="direction:rtl; text-align:right;">
+
+  <!-- فقط در چاپ نمایش داده می‌شود -->
+  <div class="print-topbar" aria-hidden="true">
+    <div class="print-brand">
+      <span class="print-brand-mark">⚖️</span>
+      <span>چک‌لیست MVP</span>
+    </div>
+    <div class="print-meta" id="printDate"></div>
+  </div>
+
+  <div class="print-header" aria-hidden="true">
+    <div>
+      <p class="print-eyebrow">برنامه محصول</p>
+      <h1 class="print-title">امکانات و محدودهٔ MVP</h1>
+      <p class="print-intro">ویژگی‌هایی که تیم برای فاز اول محصول انتخاب کرده، به‌همراه توضیح فنی هر مورد و یادداشت تیم مارکتینگ.</p>
+    </div>
+    <div class="print-goal-card">
+      <div class="print-goal-icon">🎯</div>
+      <div>
+        <p class="print-goal-title">هدف فاز MVP</p>
+        <p class="print-goal-text">ارائهٔ نسخه‌ای ساده و کاربردی از محصول برای جذب کاربران اولیه، دریافت بازخورد واقعی و آماده‌سازی برای توسعه‌های بعدی.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="summary-bar">
     <div class="summary-inner">
@@ -344,7 +595,10 @@
 
     <div class="list" id="list"></div>
 
-    <div class="footer">تغییرات این صفحه فقط روی همین مرورگر ذخیره می‌شود.</div>
+    <div class="footer">
+      <span>تغییرات این صفحه فقط روی همین مرورگر ذخیره می‌شود.</span>
+      <span class="footer-tagline">ساخته‌شده برای کاربران واقعی 💙</span>
+    </div>
   </div>
 
 <script>
@@ -355,17 +609,27 @@
   اگر image خالی بمونه ("")، همون باکس placeholder قبلی نمایش داده می‌شه.
 */
 const ITEMS = [
-  { id: "infra", title: "Scalability", image: "", desc: "سرور و Hosting، معماری زیرساخت، DevOps، برنامه افزایش ظرفیت با رشد کاربران، Load Management و Backup." },
-  { id: "knowledge-base", title: "Data Cleanup & Knowledge Base", image: "", desc: "پاک‌سازی، استانداردسازی، دسته‌بندی و آماده‌سازی منابع دانش متنوع برای استفاده توسط سیستم هوش مصنوعی." },
-  { id: "home", title: "Home Page", image: "", desc: "صفحه اصلی برای معرفی محصول، خدمات، مزایا و هدایت کاربر به سمت اقدام بعدی." },
-  { id: "seo", title: "SEO", image: "", desc: "بهینه‌سازی ساختار و محتوای سایت برای موتورهای جستجو و جذب کاربران ارگانیک." },
-  { id: "backend", title: "Core Services", image: "", desc: "شامل Authentication و Authorization، مدیریت کاربران و نقش‌ها، ذخیره و مدیریت تاریخچه مکالمات، مدیریت پرونده‌ها و داده‌ها، APIها، و مدیریت سشن و دسترسی‌ها." },
-  { id: "chat", title: "ویژگی‌های Chat", image: "", desc: "چت متنی، تحلیل و درک تصویر، تحلیل فایل‌های PDF و سایر Documentها، آپلود فایل، و چت صوتی Real-time." },
-  { id: "dashboard", title: "User Dashboard", image: "", desc: "داشبورد کاربر برای مشاهده و مدیریت مکالمات، پرونده‌ها، اسناد، وضعیت درخواست‌ها و اطلاعات حساب." },
-  { id: "legal-services", title: "سایر خدمات حقوقی", image: "", desc: "صفحه معرفی خدماتی مانند تنظیم اوراق قضایی، تهیه و بررسی اسناد و سایر خدمات حقوقی." },
-  { id: "security", title: "امنیت و حریم خصوصی داده", image: "", desc: "رمزنگاری اطلاعات و پرونده‌ها، کنترل دسترسی مبتنی بر نقش (وکیل، قاضی، متقاضی و...) و جلوگیری از دسترسی کاربران به داده‌های یکدیگر." },
-  { id: "notifications", title: "Notification System", image: "", desc: "سیستم اعلان شامل Email، SMS و اعلان درون‌برنامه‌ای؛ برای مثال اطلاع‌رسانی هنگام تغییر وضعیت پرونده." },
-  { id: "monitoring", title: "Monitoring & Logging", image: "", desc: "مانیتورینگ عملکرد سیستم، ثبت و بررسی خطاها، لاگ‌گیری و تحلیل رفتار کاربران برای بهبود مستمر محصول." }
+  { id: "infra", title: "Scalability", icon: "🖥️", image: "", desc: "سرور و Hosting، معماری زیرساخت، DevOps، برنامه افزایش ظرفیت با رشد کاربران، Load Management و Backup." },
+  { id: "knowledge-base", title: "Data Cleanup & Knowledge Base", icon: "📚", image: "", desc: "پاک‌سازی، استانداردسازی، دسته‌بندی و آماده‌سازی منابع دانش متنوع برای استفاده توسط سیستم هوش مصنوعی." },
+  { id: "home", title: "Home Page", icon: "🏠", image: "", desc: "صفحه اصلی برای معرفی محصول، خدمات، مزایا و هدایت کاربر به سمت اقدام بعدی." },
+  { id: "seo", title: "SEO", icon: "🔍", image: "", desc: "بهینه‌سازی ساختار و محتوای سایت برای موتورهای جستجو و جذب کاربران ارگانیک." },
+  { id: "backend", title: "Core Services", icon: "🧩", image: "", desc: "شامل Authentication و Authorization، مدیریت کاربران و نقش‌ها، ذخیره و مدیریت تاریخچه مکالمات، مدیریت پرونده‌ها و داده‌ها، APIها، و مدیریت سشن و دسترسی‌ها." },
+  { id: "chat", title: "ویژگی‌های Chat", icon: "💬", image: "", desc: "چت متنی، تحلیل و درک تصویر، تحلیل فایل‌های PDF و سایر Documentها، و چت صوتی Real-time." },
+  { id: "dashboard", title: "User Dashboard", icon: "📊", image: "", desc: "داشبورد کاربر برای مشاهده و مدیریت مکالمات، پرونده‌ها، اسناد، وضعیت درخواست‌ها و اطلاعات حساب." },
+  { id: "legal-services", title: "سایر خدمات حقوقی", icon: "⚖️", image: "", desc: "صفحه معرفی خدماتی مانند تنظیم اوراق قضایی، تهیه و بررسی اسناد و سایر خدمات حقوقی." },
+  { id: "security", title: "امنیت و حریم خصوصی داده", icon: "🛡️", image: "", desc: "رمزنگاری اطلاعات و پرونده‌ها، کنترل دسترسی مبتنی بر نقش (وکیل، قاضی، متقاضی و...) و جلوگیری از دسترسی کاربران به داده‌های یکدیگر." },
+  { id: "notifications", title: "Notification System", icon: "🔔", image: "", desc: "سیستم اعلان شامل Email، SMS و اعلان درون‌برنامه‌ای؛ برای مثال اطلاع‌رسانی هنگام تغییر وضعیت پرونده." },
+  { id: "monitoring", title: "Monitoring & Logging", icon: "📈", image: "", desc: "مانیتورینگ عملکرد سیستم، ثبت و بررسی خطاها، لاگ‌گیری و تحلیل رفتار کاربران برای بهبود مستمر محصول." }
+];
+
+/* پالت رنگ آیکون‌ها برای چاپ — به‌ترتیب بین آیتم‌ها می‌چرخد */
+const ICON_PALETTE = [
+  { bg: "#EEF1FE", fg: "#5B6EF5" },
+  { bg: "#E9F7EF", fg: "#2FA968" },
+  { bg: "#E8F1FE", fg: "#3B82F6" },
+  { bg: "#FDEDF0", fg: "#E1477E" },
+  { bg: "#FFF6E0", fg: "#C9950F" },
+  { bg: "#EAF6F6", fg: "#1BA3A3" }
 ];
 
 const PERSIAN_DIGITS = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
@@ -394,14 +658,13 @@ function saveState(state){
 
 let state = loadState();
 
-const mediaIconSVG = `
-  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/>
-    <circle cx="8.5" cy="10" r="1.6" stroke="currentColor" stroke-width="1.4"/>
-    <path d="M21 15l-5.2-4.6a1.5 1.5 0 0 0-1.95.05L7 16" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>`;
-
 const listEl = document.getElementById("list");
+
+function syncPrintNote(id){
+  const ta = document.getElementById("note-" + id);
+  const pn = document.getElementById("pnote-" + id);
+  if(ta && pn){ pn.textContent = ta.value.trim(); }
+}
 
 ITEMS.forEach((item, idx) => {
   const num = toFa(String(idx + 1).padStart(2, "0"));
@@ -417,9 +680,12 @@ ITEMS.forEach((item, idx) => {
   row.className = "item" + (isChecked ? " is-checked" : "");
   row.dataset.id = item.id;
 
+  const palette = ICON_PALETTE[idx % ICON_PALETTE.length];
+
   row.innerHTML = `
     <div class="item-head">
       <div class="item-number">${num}</div>
+      <div class="item-icon" style="background:${palette.bg};color:${palette.fg}">${item.icon || "✓"}</div>
       <input type="checkbox" class="item-check" id="check-${item.id}" ${isChecked ? "checked" : ""} aria-describedby="desc-${item.id}">
       <div class="item-titlewrap">
         <label class="item-title" for="check-${item.id}">
@@ -437,6 +703,7 @@ ITEMS.forEach((item, idx) => {
     <div class="item-note">
       <label for="note-${item.id}">یادداشت تیم مارکتینگ</label>
       <textarea id="note-${item.id}" placeholder="نظر، اولویت یا سوال دربارهٔ این قابلیت را اینجا بنویسید…">${noteVal}</textarea>
+      <div class="print-note" id="pnote-${item.id}"></div>
     </div>
   `;
 
@@ -454,7 +721,10 @@ ITEMS.forEach((item, idx) => {
   textarea.addEventListener("input", () => {
     state.notes[item.id] = textarea.value;
     saveState(state);
+    syncPrintNote(item.id);
   });
+
+  syncPrintNote(item.id);
 });
 
 function updateProgress(){
@@ -467,6 +737,12 @@ function updateProgress(){
 }
 
 document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+try{
+  const dateEl = document.getElementById("printDate");
+  const formatted = new Date().toLocaleDateString("fa-IR-u-ca-persian", { year: "numeric", month: "long", day: "numeric" });
+  dateEl.textContent = "تاریخ تهیه: " + formatted;
+}catch(e){ /* date formatting unsupported — leave blank */ }
 
 updateProgress();
 </script>
